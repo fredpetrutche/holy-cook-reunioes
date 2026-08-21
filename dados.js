@@ -9,7 +9,7 @@ const REUNIOES = [
     id: "2026-08-21",
     data: "2026-08-21",
     titulo: "Definição do cardápio de verão",
-    participantes: "A confirmar",
+    participantes: "Fred, Yuri e Débora",
     ata: [
       {
         id: "itens-definidos",
