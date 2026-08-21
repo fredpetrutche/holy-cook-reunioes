@@ -254,6 +254,7 @@ const PROJETOS = [
         tag: "gelado · a confirmar",
         base: "É o Pote da Felicidade, algo que já existe no mercado. A loja ainda não faz — então não há receita, custo nem processo de partida, é o item que começa mais do zero.",
         foto: "cardapio-verao/fotos/cookie-felicidade.jpg",
+        fotoRef: "https://www.instagram.com/reel/DTYKFq4jktg/",
         fotoFonte: "modelo de mercado — pote da felicidade padrão, para referência",
         perguntas: [
           "Qual o sabor do sorvete que vai nele? Ainda não foi definido.",

@@ -324,7 +324,22 @@ function gradeProdutos(p) {
     const img = document.createElement("img");
     img.src = RAIZ + pr.foto;
     img.alt = "Referência de " + pr.nome;
-    fig.append(img);
+
+    /* a capa é só um quadro do vídeo: quem quiser ver o produto inteiro
+       clica nela e vai para o post */
+    const destino = pr.ref || pr.fotoRef;
+    if (destino) {
+      const link = el("a", "foto-link");
+      link.href = destino;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.append(img);
+      link.append(el("span", "foto-lupa", "Ver o vídeo inteiro no Instagram →"));
+      fig.append(link);
+    } else {
+      fig.append(img);
+    }
+
     if (pr.fotoFonte) fig.append(el("figcaption", null, pr.fotoFonte));
     painel.append(fig);
   } else if (pr.fotoFonte) {
@@ -332,7 +347,10 @@ function gradeProdutos(p) {
   }
 
   if (pr.base) painel.append(el("p", "item-base", pr.base));
-  if (pr.ref) {
+
+  /* botão só quando a foto não está lá para ser clicada — senão são dois
+     caminhos para o mesmo lugar */
+  if (pr.ref && !pr.foto) {
     const link = el("a", "item-ref", "Ver a referência no Instagram →");
     link.href = pr.ref;
     link.target = "_blank";
