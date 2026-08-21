@@ -92,11 +92,9 @@ function abrirProjeto(p) {
   sheetBody.replaceChildren();
 
 
-  if (p.itens && p.itens.length) {
-    const total = p.itens.reduce((s, g) => s + g.produtos.length, 0);
-    sheetBody.append(el("h3", null, "Os " + total + " itens"));
-    sheetBody.append(el("p", "owner-note", "Separados pelo que muda a operação: precisar de frio ou não. Para todos vale a mesma lista — CMV, preço, utensílio, espaço no freezer, ficha técnica e vídeo. Aqui embaixo fica só o que é específico de cada um."));
-    sheetBody.append(gradeItens(p));
+  if (p.produtos && p.produtos.length) {
+    sheetBody.append(el("h3", null, "Os " + p.produtos.length + " produtos"));
+    sheetBody.append(gradeProdutos(p));
   }
 
   sheetBody.append(el("h3", null, "O que foi falado"));
@@ -146,9 +144,9 @@ function abrirReuniao(r, ancora, rolar) {
 
     sec.paragrafos.forEach(par => bloco.append(el("p", null, par)));
 
-    if (sec.itensDe) {
-      const dono = PROJETOS.find(x => x.id === sec.itensDe);
-      if (dono && dono.itens) bloco.append(gradeItens(dono));
+    if (sec.produtosDe) {
+      const dono = PROJETOS.find(x => x.id === sec.produtosDe);
+      if (dono && dono.produtos) bloco.append(gradeProdutos(dono));
     }
 
     const ehUltimaDoProjeto = p && !r.ata.slice(idx + 1).some(s => s.projetoId === sec.projetoId);

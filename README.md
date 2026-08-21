@@ -18,6 +18,7 @@ nunca divergirem:
 | `base.css` | estilos comuns |
 | `index.html` + `render-home.js` | a home: cards de projeto, lista de reuniões, diálogo |
 | `cardapio-verao/index.html` | a página do projeto Cardápio de Verão, em abas |
+| `cardapio-verao/fotos/` | referências de produto: capa do reel (`og:image`), foto do cardápio digital ou modelo de mercado |
 
 Cada página define o seu próprio `redesenhar()` — o `salvar()` do `app.js`
 chama esse nome depois de gravar — e chama `iniciar()` no fim.
@@ -53,11 +54,15 @@ vai parar na ação errada.
 - **`grupo`** numa ação: as ações passam a ser exibidas em cards de frente
   (um por grupo), abrindo um de cada vez — nunca uma lista comprida. Com
   menos de dois grupos distintos, cai de volta na lista simples.
-- **`itens`** no projeto: grade de cards em dois níveis (grupo → produto →
-  o que falta responder). Cada produto aceita `tag`, `base`, `ref` (link
-  externo) e `perguntas`.
-- **`itensDe: "<id do projeto>"`** numa seção de ata: insere ali a grade de
-  itens daquele projeto, em vez de repetir a lista dentro do texto.
+- **`produtos`** no projeto: grade de cards com foto. Cada produto aceita
+  `tag` (conservação), `base` (o que já está definido), `ref` (link externo),
+  `foto`, `fotoFonte` e `perguntas`. O caminho de `foto` é **a partir da raiz
+  do site** — cada página ajusta `RAIZ` (`""` na home, `"../"` na subpágina),
+  senão a mesma grade quebra quando aparece dentro de uma ata.
+- **`produtosDe: "<id do projeto>"`** numa seção de ata: insere ali a grade de
+  produtos daquele projeto, em vez de repetir a lista dentro do texto.
+- **`link` + `linkTxt`** numa ação: vira um botão para onde o trabalho
+  acontece de verdade (ex.: o laboratório de CMV, no Sistema HC).
 - **`pagina: "<pasta>/"`** no projeto: o card da home passa a abrir essa
   página em vez do diálogo. É o caminho quando o projeto tem informação
   demais para caber num pop-up.

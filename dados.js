@@ -15,11 +15,11 @@ const REUNIOES = [
         id: "itens-definidos",
         titulo: "Os itens do cardápio",
         projetoId: "cardapio-verao",
-        itensDe: "cardapio-verao",
+        produtosDe: "cardapio-verao",
         paragrafos: [
-          "Ficaram definidos os dez itens que entram no cardápio de verão: torta quente, torta gelada, Ice Cookie, cookie da felicidade, cookie com sorvete, cookie fries com sorvete, cookie no palito, panelinha, casquinha de sorvete de cookie e frozen de morango e maracujá com manga. A ação que vencia em 31/08 fecha com dez dias de antecedência.",
-          "Cada item saiu com um ponto de partida definido, e não só com o nome. Seis têm referência em vídeo; a torta gelada sai do cardápio de Natal, que já rodou em loja; a torta quente é massa de cookie em outros sabores; e o cookie da felicidade sai da modelagem do pote da felicidade, que a loja já faz. O frozen é o único que ainda não tem referência.",
-          "Sete dos dez itens dependem de sorvete ou de gelado. É esse número que manda na logística de transporte, no espaço de freezer da loja e em boa parte do investimento em equipamento."
+          "Ficaram definidos os dez itens que entram no cardápio de verão: torta quente, torta gelada, Ice Cookie, cookie da felicidade, cookie com sorvete, cookie fries com sorvete, cookie no palito, panelinha, casquinha de sorvete de cookie e frozen de maracujá com manga. A ação que vencia em 31/08 fecha com dez dias de antecedência.",
+          "Cada item saiu com um ponto de partida, e não só com o nome. Seis têm referência em vídeo; a torta gelada sai do cardápio de Natal e a torta quente é massa de cookie em outros sabores, ambas com três sabores; o frozen aproveita o de morango que a loja já vende, mudando só para maracujá com manga. O cookie da felicidade é o Pote da Felicidade, que existe no mercado mas a loja ainda não faz — é o que começa mais do zero.",
+          "Nove dos dez itens dependem de frio. O único que não depende é a torta quente — até o cookie no palito entra, porque a cobertura dele é a mesma casquinha do sorvete e derrete fora da geladeira. É esse número que manda na logística de transporte, no espaço de freezer da loja e em boa parte do investimento em equipamento."
         ]
       },
       {
@@ -28,7 +28,7 @@ const REUNIOES = [
         projetoId: "cardapio-verao",
         paragrafos: [
           "Com a lista fechada, o projeto sai da ideia e entra na conta. O próximo passo é testar os produtos e levantar o CMV de cada um, porque é o CMV que diz se o preço fecha em loja. O preço precisa estar decidido antes de o cardápio impresso ir para produção, em 24/09.",
-          "Três frentes novas apareceram junto com a lista, e nenhuma delas é de marketing, é de operação: os utensílios que cada loja vai ter de comprar, produto a produto; o transporte dos insumos até a loja, agora com cadeia de frio; e o espaço de armazenamento, que é o ponto mais apertado, porque são muitos sorvetes e freezer de loja é limitado.",
+          "Três frentes novas apareceram junto com a lista, e nenhuma delas é de marketing, é de operação: os utensílios que cada loja vai ter de comprar, produto a produto; o transporte dos insumos até a loja, agora com cadeia de frio; e o espaço de armazenamento, que é o ponto mais apertado, porque nove dos dez itens precisam de frio e freezer de loja é limitado.",
           "Depois da degustação de 11/09, o que for aprovado precisa virar ficha técnica e vídeo do processo de produção nas lojas, para a equipe conseguir repetir o produto igual todos os dias. Isso não estava no cronograma fechado em 11/08 e entra na janela entre 11/09 e 01/10.",
           "Para o cardápio completo e o material impresso, ficou uma decisão em aberto: as fotos saem de uma sessão fotográfica profissional ou são geradas por IA. Enquanto não for decidida, a produção de 24/09 não começa."
         ]
@@ -160,138 +160,145 @@ const PROJETOS = [
     id: "cardapio-verao",
     nome: "Cardápio de Verão",
     pagina: "cardapio-verao/",
-    resumo: "Os 10 itens estão fechados e cada um já tem referência. Agora é teste, CMV e o que cada loja precisa comprar para conseguir produzir.",
+    resumo: "Os 10 produtos estão fechados e cada um já tem referência. Agora é teste, CMV e o que cada loja precisa comprar para conseguir produzir.",
     responsavel: "Marketing",
-    itens: [
+    produtos: [
       {
-        id: "frio",
-        nome: "Precisa de frio",
-        nota: "Sete dos dez itens. São eles que definem a logística de transporte, o espaço de freezer na loja e boa parte do investimento em equipamento.",
-        produtos: [
-          {
-            id: "ice-cookie",
-            nome: "Ice Cookie",
-            tag: "congelado",
-            base: "Cookie com sorvete no meio, no formato de sanduíche.",
-            ref: "https://www.instagram.com/reel/DbwEaSOMMbh/",
-            perguntas: [
-              "Monta na loja na hora ou chega pronto e congelado da fábrica?",
-              "Se for pré-montado: quanto ocupa por unidade no freezer e qual o giro esperado — é o item que mais come espaço parado.",
-              "A embalagem aguenta o caminho do freezer até o cliente sem derreter, inclusive no delivery?"
-            ]
-          },
-          {
-            id: "cookie-sorvete",
-            nome: "Cookie com sorvete",
-            tag: "congelado",
-            base: "Cookie servido com sorvete por cima.",
-            ref: "https://www.instagram.com/reels/DairYfHKOg5/",
-            perguntas: [
-              "Bola porcionada na hora exige boleador, cuba e espaço de freezer para a cuba aberta. A loja tem os três?",
-              "Quantos sabores de sorvete entram? Cada sabor a mais é mais uma cuba e mais espaço.",
-              "Serve em pote, em prato ou em embalagem de viagem?"
-            ]
-          },
-          {
-            id: "cookie-fries",
-            nome: "Cookie fries + sorvete",
-            tag: "congelado",
-            base: "Vai com sorvete junto — não é só o cookie em formato de fritas, é item de cadeia de frio.",
-            ref: "https://www.instagram.com/p/DScWHVnD2z8/",
-            perguntas: [
-              "O sorvete vai por cima ou em pote separado, para mergulhar?",
-              "A embalagem de fritas (cone ou caixinha) é comprada pronta e personalizada? Tem prazo de gráfica, e esse prazo não está no cronograma.",
-              "Sai da mesma massa e do mesmo forno do cookie ou é massa própria?"
-            ]
-          },
-          {
-            id: "panelinha",
-            nome: "Panelinha",
-            tag: "quente + frio",
-            base: "Cookie assado na panelinha, servido com sorvete. Único item que junta quente e frio na mesma montagem.",
-            ref: "https://www.instagram.com/reel/DbDmYEyu2XU/",
-            perguntas: [
-              "A panelinha é utensílio reutilizável (a loja lava e reusa) ou é descartável e entra no CMV? Muda a lista de compra e muda o custo por unidade.",
-              "Se for reutilizável: quantas por loja, e o que acontece no delivery — vai embora com o cliente?",
-              "Vai ao forno na hora? Se sim, prende por quanto tempo o forno que já é usado para o cookie."
-            ]
-          },
-          {
-            id: "casquinha",
-            nome: "Casquinha de sorvete de cookie",
-            tag: "congelado",
-            base: "Sorvete servido em casquinha de cookie.",
-            ref: "https://www.instagram.com/reel/Dav43gPyvfI/",
-            perguntas: [
-              "É bola em casquinha ou sorvete de máquina? Essa é a resposta que mais muda o investimento da loja.",
-              "A casquinha é comprada pronta ou é feita de massa de cookie na loja?",
-              "Onde a casquinha fica estocada: ocupa espaço seco e quebra fácil no transporte."
-            ]
-          },
-          {
-            id: "torta-gelada",
-            nome: "Torta gelada",
-            tag: "refrigerado",
-            base: "Sai do cardápio de Natal — a receita já existe e já rodou em loja.",
-            perguntas: [
-              "A receita do Natal roda igual no verão ou muda alguma coisa?",
-              "O CMV e o rendimento do Natal já estão levantados? Se estiverem, esse item já entra com número na mão e economiza uma etapa.",
-              "Fica em freezer ou em vitrine refrigerada, e qual a validade depois de descongelada."
-            ]
-          },
-          {
-            id: "frozen",
-            nome: "Frozen de morango e maracujá com manga",
-            tag: "congelado",
-            base: "Único item da lista que ainda não tem referência definida.",
-            perguntas: [
-              "Precisa de máquina de frozen ou sai no liquidificador com polpa congelada?",
-              "Se for máquina: uma por loja, quanto custa, onde fica no balcão e quem paga.",
-              "Copo, tampa e canudo entram no CMV e são três itens novos na lista de compra da loja."
-            ]
-          }
+        id: "ice-cookie",
+        nome: "Ice Cookie",
+        tag: "congelado",
+        base: "Cookie com sorvete no meio, no formato de sanduíche. A referência mostra os potes já montados e empilhados no freezer.",
+        ref: "https://www.instagram.com/reel/DbwEaSOMMbh/",
+        foto: "cardapio-verao/fotos/ice-cookie.jpg",
+        fotoFonte: "capa do reel de referência",
+        perguntas: [
+          "Quantos sabores entram? Ainda não foi definido, e cada sabor a mais é mais espaço parado no freezer.",
+          "Monta na loja na hora ou chega pronto e congelado da fábrica? Na referência vem pré-montado.",
+          "Quanto ocupa por unidade no freezer e qual o giro esperado por loja.",
+          "A embalagem aguenta o caminho do freezer até o cliente sem derreter, inclusive no delivery?"
         ]
       },
       {
-        id: "sem-frio",
-        nome: "Não precisa de frio",
-        nota: "Três itens. Saem da estrutura que a loja já tem, mas ainda podem exigir utensílio, embalagem própria ou tempo de forno.",
-        produtos: [
-          {
-            id: "torta-quente",
-            nome: "Torta quente",
-            tag: "forno",
-            base: "Massa de cookie em outros sabores, servida quente.",
-            perguntas: [
-              "Quais sabores entram? Cada sabor novo é um insumo novo na lista de compra da loja.",
-              "Assa na loja ou chega pronta e só é aquecida? Se assa, prende o forno do cookie por quanto tempo e em qual horário.",
-              "Vai acompanhada de sorvete? Se for, ela também entra na conta do freezer.",
-              "Qual embalagem de viagem aguenta o produto quente."
-            ]
-          },
-          {
-            id: "cookie-felicidade",
-            nome: "Cookie da felicidade",
-            tag: "modelagem",
-            base: "Sai da modelagem do pote da felicidade, que a loja já faz.",
-            perguntas: [
-              "Muda só o formato ou muda também massa e recheio em relação ao pote que já existe?",
-              "A modelagem é feita na loja? Se for, quanto tempo leva por unidade — é o custo escondido desse item.",
-              "O nome fica “cookie da felicidade” no material impresso?"
-            ]
-          },
-          {
-            id: "cookie-palito",
-            nome: "Cookie no palito",
-            tag: "seco",
-            base: "Cookie servido espetado no palito.",
-            ref: "https://www.instagram.com/reel/DbJhK6vJVF2/",
-            perguntas: [
-              "O palito entra como insumo no CMV: quantos vêm por pacote e quem compra.",
-              "Precisa de suporte ou expositor no balcão para ficar em pé? É utensílio novo.",
-              "Vai decorado com cobertura ou confeito? Cada camada é mais tempo de montagem na loja."
-            ]
-          }
+        id: "cookie-sorvete",
+        nome: "Cookie com sorvete",
+        tag: "congelado",
+        base: "Cookie servido com sorvete, no pote.",
+        ref: "https://www.instagram.com/reels/DairYfHKOg5/",
+        foto: "cardapio-verao/fotos/cookie-sorvete.jpg",
+        fotoFonte: "capa do reel de referência",
+        perguntas: [
+          "Qual o sabor do sorvete? Ainda não foi definido.",
+          "Bola porcionada na hora exige boleador, cuba e espaço de freezer para a cuba aberta. A loja tem os três?",
+          "Serve em pote, em prato ou em embalagem de viagem?"
+        ]
+      },
+      {
+        id: "cookie-fries",
+        nome: "Cookie fries + sorvete",
+        tag: "congelado",
+        base: "Cookie em formato de fritas, acompanhado de sorvete de creme — o sabor já está definido.",
+        ref: "https://www.instagram.com/p/DScWHVnD2z8/",
+        foto: "cardapio-verao/fotos/cookie-fries.jpg",
+        fotoFonte: "capa do post de referência",
+        perguntas: [
+          "O sorvete vai em pote separado, para mergulhar, como na referência? Se for sorvete de máquina, é equipamento.",
+          "A embalagem de fritas (cone ou caixinha) é comprada pronta e personalizada? Tem prazo de gráfica, e esse prazo não está no cronograma.",
+          "Sai da mesma massa e do mesmo forno do cookie ou é massa própria?"
+        ]
+      },
+      {
+        id: "panelinha",
+        nome: "Panelinha",
+        tag: "quente + frio",
+        base: "Cookie assado na panelinha, servido com sorvete e fruta por cima. Único item que junta quente e frio na mesma montagem.",
+        ref: "https://www.instagram.com/reel/DbDmYEyu2XU/",
+        foto: "cardapio-verao/fotos/panelinha.jpg",
+        fotoFonte: "capa do reel de referência",
+        perguntas: [
+          "A panelinha é utensílio reutilizável (a loja lava e reusa) ou é descartável e entra no CMV? Muda a lista de compra e muda o custo por unidade.",
+          "Se for reutilizável: quantas por loja, e o que acontece no delivery — vai embora com o cliente?",
+          "Vai ao forno na hora? Se sim, prende por quanto tempo o forno que já é usado para o cookie."
+        ]
+      },
+      {
+        id: "casquinha",
+        nome: "Casquinha de sorvete de cookie",
+        tag: "congelado",
+        base: "Sorvete servido dentro de uma casquinha de cookie.",
+        ref: "https://www.instagram.com/reel/Dav43gPyvfI/",
+        foto: "cardapio-verao/fotos/casquinha.jpg",
+        fotoFonte: "capa do reel de referência",
+        perguntas: [
+          "É bola em casquinha ou sorvete de máquina? Essa é a resposta que mais muda o investimento da loja.",
+          "A casquinha é comprada pronta ou é feita de massa de cookie na loja?",
+          "Onde a casquinha fica estocada: ocupa espaço seco e quebra fácil no transporte."
+        ]
+      },
+      {
+        id: "cookie-palito",
+        nome: "Cookie no palito",
+        tag: "precisa de frio",
+        base: "Cookie espetado no palito, com cobertura. A cobertura é igual à do sorvete — aquela casquinha que derrete se ficar fora da geladeira. É o que faz a diferença no produto, e é por isso que ele entra na cadeia de frio.",
+        ref: "https://www.instagram.com/reel/DbJhK6vJVF2/",
+        foto: "cardapio-verao/fotos/cookie-palito.jpg",
+        fotoFonte: "capa do reel de referência",
+        perguntas: [
+          "Se não pode ficar fora da geladeira, onde ele fica exposto? Expositor de balcão comum está descartado — ou é vitrine refrigerada, ou sai do freezer só na hora.",
+          "O palito entra como insumo no CMV: quantos vêm por pacote e quem compra.",
+          "Quantas coberturas e quantos sabores entram? Cada um é mais tempo de montagem e mais espaço."
+        ]
+      },
+      {
+        id: "cookie-felicidade",
+        nome: "Cookie da Felicidade",
+        tag: "gelado · a confirmar",
+        base: "É o Pote da Felicidade, algo que já existe no mercado. A loja ainda não faz — então não há receita, custo nem processo de partida, é o item que começa mais do zero.",
+        foto: "cardapio-verao/fotos/cookie-felicidade.jpg",
+        fotoFonte: "modelo de mercado — pote da felicidade padrão, para referência",
+        perguntas: [
+          "Qual o sabor do sorvete que vai nele? Ainda não foi definido.",
+          "Provavelmente é gelado — precisa ser confirmado, porque muda a conta de espaço no freezer.",
+          "O que entra no pote e em quantas camadas: é o que define o CMV e o tempo de montagem.",
+          "O pote é comprado pronto e personalizado? Se for impresso, tem prazo de gráfica."
+        ]
+      },
+      {
+        id: "torta-quente",
+        nome: "Torta quente",
+        tag: "forno",
+        base: "Massa de cookie em outros sabores, servida quente. São três sabores.",
+        foto: "cardapio-verao/fotos/torta.jpg",
+        fotoFonte: "foto da torta de cookie que a loja já faz",
+        perguntas: [
+          "Quais são os três sabores? Cada um é um insumo novo na lista de compra da loja.",
+          "Assa na loja ou chega pronta e só é aquecida? Se assa, prende o forno do cookie por quanto tempo e em qual horário.",
+          "Vai acompanhada de sorvete? Se for, ela também entra na conta do freezer.",
+          "Qual embalagem de viagem aguenta o produto quente."
+        ]
+      },
+      {
+        id: "torta-gelada",
+        nome: "Torta gelada",
+        tag: "refrigerado",
+        base: "Conforme o cardápio de Natal — a receita já existe e já rodou em loja. São três sabores.",
+        foto: "cardapio-verao/fotos/torta.jpg",
+        fotoFonte: "foto da torta de cookie que a loja já faz",
+        perguntas: [
+          "Quais são os três sabores do verão? São os mesmos do Natal ou muda?",
+          "O CMV e o rendimento do Natal já estão levantados? Se estiverem, esse item entra com número na mão e economiza uma etapa.",
+          "Fica em freezer ou em vitrine refrigerada, e qual a validade depois de descongelada."
+        ]
+      },
+      {
+        id: "frozen",
+        nome: "Frozen de maracujá com manga",
+        tag: "congelado",
+        base: "A loja já tem frozen de morango. O item novo do cardápio é o de maracujá com manga — ou seja, a máquina, o copo e o processo já existem; o que entra novo é o sabor.",
+        fotoFonte: "sem foto ainda — a do frozen de morango que a loja já vende resolve",
+        perguntas: [
+          "O equipamento do frozen de morango dá conta de mais um sabor ao mesmo tempo, ou é um de cada vez?",
+          "A polpa de maracujá e a de manga são insumos novos: quem fornece e a que custo.",
+          "Copo, tampa e canudo já são os mesmos do morango? Se forem, não entram como item novo na lista da loja."
         ]
       }
     ],
@@ -303,14 +310,14 @@ const PROJETOS = [
     acoes: [
       { id: "cv-ideias",        grupo: "Produto e custo", o: "Fechar as ideias do cardápio de verão", prazo: "2026-08-31", status: "aberta", reuniao: "2026-08-11" },
       { id: "cv-testes",        grupo: "Produto e custo", o: "Testar os 10 produtos na cozinha e ajustar a execução para o padrão da loja", prazo: null, prazoTxt: "Antes de 11/09", status: "aberta", reuniao: "2026-08-21" },
-      { id: "cv-cmv",           grupo: "Produto e custo", o: "Levantar o CMV de cada um dos 10 produtos", prazo: null, prazoTxt: "Antes de 11/09", status: "aberta", reuniao: "2026-08-21" },
-      { id: "cv-preco",         grupo: "Produto e custo", o: "Definir o preço de venda de cada produto a partir do CMV", prazo: null, prazoTxt: "Antes de 24/09", status: "aberta", reuniao: "2026-08-21" },
+      { id: "cv-cmv",           grupo: "Produto e custo", o: "Levantar o CMV de cada um dos 10 produtos", prazo: null, prazoTxt: "Antes de 11/09", status: "aberta", reuniao: "2026-08-21", link: "https://fechamento-caixa-nu.vercel.app/cmv/laboratorio", linkTxt: "Laboratório de CMV, no Sistema HC" },
+      { id: "cv-preco",         grupo: "Produto e custo", o: "Definir o preço de venda de cada produto a partir do CMV", prazo: null, prazoTxt: "Antes de 24/09", status: "aberta", reuniao: "2026-08-21", link: "https://fechamento-caixa-nu.vercel.app/cmv/laboratorio", linkTxt: "Preço sugerido sai do laboratório" },
       { id: "cv-degustacao",    grupo: "Produto e custo", o: "Degustação do cardápio", prazo: "2026-09-11", status: "aberta", reuniao: "2026-08-11" },
       { id: "cv-aprovados",     grupo: "Produto e custo", o: "Registrar o que foi aprovado na degustação e o que sai do cardápio", prazo: "2026-09-11", status: "aberta", reuniao: "2026-08-21" },
 
       { id: "cv-utensilios",    grupo: "O que a loja precisa", o: "Listar, produto a produto, os utensílios que cada loja precisa comprar", prazo: null, prazoTxt: "Depois do teste, antes de 25/09", status: "aberta", reuniao: "2026-08-21" },
       { id: "cv-logistica",     grupo: "O que a loja precisa", o: "Viabilizar o transporte dos insumos até a loja, com cadeia de frio para os congelados", prazo: null, prazoTxt: "Antes de 25/09", status: "aberta", reuniao: "2026-08-21" },
-      { id: "cv-armazenamento", grupo: "O que a loja precisa", o: "Calcular o espaço de armazenamento por loja — 7 dos 10 itens dependem de frio", prazo: null, prazoTxt: "Antes de 25/09", status: "aberta", reuniao: "2026-08-21" },
+      { id: "cv-armazenamento", grupo: "O que a loja precisa", o: "Calcular o espaço de armazenamento por loja — 9 dos 10 itens dependem de frio", prazo: null, prazoTxt: "Antes de 25/09", status: "aberta", reuniao: "2026-08-21" },
 
       { id: "cv-fichas",        grupo: "Ficha técnica e treino", o: "Criar a ficha técnica de cada produto aprovado", prazo: null, prazoTxt: "Depois de 11/09", status: "aberta", reuniao: "2026-08-21" },
       { id: "cv-videos",        grupo: "Ficha técnica e treino", o: "Gravar o vídeo do processo de produção de cada produto nas lojas", prazo: null, prazoTxt: "Depois de 11/09", status: "aberta", reuniao: "2026-08-21" },
@@ -326,10 +333,11 @@ const PROJETOS = [
     ],
     abertos: [
       "As fotos do cardápio saem de sessão profissional ou de IA? A decisão trava a produção do material impresso de 24/09 e ninguém ficou responsável por ela.",
-      "Sete dos dez itens dependem de frio. Não se sabe se o freezer que a loja já tem comporta o volume — nem quem paga o freezer novo, se não comportar.",
+      "Nove dos dez itens dependem de frio. Não se sabe se o freezer que a loja já tem comporta o volume — nem quem paga o freezer novo, se não comportar.",
       "Os utensílios: cada loja compra por conta ou a compra é centralizada e rateada? Muda o prazo, porque compra centralizada tem lead time.",
-      "A casquinha e o frozen podem exigir máquina. Se exigirem, é investimento por loja e precisa entrar na conta antes de 25/09.",
-      "O frozen é o único item sem referência definida — é o que está mais longe de poder ser testado.",
+      "A casquinha e o cookie fries podem exigir sorvete de máquina. Se exigirem, é investimento por loja e precisa entrar na conta antes de 25/09.",
+      "Faltam sabores definidos: quantos entram no Ice Cookie, qual o sorvete do cookie com sorvete e do cookie da felicidade, e quais são os três sabores de cada torta.",
+      "O laboratório de CMV do Sistema HC já tem os 10 produtos com um rascunho de ficha e alvo de 40%, mas as quantidades não foram validadas e o frozen ainda está lá com o nome antigo, de morango. Precisa ser revisado produto a produto.",
       "O Marketing aciona a fábrica direto no dia 25/09 ou depende da operação para liberar?",
       "Onde acontece a degustação de 11/09 e quem participa.",
       "A divulgação no Instagram cai antes ou no mesmo dia da venda?"

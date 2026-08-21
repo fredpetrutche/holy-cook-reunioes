@@ -246,6 +246,15 @@ function listaAcoes(acoes) {
 
     row.append(el("div", "acao-txt", a.o));
 
+    if (a.link) {
+      const l = el("a", "acao-link", (a.linkTxt || "Abrir") + " →");
+      l.href = a.link;
+      l.target = "_blank";
+      l.rel = "noopener noreferrer";
+      l.addEventListener("click", e => e.stopPropagation());
+      row.append(l);
+    }
+
     const meta = el("div", "acao-meta");
     meta.append(campoData(a));
     if (a.quando) {
@@ -273,64 +282,70 @@ function alternar(chave, id) {
   redesenhar();
 }
 
-/* grade de produtos do cardápio: grupo de conservação → produto → o que falta */
-function gradeItens(p) {
-  const nivel = el("div", "nivel");
-  const chaveG = "grupo-item:" + p.id;
+/* raiz do site vista pela página atual: "" na home, "../" numa subpágina */
+let RAIZ = "";
 
-  const grade = el("div", "grade-grupos");
-  p.itens.forEach(g => {
-    const b = el("button", "grupo-btn" + (estaAberto(chaveG, g.id) ? " on" : ""));
+/* grade de produtos de um projeto: card → foto, o que já está definido e o
+   que o teste ainda tem de responder */
+function gradeProdutos(p) {
+  const nivel = el("div", "nivel");
+  const chave = "produto:" + p.id;
+
+  const grade = el("div", "grade-itens");
+  p.produtos.forEach(pr => {
+    const b = el("button", "item-btn" + (estaAberto(chave, pr.id) ? " on" : ""));
     b.type = "button";
-    b.append(el("span", "grupo-nome", g.nome));
-    const meta = el("div", "grupo-meta");
-    meta.append(el("span", "grupo-cont", g.produtos.length + " itens"));
-    const semRef = g.produtos.filter(x => !x.ref && !x.base).length;
-    if (semRef) meta.append(el("span", "chip warn", semRef + " sem base"));
-    b.append(meta);
-    b.addEventListener("click", () => alternar(chaveG, g.id));
+    const capa = el("span", "item-capa" + (pr.foto ? "" : " vazia"));
+    if (pr.foto) {
+      const img = document.createElement("img");
+      img.src = RAIZ + pr.foto;
+      img.alt = "";
+      img.loading = "lazy";
+      capa.append(img);
+    } else {
+      capa.append(el("span", "item-capa-txt", "sem foto"));
+    }
+    b.append(capa);
+    b.append(el("span", "item-nome-btn", pr.nome));
+    if (pr.tag) b.append(el("span", "item-tag", pr.tag));
+    b.addEventListener("click", () => alternar(chave, pr.id));
     grade.append(b);
   });
   nivel.append(grade);
 
-  const g = p.itens.find(x => estaAberto(chaveG, x.id));
-  if (!g) return nivel;
+  const pr = p.produtos.find(x => estaAberto(chave, x.id));
+  if (!pr) return nivel;
 
-  const visor = el("div", "grupo-visor");
-  if (g.nota) visor.append(el("p", "grupo-nota", g.nota));
+  const painel = el("div", "item-visor");
+  painel.append(el("div", "item-titulo", pr.nome));
 
-  const chaveP = "produto:" + p.id + ":" + g.id;
-  const gradeP = el("div", "grade-itens");
-  g.produtos.forEach(pr => {
-    const b = el("button", "item-btn" + (estaAberto(chaveP, pr.id) ? " on" : ""));
-    b.type = "button";
-    b.append(el("span", "item-nome-btn", pr.nome));
-    if (pr.tag) b.append(el("span", "item-tag", pr.tag));
-    b.addEventListener("click", () => alternar(chaveP, pr.id));
-    gradeP.append(b);
-  });
-  visor.append(gradeP);
-
-  const pr = g.produtos.find(x => estaAberto(chaveP, x.id));
-  if (pr) {
-    const painel = el("div", "item-visor");
-    painel.append(el("div", "item-titulo", pr.nome));
-    if (pr.base) painel.append(el("p", "item-base", pr.base));
-    if (pr.ref) {
-      const a = el("a", "item-ref", "Ver a referência no Instagram →");
-      a.href = pr.ref;
-      a.target = "_blank";
-      a.rel = "noopener noreferrer";
-      painel.append(a);
-    }
-    painel.append(el("span", "visor-rot", "A responder no teste"));
-    const ul = el("ul", "openlist");
-    pr.perguntas.forEach(q => ul.append(el("li", null, q)));
-    painel.append(ul);
-    visor.append(painel);
+  if (pr.foto) {
+    const fig = el("figure", "item-foto");
+    const img = document.createElement("img");
+    img.src = RAIZ + pr.foto;
+    img.alt = "Referência de " + pr.nome;
+    fig.append(img);
+    if (pr.fotoFonte) fig.append(el("figcaption", null, pr.fotoFonte));
+    painel.append(fig);
+  } else if (pr.fotoFonte) {
+    painel.append(el("p", "item-semfoto", pr.fotoFonte));
   }
 
-  nivel.append(visor);
+  if (pr.base) painel.append(el("p", "item-base", pr.base));
+  if (pr.ref) {
+    const link = el("a", "item-ref", "Ver a referência no Instagram →");
+    link.href = pr.ref;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    painel.append(link);
+  }
+
+  painel.append(el("span", "visor-rot", "A responder no teste"));
+  const ul = el("ul", "openlist");
+  pr.perguntas.forEach(q => ul.append(el("li", null, q)));
+  painel.append(ul);
+
+  nivel.append(painel);
   return nivel;
 }
 

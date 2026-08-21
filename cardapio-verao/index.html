@@ -47,6 +47,7 @@
    cada mudança que chega do banco.
    ════════════════════════════════════════════════════════════════════════ */
 
+RAIZ = "../";   /* as fotos são guardadas a partir da raiz do site */
 const P = PROJETOS.find(x => x.id === "cardapio-verao");
 
 /* cada marco do cronograma puxa as ações que vencem nele — todas as 18 estão
@@ -81,7 +82,7 @@ const PASSOS = [
 
 const ABAS = [
   { id: "briefing",   nome: "Briefing" },
-  { id: "itens",      nome: "Os itens" },
+  { id: "produtos",   nome: "Os produtos" },
   { id: "acoes",      nome: "Ações" },
   { id: "cronograma", nome: "Cronograma" },
   { id: "atas",       nome: "Atas" },
@@ -89,6 +90,7 @@ const ABAS = [
 ];
 
 let abaAtual = (location.hash || "#briefing").slice(1);
+if (abaAtual === "itens") abaAtual = "produtos";   /* link antigo */
 if (!ABAS.some(a => a.id === abaAtual)) abaAtual = "briefing";
 
 const acaoPorId = id => acoesDe(P).find(a => a.id === id);
@@ -100,8 +102,8 @@ function painelBriefing() {
   const acoes = acoesDe(P);
   const feitas = acoes.filter(a => a.feita).length;
   const prox = proximaAcao(P);
-  const comFrio = P.itens.find(g => g.id === "frio").produtos.length;
-  const total = P.itens.reduce((s, g) => s + g.produtos.length, 0);
+  const comFrio = P.produtos.filter(x => x.tag !== "forno").length;
+  const total = P.produtos.length;
 
   const placar = el("div", "placar");
   const num = (n, rot) => {
@@ -110,7 +112,7 @@ function painelBriefing() {
     i.append(el("span", "placar-rot", rot));
     placar.append(i);
   };
-  num(String(total), "itens definidos");
+  num(String(total), "produtos definidos");
   num(String(comFrio), "dependem de frio");
   num(feitas + "/" + acoes.length, "ações feitas");
   num(prox && prox.prazo ? fmtCurto(prox.prazo) : "—", prox ? prox.o : "tudo feito");
@@ -129,11 +131,11 @@ function painelBriefing() {
   return box;
 }
 
-/* ── Os itens ───────────────────────────────────────────────────────────── */
-function painelItens() {
+/* ── Os produtos ────────────────────────────────────────────────────────── */
+function painelProdutos() {
   const box = el("div", "tab-panel");
-  box.append(el("p", "painel-nota", "Separados pelo que muda a operação: precisar de frio ou não. Para todos vale a mesma lista — CMV, preço, utensílio, espaço no freezer, ficha técnica e vídeo. Dentro de cada um fica só o que é específico dele."));
-  box.append(gradeItens(P));
+  box.append(el("p", "painel-nota", "Nove dos dez precisam de frio — só a torta quente não. Para todos vale a mesma lista: CMV, preço, utensílio, espaço no freezer, ficha técnica e vídeo. Dentro de cada card fica a referência e só o que é específico dele."));
+  box.append(gradeProdutos(P));
   return box;
 }
 
@@ -225,7 +227,7 @@ function painelAbertos() {
 
 const PAINEIS = {
   briefing: painelBriefing,
-  itens: painelItens,
+  produtos: painelProdutos,
   acoes: painelAcoes,
   cronograma: painelCronograma,
   atas: painelAtas,
@@ -234,7 +236,7 @@ const PAINEIS = {
 
 function contagem(id) {
   const acoes = acoesDe(P);
-  if (id === "itens")   return P.itens.reduce((s, g) => s + g.produtos.length, 0);
+  if (id === "produtos") return P.produtos.length;
   if (id === "acoes")   return acoes.filter(a => !a.feita).length;
   if (id === "abertos") return P.abertos.length;
   return null;
