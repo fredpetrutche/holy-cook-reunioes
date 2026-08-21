@@ -359,6 +359,73 @@
   }
   .erro.on { display: flex; }
 
+  /* ── Atualização de projeto ───────────────────────────────── */
+  .upd {
+    border: 1px solid var(--accent); border-left-width: 3px;
+    border-radius: var(--radius); background: var(--accent-soft);
+    padding: 15px 17px;
+  }
+  .upd + .upd { margin-top: 10px; }
+  .upd-data {
+    display: block; font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: .12em; text-transform: uppercase; color: var(--accent-ink);
+  }
+  .upd-titulo {
+    font-family: var(--font-display); font-size: 17.5px; font-weight: 600;
+    margin: 3px 0 8px; color: var(--ink); text-wrap: balance;
+  }
+  .upd p { font-size: 14px; line-height: 1.6; color: var(--ink); }
+  .upd p + p { margin-top: 9px; }
+  .upd-flag { font-family: var(--font-mono); font-size: 11px; color: var(--accent); letter-spacing: .03em; }
+
+  /* ── Grades de card dentro do diálogo ──────────────────────────── */
+  .nivel { display: flex; flex-direction: column; gap: 10px; }
+
+  .grade-grupos { display: grid; grid-template-columns: repeat(auto-fit, minmax(196px, 1fr)); gap: 9px; }
+  .grade-itens  { display: grid; grid-template-columns: repeat(auto-fit, minmax(158px, 1fr)); gap: 8px; }
+
+  .grupo-btn, .item-btn {
+    display: flex; flex-direction: column; gap: 4px; text-align: left;
+    font: inherit; color: inherit; cursor: pointer;
+    background: var(--surface); border: 1px solid var(--line-2);
+    border-radius: var(--radius); padding: 12px 14px;
+    transition: border-color .15s ease, background .15s ease;
+  }
+  .grupo-btn:hover, .item-btn:hover { border-color: var(--accent); background: var(--surface-2); }
+  .grupo-btn.on, .item-btn.on { border-color: var(--accent); background: var(--accent-soft); }
+
+  .grupo-nome { font-size: 14.5px; font-weight: 600; line-height: 1.3; text-wrap: balance; }
+  .grupo-meta { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
+  .grupo-cont { font-family: var(--font-mono); font-size: 11px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+
+  .item-btn { padding: 11px 13px; }
+  .item-nome-btn { font-size: 13.5px; font-weight: 600; line-height: 1.3; text-wrap: balance; }
+  .item-tag {
+    font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--ink-3);
+  }
+
+  .grupo-visor, .item-visor {
+    border: 1px solid var(--line); border-left: 3px solid var(--accent);
+    border-radius: var(--radius); background: var(--surface-2);
+    padding: 14px 16px; display: flex; flex-direction: column; gap: 10px;
+  }
+  .item-visor { background: var(--surface); }
+  .grupo-nota, .item-nota { font-size: 13.5px; color: var(--ink-2); line-height: 1.55; }
+  .item-titulo { font-family: var(--font-display); font-size: 16.5px; font-weight: 600; text-wrap: balance; }
+  .visor-rot {
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--ink-3);
+  }
+
+  .item-base { font-size: 14px; line-height: 1.55; color: var(--ink); }
+  .item-ref {
+    align-self: flex-start; font-size: 13px; font-weight: 600; color: var(--accent);
+    text-decoration: none; border: 1px solid var(--line-2); border-radius: 100px;
+    padding: 6px 13px; background: var(--surface-2);
+  }
+  .item-ref:hover { border-color: var(--accent); }
+
   /* ── Mobile ──────────────────────────────────────────────────────────── */
   @media (max-width: 640px) {
     body { font-size: 16px; }
@@ -560,14 +627,14 @@ const PROJETOS = [
       "A divulgação sai do Instagram e vai para os quatro canais orgânicos que a operação já tem. Cada canal precisa da peça pronta e da instrução de execução, porque quem roda isso na ponta é a loja."
     ],
     acoes: [
-      { id: "ag-listas",     o: "Montar a lista de transmissão nas lojas que ainda não têm — a maioria não tem", prazo: null, prazoTxt: "A definir", status: "bloqueia", reuniao: "2026-08-11" },
-      { id: "ag-mensagens",  o: "Escrever as mensagens prontas para as lojas dispararem na lista de transmissão", prazo: null, prazoTxt: "A definir", status: "aberta", reuniao: "2026-08-11" },
-      { id: "ag-display",    o: "Definir a peça de display: a de balcão e a que vai junto com o pedido", prazo: null, prazoTxt: "A definir", status: "aberta", reuniao: "2026-08-11" },
-      { id: "ag-delivery",   o: "Definir qual é a ação no delivery e como a loja executa na prática", prazo: null, prazoTxt: "A definir", status: "aberta", reuniao: "2026-08-11" },
-      { id: "ag-instagram",  o: "Definir a data e o formato do post de divulgação no Instagram", prazo: null, prazoTxt: "A definir", status: "aberta", reuniao: "2026-08-11" },
-      { id: "ag-janela",     o: "Decidir a janela de medição: 3 dias (acordado) ou 5 dias (sugestão do Fred)", prazo: null, prazoTxt: "A definir", status: "aberta", reuniao: "2026-08-11" },
-      { id: "ag-medicao",    o: "Registrar o aumento de vendas por dia de divulgação (D1, D2, D3)", prazo: null, prazoTxt: "Durante a divulgação", status: "aberta", reuniao: "2026-08-11" },
-      { id: "ag-nomes",      o: "Confirmar os nomes oficiais dos dois produtos", prazo: null, prazoTxt: "A definir", status: "aberta", reuniao: "2026-08-11" }
+      { id: "ag-nomes",      grupo: "Produtos", o: "Confirmar os nomes oficiais dos dois produtos", prazo: null, prazoTxt: "A definir", status: "aberta", reuniao: "2026-08-11" },
+      { id: "ag-listas",     grupo: "Canais de divulgação", o: "Montar a lista de transmissão nas lojas que ainda não têm — a maioria não tem", prazo: null, prazoTxt: "A definir", status: "bloqueia", reuniao: "2026-08-11" },
+      { id: "ag-mensagens",  grupo: "Canais de divulgação", o: "Escrever as mensagens prontas para as lojas dispararem na lista de transmissão", prazo: null, prazoTxt: "A definir", status: "aberta", reuniao: "2026-08-11" },
+      { id: "ag-display",    grupo: "Canais de divulgação", o: "Definir a peça de display: a de balcão e a que vai junto com o pedido", prazo: null, prazoTxt: "A definir", status: "aberta", reuniao: "2026-08-11" },
+      { id: "ag-delivery",   grupo: "Canais de divulgação", o: "Definir qual é a ação no delivery e como a loja executa na prática", prazo: null, prazoTxt: "A definir", status: "aberta", reuniao: "2026-08-11" },
+      { id: "ag-instagram",  grupo: "Canais de divulgação", o: "Definir a data e o formato do post de divulgação no Instagram", prazo: null, prazoTxt: "A definir", status: "aberta", reuniao: "2026-08-11" },
+      { id: "ag-janela",     grupo: "Medição", o: "Decidir a janela de medição: 3 dias (acordado) ou 5 dias (sugestão do Fred)", prazo: null, prazoTxt: "A definir", status: "aberta", reuniao: "2026-08-11" },
+      { id: "ag-medicao",    grupo: "Medição", o: "Registrar o aumento de vendas por dia de divulgação (D1, D2, D3)", prazo: null, prazoTxt: "Durante a divulgação", status: "aberta", reuniao: "2026-08-11" }
     ],
     abertos: [
       "Nenhuma ação deste projeto tem data — só janela. É o projeto mais exposto a atraso, e agosto já passou da metade.",
@@ -599,23 +666,190 @@ const PROJETOS = [
   {
     id: "cardapio-verao",
     nome: "Cardápio de Verão",
-    resumo: "Único projeto com cronograma fechado: das ideias em agosto até a venda em loja no dia 1º de outubro.",
+    resumo: "Os 10 itens estão fechados e cada um já tem referência. Agora é teste, CMV e o que cada loja precisa comprar para conseguir produzir.",
     responsavel: "Marketing",
+    atualizacoes: [
+      {
+        data: "2026-08-21",
+        titulo: "Os 10 itens do cardápio foram definidos",
+        paragrafos: [
+          "A lista está fechada: torta quente, torta gelada, Ice Cookie, cookie da felicidade, cookie com sorvete, cookie fries com sorvete, cookie no palito, panelinha, casquinha de sorvete de cookie e frozen de morango e maracujá com manga. A ação de 31/08 fecha com dez dias de antecedência.",
+          "Cada item veio com o seu ponto de partida: seis têm referência em vídeo, a torta gelada sai do cardápio de Natal, a torta quente é massa de cookie em outros sabores e o cookie da felicidade sai da modelagem do pote da felicidade. Só o frozen ainda está sem referência definida.",
+          "Com a lista definida, o projeto muda de natureza: sai da ideia e entra na conta. O próximo passo é testar os produtos e levantar o CMV de cada um, porque é o CMV que diz se o preço fecha em loja — e o preço precisa estar decidido antes de o cardápio impresso ir para produção, em 24/09.",
+          "Três frentes novas apareceram junto com a lista, e nenhuma delas é de marketing, é de operação: os utensílios que cada loja vai ter de comprar, produto a produto; o transporte dos insumos até a loja, agora com cadeia de frio; e o espaço de armazenamento, que é o ponto mais apertado — 7 dos 10 itens dependem de sorvete ou de gelado, e freezer de loja é limitado.",
+          "Depois da degustação de 11/09, o que for aprovado precisa virar ficha técnica e vídeo do processo de produção, para a loja conseguir repetir o produto igual todos os dias. Isso não estava no cronograma fechado na reunião e entra na janela entre 11/09 e 01/10.",
+          "E ficou uma decisão em aberto que trava a produção do material impresso: as fotos do cardápio saem de uma sessão fotográfica profissional ou são geradas por IA. Enquanto não for decidida, o cardápio completo de 24/09 não começa."
+        ]
+      }
+    ],
+    itens: [
+      {
+        id: "frio",
+        nome: "Precisa de frio",
+        nota: "Sete dos dez itens. São eles que definem a logística de transporte, o espaço de freezer na loja e boa parte do investimento em equipamento.",
+        produtos: [
+          {
+            id: "ice-cookie",
+            nome: "Ice Cookie",
+            tag: "congelado",
+            base: "Cookie com sorvete no meio, no formato de sanduíche.",
+            ref: "https://www.instagram.com/reel/DbwEaSOMMbh/",
+            perguntas: [
+              "Monta na loja na hora ou chega pronto e congelado da fábrica?",
+              "Se for pré-montado: quanto ocupa por unidade no freezer e qual o giro esperado — é o item que mais come espaço parado.",
+              "A embalagem aguenta o caminho do freezer até o cliente sem derreter, inclusive no delivery?"
+            ]
+          },
+          {
+            id: "cookie-sorvete",
+            nome: "Cookie com sorvete",
+            tag: "congelado",
+            base: "Cookie servido com sorvete por cima.",
+            ref: "https://www.instagram.com/reels/DairYfHKOg5/",
+            perguntas: [
+              "Bola porcionada na hora exige boleador, cuba e espaço de freezer para a cuba aberta. A loja tem os três?",
+              "Quantos sabores de sorvete entram? Cada sabor a mais é mais uma cuba e mais espaço.",
+              "Serve em pote, em prato ou em embalagem de viagem?"
+            ]
+          },
+          {
+            id: "cookie-fries",
+            nome: "Cookie fries + sorvete",
+            tag: "congelado",
+            base: "Vai com sorvete junto — não é só o cookie em formato de fritas, é item de cadeia de frio.",
+            ref: "https://www.instagram.com/p/DScWHVnD2z8/",
+            perguntas: [
+              "O sorvete vai por cima ou em pote separado, para mergulhar?",
+              "A embalagem de fritas (cone ou caixinha) é comprada pronta e personalizada? Tem prazo de gráfica, e esse prazo não está no cronograma.",
+              "Sai da mesma massa e do mesmo forno do cookie ou é massa própria?"
+            ]
+          },
+          {
+            id: "panelinha",
+            nome: "Panelinha",
+            tag: "quente + frio",
+            base: "Cookie assado na panelinha, servido com sorvete. Único item que junta quente e frio na mesma montagem.",
+            ref: "https://www.instagram.com/reel/DbDmYEyu2XU/",
+            perguntas: [
+              "A panelinha é utensílio reutilizável (a loja lava e reusa) ou é descartável e entra no CMV? Muda a lista de compra e muda o custo por unidade.",
+              "Se for reutilizável: quantas por loja, e o que acontece no delivery — vai embora com o cliente?",
+              "Vai ao forno na hora? Se sim, prende por quanto tempo o forno que já é usado para o cookie."
+            ]
+          },
+          {
+            id: "casquinha",
+            nome: "Casquinha de sorvete de cookie",
+            tag: "congelado",
+            base: "Sorvete servido em casquinha de cookie.",
+            ref: "https://www.instagram.com/reel/Dav43gPyvfI/",
+            perguntas: [
+              "É bola em casquinha ou sorvete de máquina? Essa é a resposta que mais muda o investimento da loja.",
+              "A casquinha é comprada pronta ou é feita de massa de cookie na loja?",
+              "Onde a casquinha fica estocada: ocupa espaço seco e quebra fácil no transporte."
+            ]
+          },
+          {
+            id: "torta-gelada",
+            nome: "Torta gelada",
+            tag: "refrigerado",
+            base: "Sai do cardápio de Natal — a receita já existe e já rodou em loja.",
+            perguntas: [
+              "A receita do Natal roda igual no verão ou muda alguma coisa?",
+              "O CMV e o rendimento do Natal já estão levantados? Se estiverem, esse item já entra com número na mão e economiza uma etapa.",
+              "Fica em freezer ou em vitrine refrigerada, e qual a validade depois de descongelada."
+            ]
+          },
+          {
+            id: "frozen",
+            nome: "Frozen de morango e maracujá com manga",
+            tag: "congelado",
+            base: "Único item da lista que ainda não tem referência definida.",
+            perguntas: [
+              "Precisa de máquina de frozen ou sai no liquidificador com polpa congelada?",
+              "Se for máquina: uma por loja, quanto custa, onde fica no balcão e quem paga.",
+              "Copo, tampa e canudo entram no CMV e são três itens novos na lista de compra da loja."
+            ]
+          }
+        ]
+      },
+      {
+        id: "sem-frio",
+        nome: "Não precisa de frio",
+        nota: "Três itens. Saem da estrutura que a loja já tem, mas ainda podem exigir utensílio, embalagem própria ou tempo de forno.",
+        produtos: [
+          {
+            id: "torta-quente",
+            nome: "Torta quente",
+            tag: "forno",
+            base: "Massa de cookie em outros sabores, servida quente.",
+            perguntas: [
+              "Quais sabores entram? Cada sabor novo é um insumo novo na lista de compra da loja.",
+              "Assa na loja ou chega pronta e só é aquecida? Se assa, prende o forno do cookie por quanto tempo e em qual horário.",
+              "Vai acompanhada de sorvete? Se for, ela também entra na conta do freezer.",
+              "Qual embalagem de viagem aguenta o produto quente."
+            ]
+          },
+          {
+            id: "cookie-felicidade",
+            nome: "Cookie da felicidade",
+            tag: "modelagem",
+            base: "Sai da modelagem do pote da felicidade, que a loja já faz.",
+            perguntas: [
+              "Muda só o formato ou muda também massa e recheio em relação ao pote que já existe?",
+              "A modelagem é feita na loja? Se for, quanto tempo leva por unidade — é o custo escondido desse item.",
+              "O nome fica “cookie da felicidade” no material impresso?"
+            ]
+          },
+          {
+            id: "cookie-palito",
+            nome: "Cookie no palito",
+            tag: "seco",
+            base: "Cookie servido espetado no palito.",
+            ref: "https://www.instagram.com/reel/DbJhK6vJVF2/",
+            perguntas: [
+              "O palito entra como insumo no CMV: quantos vêm por pacote e quem compra.",
+              "Precisa de suporte ou expositor no balcão para ficar em pé? É utensílio novo.",
+              "Vai decorado com cobertura ou confeito? Cada camada é mais tempo de montagem na loja."
+            ]
+          }
+        ]
+      }
+    ],
     detalhe: [
       "O cronograma foi fechado de ponta a ponta na reunião, encadeando fechamento de ideias, degustação, produção do material impresso, liberação de compra na fábrica e início da venda.",
       "Cada data depende da anterior: um atraso no fechamento das ideias em 31/08 empurra a degustação, a impressão e a compra de insumos — e 1º de outubro é a data que não deveria se mexer.",
       "As lojas precisam receber esse calendário antes de 25/09, porque é nesse dia que abre a solicitação de compra na fábrica. Sem o calendário na mão, a loja não se programa para comprar."
     ],
     acoes: [
-      { id: "cv-ideias",     o: "Fechar as ideias do cardápio de verão", prazo: "2026-08-31", status: "aberta", reuniao: "2026-08-11" },
-      { id: "cv-degustacao", o: "Degustação do cardápio", prazo: "2026-09-11", status: "aberta", reuniao: "2026-08-11" },
-      { id: "cv-calendario", o: "Apresentar o calendário às lojas: liberação de compra, divulgação no Instagram e início da venda", prazo: null, prazoTxt: "Antes de 25/09", status: "aberta", reuniao: "2026-08-11" },
-      { id: "cv-producao",   o: "Produzir o cardápio completo e o material impresso", prazo: "2026-09-24", status: "aberta", reuniao: "2026-08-11" },
-      { id: "cv-fabrica",    o: "Abrir a solicitação e liberar os produtos na fábrica para compra", prazo: "2026-09-25", status: "aberta", reuniao: "2026-08-11" },
-      { id: "cv-instagram",  o: "Definir a data da divulgação no Instagram do cardápio de verão", prazo: null, prazoTxt: "Antes de 01/10", status: "aberta", reuniao: "2026-08-11" },
-      { id: "cv-venda",      o: "Início da venda nas lojas, com divulgação de marketing", prazo: "2026-10-01", status: "aberta", reuniao: "2026-08-11" }
+      { id: "cv-ideias",        grupo: "Produto e custo", o: "Fechar as ideias do cardápio de verão", prazo: "2026-08-31", status: "aberta", reuniao: "2026-08-11" },
+      { id: "cv-testes",        grupo: "Produto e custo", o: "Testar os 10 produtos na cozinha e ajustar a execução para o padrão da loja", prazo: null, prazoTxt: "Antes de 11/09", status: "bloqueia", reuniao: "2026-08-21" },
+      { id: "cv-cmv",           grupo: "Produto e custo", o: "Levantar o CMV de cada um dos 10 produtos", prazo: null, prazoTxt: "Antes de 11/09", status: "aberta", reuniao: "2026-08-21" },
+      { id: "cv-preco",         grupo: "Produto e custo", o: "Definir o preço de venda de cada produto a partir do CMV", prazo: null, prazoTxt: "Antes de 24/09", status: "aberta", reuniao: "2026-08-21" },
+      { id: "cv-degustacao",    grupo: "Produto e custo", o: "Degustação do cardápio", prazo: "2026-09-11", status: "aberta", reuniao: "2026-08-11" },
+      { id: "cv-aprovados",     grupo: "Produto e custo", o: "Registrar o que foi aprovado na degustação e o que sai do cardápio", prazo: "2026-09-11", status: "aberta", reuniao: "2026-08-21" },
+
+      { id: "cv-utensilios",    grupo: "O que a loja precisa", o: "Listar, produto a produto, os utensílios que cada loja precisa comprar", prazo: null, prazoTxt: "Depois do teste, antes de 25/09", status: "aberta", reuniao: "2026-08-21" },
+      { id: "cv-logistica",     grupo: "O que a loja precisa", o: "Viabilizar o transporte dos insumos até a loja, com cadeia de frio para os congelados", prazo: null, prazoTxt: "Antes de 25/09", status: "aberta", reuniao: "2026-08-21" },
+      { id: "cv-armazenamento", grupo: "O que a loja precisa", o: "Calcular o espaço de armazenamento por loja — 7 dos 10 itens dependem de frio", prazo: null, prazoTxt: "Antes de 25/09", status: "aberta", reuniao: "2026-08-21" },
+
+      { id: "cv-fichas",        grupo: "Ficha técnica e treino", o: "Criar a ficha técnica de cada produto aprovado", prazo: null, prazoTxt: "Depois de 11/09", status: "aberta", reuniao: "2026-08-21" },
+      { id: "cv-videos",        grupo: "Ficha técnica e treino", o: "Gravar o vídeo do processo de produção de cada produto nas lojas", prazo: null, prazoTxt: "Depois de 11/09", status: "aberta", reuniao: "2026-08-21" },
+      { id: "cv-repasse",       grupo: "Ficha técnica e treino", o: "Entregar as fichas e os vídeos às lojas antes de a venda começar", prazo: null, prazoTxt: "Antes de 01/10", status: "aberta", reuniao: "2026-08-21" },
+
+      { id: "cv-imagens",       grupo: "Material e divulgação", o: "Decidir como saem as fotos do cardápio: sessão fotográfica profissional ou IA", prazo: null, prazoTxt: "Trava a produção de 24/09", status: "bloqueia", reuniao: "2026-08-21" },
+      { id: "cv-producao",      grupo: "Material e divulgação", o: "Produzir o cardápio completo e o material impresso", prazo: "2026-09-24", status: "aberta", reuniao: "2026-08-11" },
+      { id: "cv-instagram",     grupo: "Material e divulgação", o: "Definir a data da divulgação no Instagram do cardápio de verão", prazo: null, prazoTxt: "Antes de 01/10", status: "aberta", reuniao: "2026-08-11" },
+
+      { id: "cv-calendario",    grupo: "Calendário e liberação", o: "Apresentar o calendário às lojas: liberação de compra, divulgação no Instagram e início da venda", prazo: null, prazoTxt: "Antes de 25/09", status: "aberta", reuniao: "2026-08-11" },
+      { id: "cv-fabrica",       grupo: "Calendário e liberação", o: "Abrir a solicitação e liberar os produtos na fábrica para compra", prazo: "2026-09-25", status: "aberta", reuniao: "2026-08-11" },
+      { id: "cv-venda",         grupo: "Calendário e liberação", o: "Início da venda nas lojas, com divulgação de marketing", prazo: "2026-10-01", status: "aberta", reuniao: "2026-08-11" }
     ],
     abertos: [
+      "As fotos do cardápio saem de sessão profissional ou de IA? A decisão trava a produção do material impresso de 24/09 e ninguém ficou responsável por ela.",
+      "Sete dos dez itens dependem de frio. Não se sabe se o freezer que a loja já tem comporta o volume — nem quem paga o freezer novo, se não comportar.",
+      "Os utensílios: cada loja compra por conta ou a compra é centralizada e rateada? Muda o prazo, porque compra centralizada tem lead time.",
+      "A casquinha e o frozen podem exigir máquina. Se exigirem, é investimento por loja e precisa entrar na conta antes de 25/09.",
+      "O frozen é o único item sem referência definida — é o que está mais longe de poder ser testado.",
       "O Marketing aciona a fábrica direto no dia 25/09 ou depende da operação para liberar?",
       "Onde acontece a degustação de 11/09 e quem participa.",
       "A divulgação no Instagram cai antes ou no mesmo dia da venda?"
@@ -870,6 +1104,127 @@ function listaAcoes(acoes) {
   return box;
 }
 
+/* ═══ NAVEGAÇÃO EM CARD ═══════════════════════════════════════════════════
+   Nenhuma tela comprida: cada nível é uma grade de cards e só o card aberto
+   mostra o conteúdo. O que está aberto vive aqui fora, e não no DOM, porque
+   redesenhar() reconstrói o diálogo inteiro a cada mudança vinda do banco.
+   ════════════════════════════════════════════════════════════════════════ */
+
+const uiAberto = {};
+const estaAberto = (chave, id) => uiAberto[chave] === id;
+function alternar(chave, id) {
+  uiAberto[chave] = uiAberto[chave] === id ? null : id;
+  redesenhar();
+}
+
+/* grade de produtos do cardápio: grupo de conservação → produto → o que falta */
+function gradeItens(p) {
+  const nivel = el("div", "nivel");
+  const chaveG = "grupo-item:" + p.id;
+
+  const grade = el("div", "grade-grupos");
+  p.itens.forEach(g => {
+    const b = el("button", "grupo-btn" + (estaAberto(chaveG, g.id) ? " on" : ""));
+    b.type = "button";
+    b.append(el("span", "grupo-nome", g.nome));
+    const meta = el("div", "grupo-meta");
+    meta.append(el("span", "grupo-cont", g.produtos.length + " itens"));
+    const semRef = g.produtos.filter(x => !x.ref && !x.base).length;
+    if (semRef) meta.append(el("span", "chip warn", semRef + " sem base"));
+    b.append(meta);
+    b.addEventListener("click", () => alternar(chaveG, g.id));
+    grade.append(b);
+  });
+  nivel.append(grade);
+
+  const g = p.itens.find(x => estaAberto(chaveG, x.id));
+  if (!g) return nivel;
+
+  const visor = el("div", "grupo-visor");
+  if (g.nota) visor.append(el("p", "grupo-nota", g.nota));
+
+  const chaveP = "produto:" + p.id + ":" + g.id;
+  const gradeP = el("div", "grade-itens");
+  g.produtos.forEach(pr => {
+    const b = el("button", "item-btn" + (estaAberto(chaveP, pr.id) ? " on" : ""));
+    b.type = "button";
+    b.append(el("span", "item-nome-btn", pr.nome));
+    if (pr.tag) b.append(el("span", "item-tag", pr.tag));
+    b.addEventListener("click", () => alternar(chaveP, pr.id));
+    gradeP.append(b);
+  });
+  visor.append(gradeP);
+
+  const pr = g.produtos.find(x => estaAberto(chaveP, x.id));
+  if (pr) {
+    const painel = el("div", "item-visor");
+    painel.append(el("div", "item-titulo", pr.nome));
+    if (pr.base) painel.append(el("p", "item-base", pr.base));
+    if (pr.ref) {
+      const a = el("a", "item-ref", "Ver a referência no Instagram →");
+      a.href = pr.ref;
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      painel.append(a);
+    }
+    painel.append(el("span", "visor-rot", "A responder no teste"));
+    const ul = el("ul", "openlist");
+    pr.perguntas.forEach(q => ul.append(el("li", null, q)));
+    painel.append(ul);
+    visor.append(painel);
+  }
+
+  nivel.append(visor);
+  return nivel;
+}
+
+/* ações em grupos: abre no grupo da próxima ação, um grupo por vez */
+function acoesEmGrupos(p) {
+  const acoes = acoesDe(p);
+  const nomes = [];
+  acoes.forEach(a => { if (a.grupo && nomes.indexOf(a.grupo) < 0) nomes.push(a.grupo); });
+  if (nomes.length < 2) return listaAcoes(acoes);
+
+  const chave = "grupo-acao:" + p.id;
+  if (!(chave in uiAberto)) {
+    const prox = proximaAcao(p);
+    uiAberto[chave] = prox && prox.grupo ? prox.grupo : nomes[0];
+  }
+
+  const nivel = el("div", "nivel");
+  const grade = el("div", "grade-grupos");
+
+  nomes.forEach(n => {
+    const doGrupo = acoes.filter(a => a.grupo === n);
+    const feitas = doGrupo.filter(a => a.feita).length;
+    const trava = doGrupo.some(a => !a.feita && a.status === "bloqueia");
+
+    const b = el("button", "grupo-btn" + (estaAberto(chave, n) ? " on" : ""));
+    b.type = "button";
+    b.append(el("span", "grupo-nome", n));
+    const meta = el("div", "grupo-meta");
+    meta.append(el("span", "grupo-cont", feitas + "/" + doGrupo.length));
+    if (feitas === doGrupo.length)  meta.append(el("span", "chip ok", "Feito"));
+    else if (trava)                 meta.append(el("span", "chip late", "Bloqueia"));
+    else {
+      const comData = doGrupo.filter(a => !a.feita && a.prazo).sort((x, y) => x.prazo < y.prazo ? -1 : 1)[0];
+      if (comData) meta.append(el("span", "chip " + severidade(comData.prazo), fmtCurto(comData.prazo)));
+    }
+    b.append(meta);
+    b.addEventListener("click", () => alternar(chave, n));
+    grade.append(b);
+  });
+  nivel.append(grade);
+
+  const aberto = nomes.find(n => estaAberto(chave, n));
+  if (aberto) {
+    const visor = el("div", "grupo-visor");
+    visor.append(listaAcoes(acoes.filter(a => a.grupo === aberto)));
+    nivel.append(visor);
+  }
+  return nivel;
+}
+
 /* ═══ RENDER ══════════════════════════════════════════════════════════════ */
 
 function renderCards() {
@@ -917,6 +1272,10 @@ function renderCards() {
     const foot = el("div", "card-foot");
     const feitas = acoes.length - abertas.length;
     foot.append(el("span", "open-count", feitas + " de " + acoes.length + " feitas"));
+    if (p.atualizacoes && p.atualizacoes.length) {
+      const u = p.atualizacoes[p.atualizacoes.length - 1];
+      foot.append(el("span", "upd-flag", "atualizado " + fmtCurto(u.data)));
+    }
     foot.append(el("span", "card-cta", "Abrir →"));
     card.append(foot);
 
@@ -960,12 +1319,29 @@ function abrirProjeto(p) {
   sheetTitle.textContent = p.nome;
   sheetBody.replaceChildren();
 
+  if (p.atualizacoes && p.atualizacoes.length) {
+    p.atualizacoes.slice().reverse().forEach(u => {
+      const bloco = el("div", "upd");
+      bloco.append(el("span", "upd-data", "Atualização · " + fmtLongo(u.data)));
+      bloco.append(el("h4", "upd-titulo", u.titulo));
+      u.paragrafos.forEach(par => bloco.append(el("p", null, par)));
+      sheetBody.append(bloco);
+    });
+  }
+
+  if (p.itens && p.itens.length) {
+    const total = p.itens.reduce((s, g) => s + g.produtos.length, 0);
+    sheetBody.append(el("h3", null, "Os " + total + " itens"));
+    sheetBody.append(el("p", "owner-note", "Separados pelo que muda a operação: precisar de frio ou não. Para todos vale a mesma lista — CMV, preço, utensílio, espaço no freezer, ficha técnica e vídeo. Aqui embaixo fica só o que é específico de cada um."));
+    sheetBody.append(gradeItens(p));
+  }
+
   sheetBody.append(el("h3", null, "O que foi falado"));
   p.detalhe.forEach(par => sheetBody.append(el("p", "resumo", par)));
 
   sheetBody.append(el("h3", null, "Ações e prazos"));
   sheetBody.append(el("p", "owner-note", "Todas do " + p.responsavel + ". O que você marcar aqui aparece para todo mundo na hora."));
-  sheetBody.append(listaAcoes(acoesDe(p)));
+  sheetBody.append(acoesEmGrupos(p));
 
   if (p.abertos && p.abertos.length) {
     sheetBody.append(el("h3", null, "Ainda em aberto"));
