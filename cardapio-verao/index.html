@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Cardápio de Verão · Holy Cook</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍦</text></svg>">
+<link rel="stylesheet" href="../base.css">
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="monogram">HC</div>
+    <div class="masthead-text">
+      <span class="eyebrow">Projeto</span>
+      <h1>Cardápio de Verão</h1>
+    </div>
+    <div class="ident">
+      <a class="voltar" href="../">← Reuniões</a>
+      <span class="ident-field vazio" id="ident-field">
+        <label for="ident">Você é</label>
+        <input id="ident" type="text" placeholder="seu nome" autocomplete="off" maxlength="24">
+      </span>
+      <span class="conn" id="conn"><span class="conn-dot"></span><span id="conn-txt">conectando…</span></span>
+    </div>
+  </header>
+
+  <nav class="tabs" id="tabs"></nav>
+  <main id="painel"></main>
+
+  <p class="footnote">O que você marcar aqui é salvo para todo mundo, na hora. Qualquer pessoa com este link pode editar.</p>
+
+</div>
+
+<div class="erro" id="erro"><span id="erro-txt"></span></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script src="../dados.js"></script>
+<script src="../app.js"></script>
+<script>
+/* ═══ A PÁGINA ════════════════════════════════════════════════════════════
+   Uma aba por assunto, para não virar uma rolagem só. O estado (aba aberta,
+   card aberto) vive fora do DOM porque redesenhar() reconstrói o painel a
+   cada mudança que chega do banco.
+   ════════════════════════════════════════════════════════════════════════ */
+
+const P = PROJETOS.find(x => x.id === "cardapio-verao");
+
+/* cada marco do cronograma puxa as ações que vencem nele — todas as 18 estão
+   em exatamente um passo, para nenhuma ficar sem data de referência */
+const PASSOS = [
+  {
+    id: "ideias", data: "2026-08-31", titulo: "Ideias fechadas",
+    texto: "Fechado em 21/08, dez dias antes do prazo. Os dez itens estão definidos e cada um saiu com um ponto de partida: referência em vídeo, receita que já rodou em loja ou modelagem que a equipe já faz.",
+    acoes: ["cv-ideias"]
+  },
+  {
+    id: "degustacao", data: "2026-09-11", titulo: "Degustação",
+    texto: "É o marco que valida o que foi definido. Até chegar nele, os produtos precisam ter sido testados na cozinha e o CMV de cada um levantado — sem isso a degustação aprova sabor, mas não aprova produto, porque ninguém sabe se o preço fecha.",
+    acoes: ["cv-testes", "cv-cmv", "cv-degustacao", "cv-aprovados"]
+  },
+  {
+    id: "impresso", data: "2026-09-24", titulo: "Material impresso",
+    texto: "O cardápio completo e todo o material impresso ficam prontos. Duas coisas travam esta data: o preço de venda, que sai do CMV, e a decisão de como as fotos vão ser feitas — sessão profissional ou IA. Nenhuma das duas tem responsável.",
+    acoes: ["cv-preco", "cv-imagens", "cv-producao"]
+  },
+  {
+    id: "fabrica", data: "2026-09-25", titulo: "Fábrica libera a compra",
+    texto: "Abre a solicitação e as lojas podem comprar. Para a loja conseguir se programar, ela precisa ter recebido o calendário antes, saber quais utensílios comprar, e o transporte com cadeia de frio já tem de estar resolvido — sete dos dez itens dependem de frio.",
+    acoes: ["cv-calendario", "cv-utensilios", "cv-logistica", "cv-armazenamento", "cv-fabrica"]
+  },
+  {
+    id: "venda", data: "2026-10-01", titulo: "Venda começa",
+    texto: "A data que não deveria se mexer. Até aqui, cada produto aprovado precisa ter ficha técnica e vídeo do processo de produção nas mãos da loja — senão o produto sai diferente em cada uma — e a divulgação no Instagram precisa de data marcada.",
+    acoes: ["cv-fichas", "cv-videos", "cv-repasse", "cv-instagram", "cv-venda"]
+  }
+];
+
+const ABAS = [
+  { id: "briefing",   nome: "Briefing" },
+  { id: "itens",      nome: "Os itens" },
+  { id: "acoes",      nome: "Ações" },
+  { id: "cronograma", nome: "Cronograma" },
+  { id: "atas",       nome: "Atas" },
+  { id: "abertos",    nome: "Em aberto" }
+];
+
+let abaAtual = (location.hash || "#briefing").slice(1);
+if (!ABAS.some(a => a.id === abaAtual)) abaAtual = "briefing";
+
+const acaoPorId = id => acoesDe(P).find(a => a.id === id);
+
+/* ── Briefing ───────────────────────────────────────────────────────────── */
+function painelBriefing() {
+  const box = el("div", "tab-panel");
+
+  const acoes = acoesDe(P);
+  const feitas = acoes.filter(a => a.feita).length;
+  const prox = proximaAcao(P);
+  const comFrio = P.itens.find(g => g.id === "frio").produtos.length;
+  const total = P.itens.reduce((s, g) => s + g.produtos.length, 0);
+
+  const placar = el("div", "placar");
+  const num = (n, rot) => {
+    const i = el("div", "placar-item");
+    i.append(el("span", "placar-num", n));
+    i.append(el("span", "placar-rot", rot));
+    placar.append(i);
+  };
+  num(String(total), "itens definidos");
+  num(String(comFrio), "dependem de frio");
+  num(feitas + "/" + acoes.length, "ações feitas");
+  num(prox && prox.prazo ? fmtCurto(prox.prazo) : "—", prox ? prox.o : "tudo feito");
+  box.append(placar);
+
+  const ata = REUNIOES.find(r => r.id === "2026-08-21");
+  const upd = el("div", "upd");
+  upd.append(el("span", "upd-data", "Definido em · " + fmtLongo(ata.data)));
+  upd.append(el("h4", "upd-titulo", "Os dez itens do cardápio foram fechados"));
+  ata.ata[0].paragrafos.forEach(par => upd.append(el("p", null, par)));
+  box.append(upd);
+
+  box.append(el("span", "painel-rot", "O cronograma"));
+  P.detalhe.forEach(par => box.append(el("p", "painel-texto", par)));
+
+  return box;
+}
+
+/* ── Os itens ───────────────────────────────────────────────────────────── */
+function painelItens() {
+  const box = el("div", "tab-panel");
+  box.append(el("p", "painel-nota", "Separados pelo que muda a operação: precisar de frio ou não. Para todos vale a mesma lista — CMV, preço, utensílio, espaço no freezer, ficha técnica e vídeo. Dentro de cada um fica só o que é específico dele."));
+  box.append(gradeItens(P));
+  return box;
+}
+
+/* ── Ações ──────────────────────────────────────────────────────────────── */
+function painelAcoes() {
+  const box = el("div", "tab-panel");
+  box.append(el("p", "painel-nota", "Todas do " + P.responsavel + ". O que você marcar aqui aparece para todo mundo na hora."));
+  box.append(acoesEmGrupos(P));
+  return box;
+}
+
+/* ── Cronograma ─────────────────────────────────────────────────────────── */
+function painelCronograma() {
+  const box = el("div", "tab-panel");
+  box.append(el("p", "painel-nota", "As datas são encadeadas: atraso em uma empurra todas as seguintes. 1º de outubro é a que não deveria se mexer."));
+
+  const chave = "passo";
+  if (!(chave in uiAberto)) {
+    const aberto = PASSOS.find(s => s.acoes.some(id => { const a = acaoPorId(id); return a && !a.feita; }));
+    uiAberto[chave] = aberto ? aberto.id : PASSOS[0].id;
+  }
+
+  const fluxo = el("div", "fluxo");
+  PASSOS.forEach((s, i) => {
+    const acoes = s.acoes.map(acaoPorId).filter(Boolean);
+    const feitas = acoes.filter(a => a.feita).length;
+    const tudoFeito = feitas === acoes.length;
+
+    const b = el("button", "passo-caixa" + (estaAberto(chave, s.id) ? " on" : "") + (tudoFeito ? " feito" : ""));
+    b.type = "button";
+    b.append(el("span", "passo-data", fmtCurto(s.data)));
+    b.append(el("span", "passo-titulo", s.titulo));
+    b.append(el("span", "chip " + (tudoFeito ? "ok" : (diasAte(s.data) < 0 ? "late" : "idle")),
+      tudoFeito ? "Feito" : feitas + "/" + acoes.length));
+    b.addEventListener("click", () => alternar(chave, s.id));
+    fluxo.append(b);
+    if (i < PASSOS.length - 1) fluxo.append(el("span", "passo-seta", "→"));
+  });
+  box.append(fluxo);
+
+  const s = PASSOS.find(x => estaAberto(chave, x.id));
+  if (s) {
+    const det = el("div", "passo-detalhe");
+    det.append(el("span", "painel-rot", fmtLongo(s.data) + " · " + s.titulo));
+    det.append(el("p", "painel-texto", s.texto));
+    det.append(listaAcoes(s.acoes.map(acaoPorId).filter(Boolean)));
+    box.append(det);
+  }
+  return box;
+}
+
+/* ── Atas ───────────────────────────────────────────────────────────────── */
+function painelAtas() {
+  const box = el("div", "tab-panel");
+  box.append(el("p", "painel-nota", "Só o que cada reunião tratou sobre o cardápio de verão. A ata completa fica na página de reuniões."));
+
+  const doc = el("div", "ata-doc");
+  REUNIOES.forEach(r => {
+    const secoes = r.ata.filter(s => s.projetoId === P.id);
+    if (!secoes.length) return;
+    secoes.forEach(sec => {
+      const bloco = el("section", "ata-sec");
+      const h = el("h4", null, sec.titulo);
+      h.append(el("span", "chip brand", fmtCurto(r.data)));
+      bloco.append(h);
+      sec.paragrafos.forEach(par => bloco.append(el("p", null, par)));
+      doc.append(bloco);
+    });
+  });
+  box.append(doc);
+
+  const b = el("a", "linkata", "Ver as atas completas na página de reuniões →");
+  b.href = "../";
+  b.style.textDecoration = "none";
+  b.style.display = "block";
+  box.append(b);
+  return box;
+}
+
+/* ── Em aberto ──────────────────────────────────────────────────────────── */
+function painelAbertos() {
+  const box = el("div", "tab-panel");
+  box.append(el("p", "painel-nota", "O que ainda não tem resposta nem responsável."));
+  const ul = el("ul", "openlist");
+  P.abertos.forEach(o => ul.append(el("li", null, o)));
+  box.append(ul);
+  return box;
+}
+
+const PAINEIS = {
+  briefing: painelBriefing,
+  itens: painelItens,
+  acoes: painelAcoes,
+  cronograma: painelCronograma,
+  atas: painelAtas,
+  abertos: painelAbertos
+};
+
+function contagem(id) {
+  const acoes = acoesDe(P);
+  if (id === "itens")   return P.itens.reduce((s, g) => s + g.produtos.length, 0);
+  if (id === "acoes")   return acoes.filter(a => !a.feita).length;
+  if (id === "abertos") return P.abertos.length;
+  return null;
+}
+
+function redesenhar() {
+  const tabs = document.getElementById("tabs");
+  tabs.replaceChildren();
+  ABAS.forEach(a => {
+    const b = el("button", "tab" + (a.id === abaAtual ? " on" : ""));
+    b.type = "button";
+    b.append(document.createTextNode(a.nome));
+    const n = contagem(a.id);
+    if (n != null) b.append(el("span", "tab-cont", String(n)));
+    b.addEventListener("click", () => {
+      abaAtual = a.id;
+      history.replaceState(null, "", "#" + a.id);
+      redesenhar();
+      window.scrollTo({ top: 0, behavior: "instant" });
+    });
+    tabs.append(b);
+  });
+
+  const painel = document.getElementById("painel");
+  painel.replaceChildren(PAINEIS[abaAtual]());
+}
+
+redesenhar();
+iniciar();
+</script>
+</body>
+</html>
