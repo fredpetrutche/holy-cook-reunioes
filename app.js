@@ -285,39 +285,67 @@ function alternar(chave, id) {
 /* raiz do site vista pela página atual: "" na home, "../" numa subpágina */
 let RAIZ = "";
 
-/* grade de produtos de um projeto: card → foto, o que já está definido e o
-   que o teste ainda tem de responder */
-function gradeProdutos(p) {
-  const nivel = el("div", "nivel");
-  const chave = "produto:" + p.id;
+/* ── Produto: grade de cards + diálogo ────────────────────────────────────
+   O detalhe abre sobreposto, e não embaixo da grade: com dez cards, quem
+   clicava no primeiro tinha de rolar a grade inteira para achar o conteúdo.
+   O diálogo é criado uma vez e reaproveitado pelas duas páginas.
+   ─────────────────────────────────────────────────────────────────────── */
 
-  const grade = el("div", "grade-itens");
-  p.produtos.forEach(pr => {
-    const b = el("button", "item-btn" + (estaAberto(chave, pr.id) ? " on" : ""));
-    b.type = "button";
-    const capa = el("span", "item-capa" + (pr.foto ? "" : " vazia"));
-    if (pr.foto) {
-      const img = document.createElement("img");
-      img.src = RAIZ + pr.foto;
-      img.alt = "";
-      img.loading = "lazy";
-      capa.append(img);
-    } else {
-      capa.append(el("span", "item-capa-txt", "sem foto"));
-    }
-    b.append(capa);
-    b.append(el("span", "item-nome-btn", pr.nome));
-    if (pr.tag) b.append(el("span", "item-tag", pr.tag));
-    b.addEventListener("click", () => alternar(chave, pr.id));
-    grade.append(b);
+let dlgProduto = null;
+let produtoAtual = null;   // { lista, i }
+
+function montarDialogoProduto() {
+  const dlg = document.createElement("dialog");
+  dlg.className = "dlg-produto";
+  dlg.innerHTML =
+    '<div class="sheet">' +
+      '<div class="sheet-head">' +
+        '<div style="flex:1; min-width:0">' +
+          '<div class="sheet-origin" data-dp="origem"></div>' +
+          '<h2 data-dp="titulo"></h2>' +
+        '</div>' +
+        '<button class="close" data-dp="fechar" aria-label="Fechar">&times;</button>' +
+      '</div>' +
+      '<div class="sheet-body" data-dp="corpo"></div>' +
+      '<div class="dp-nav">' +
+        '<button class="dp-passo" data-dp="antes" type="button">← Anterior</button>' +
+        '<span class="dp-conta" data-dp="conta"></span>' +
+        '<button class="dp-passo" data-dp="depois" type="button">Próximo →</button>' +
+      '</div>' +
+    '</div>';
+
+  const q = n => dlg.querySelector('[data-dp="' + n + '"]');
+  q("fechar").addEventListener("click", () => dlg.close());
+  dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); });
+  q("antes").addEventListener("click", () => passarProduto(-1));
+  q("depois").addEventListener("click", () => passarProduto(1));
+  dlg.addEventListener("keydown", e => {
+    if (e.key === "ArrowLeft")  passarProduto(-1);
+    if (e.key === "ArrowRight") passarProduto(1);
   });
-  nivel.append(grade);
 
-  const pr = p.produtos.find(x => estaAberto(chave, x.id));
-  if (!pr) return nivel;
+  document.body.append(dlg);
+  return dlg;
+}
 
-  const painel = el("div", "item-visor");
-  painel.append(el("div", "item-titulo", pr.nome));
+function passarProduto(passo) {
+  if (!produtoAtual) return;
+  const n = produtoAtual.lista.length;
+  produtoAtual.i = (produtoAtual.i + passo + n) % n;
+  pintarProduto();
+}
+
+function pintarProduto() {
+  const { lista, i } = produtoAtual;
+  const pr = lista[i];
+  const q = n => dlgProduto.querySelector('[data-dp="' + n + '"]');
+
+  q("origem").textContent = pr.tag ? "Produto · " + pr.tag : "Produto";
+  q("titulo").textContent = pr.nome;
+  q("conta").textContent = (i + 1) + " de " + lista.length;
+
+  const corpo = q("corpo");
+  corpo.replaceChildren();
 
   if (pr.foto) {
     const fig = el("figure", "item-foto");
@@ -325,7 +353,7 @@ function gradeProdutos(p) {
     img.src = RAIZ + pr.foto;
     img.alt = "Referência de " + pr.nome;
 
-    /* a capa é só um quadro do vídeo: quem quiser ver o produto inteiro
+    /* a capa é um quadro só do vídeo: quem quiser ver o produto inteiro
        clica nela e vai para o post */
     const destino = pr.ref || pr.fotoRef;
     if (destino) {
@@ -339,32 +367,63 @@ function gradeProdutos(p) {
     } else {
       fig.append(img);
     }
-
     if (pr.fotoFonte) fig.append(el("figcaption", null, pr.fotoFonte));
-    painel.append(fig);
+    corpo.append(fig);
   } else if (pr.fotoFonte) {
-    painel.append(el("p", "item-semfoto", pr.fotoFonte));
+    corpo.append(el("p", "item-semfoto", pr.fotoFonte));
   }
 
-  if (pr.base) painel.append(el("p", "item-base", pr.base));
+  if (pr.base) corpo.append(el("p", "item-base", pr.base));
 
-  /* botão só quando a foto não está lá para ser clicada — senão são dois
-     caminhos para o mesmo lugar */
   if (pr.ref && !pr.foto) {
     const link = el("a", "item-ref", "Ver a referência no Instagram →");
     link.href = pr.ref;
     link.target = "_blank";
     link.rel = "noopener noreferrer";
-    painel.append(link);
+    corpo.append(link);
   }
 
-  painel.append(el("span", "visor-rot", "A responder no teste"));
+  corpo.append(el("span", "visor-rot", "A responder no teste"));
   const ul = el("ul", "openlist");
-  pr.perguntas.forEach(q => ul.append(el("li", null, q)));
-  painel.append(ul);
+  pr.perguntas.forEach(x => ul.append(el("li", null, x)));
+  corpo.append(ul);
 
-  nivel.append(painel);
-  return nivel;
+  corpo.scrollTop = 0;
+}
+
+function abrirProduto(lista, i) {
+  if (!dlgProduto) dlgProduto = montarDialogoProduto();
+  produtoAtual = { lista: lista, i: i };
+  pintarProduto();
+  if (!dlgProduto.open) dlgProduto.showModal();
+}
+
+function gradeProdutos(p) {
+  const grade = el("div", "grade-itens");
+
+  p.produtos.forEach((pr, i) => {
+    const b = el("button", "item-btn");
+    b.type = "button";
+    b.setAttribute("aria-label", "Abrir " + pr.nome);
+
+    const capa = el("span", "item-capa" + (pr.foto ? "" : " vazia"));
+    if (pr.foto) {
+      const img = document.createElement("img");
+      img.src = RAIZ + pr.foto;
+      img.alt = "";
+      img.loading = "lazy";
+      capa.append(img);
+    } else {
+      capa.append(el("span", "item-capa-txt", "sem foto"));
+    }
+    b.append(capa);
+    b.append(el("span", "item-nome-btn", pr.nome));
+    if (pr.tag) b.append(el("span", "item-tag", pr.tag));
+    b.addEventListener("click", () => abrirProduto(p.produtos, i));
+    grade.append(b);
+  });
+
+  return grade;
 }
 
 /* ações em grupos: abre no grupo da próxima ação, um grupo por vez */

@@ -56,7 +56,10 @@ vai parar na ação errada.
   menos de dois grupos distintos, cai de volta na lista simples.
 - **`produtos`** no projeto: grade de cards com foto. Cada produto aceita
   `tag` (conservação), `base` (o que já está definido), `ref` (link externo),
-  `foto`, `fotoFonte` e `perguntas`. O caminho de `foto` é **a partir da raiz
+  `foto`, `fotoFonte`, `fotoRef` e `perguntas`. Clicar num card abre o
+  detalhe **num diálogo sobreposto**, com "anterior/próximo" para percorrer
+  os produtos — antes ele abria embaixo da grade, e com dez cards era preciso
+  rolar a grade inteira para achar o que tinha acabado de abrir. O caminho de `foto` é **a partir da raiz
   do site** — cada página ajusta `RAIZ` (`""` na home, `"../"` na subpágina),
   senão a mesma grade quebra quando aparece dentro de uma ata.
 - **`produtosDe: "<id do projeto>"`** numa seção de ata: insere ali a grade de
