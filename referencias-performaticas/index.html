@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Referências Performáticas · Holy Cookie</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤯</text></svg>">
+<link rel="stylesheet" href="../base.css">
+<style>
+  :root { --maxw: 1120px; }
+  .masthead { align-items: flex-start; }
+  .masthead h1 { font-size: clamp(24px, 4vw, 34px); }
+  .voltar { color: var(--accent); font-size: 12.5px; font-weight: 600; text-decoration: none; white-space: nowrap; }
+  .voltar:hover { text-decoration: underline; }
+  .tabs { position: sticky; top: 0; z-index: 20; display: flex; gap: 8px; padding: 12px 0; overflow-x: auto; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+  .tab { flex: none; border: 1px solid var(--line-2); border-radius: 100px; padding: 9px 16px; background: var(--surface); color: var(--ink-2); font: 600 13px var(--font-body); cursor: pointer; }
+  .tab:hover { border-color: var(--accent); color: var(--accent); }
+  .tab.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .panel { padding-top: 30px; }
+  .intro { max-width: 800px; }
+  .label { font: 10.5px var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+  .intro h2 { margin-top: 6px; font: 600 clamp(30px, 5vw, 48px)/1.06 var(--font-display); letter-spacing: -.025em; text-wrap: balance; }
+  .intro p { margin-top: 13px; color: var(--ink-2); font-size: 15.5px; line-height: 1.65; }
+  .main-question { margin: 24px 0 30px; border-left: 3px solid var(--accent); padding: 16px 19px; background: var(--accent-soft); color: var(--accent-ink); font: 600 20px/1.45 var(--font-display); }
+  .formula { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: 12px; align-items: center; margin: 25px 0 38px; }
+  .formula-card { min-height: 132px; border: 1px solid var(--line); border-radius: 12px; padding: 18px; background: var(--surface); box-shadow: var(--shadow-1); }
+  .formula-card .num { font: 700 10px var(--font-mono); color: var(--accent); }
+  .formula-card h3 { margin-top: 12px; font: 600 20px var(--font-display); }
+  .formula-card p { margin-top: 5px; color: var(--ink-2); font-size: 12.8px; }
+  .arrow { color: var(--accent); font-size: 24px; }
+  .note { border: 1px solid var(--line); border-radius: 12px; padding: 19px; background: var(--surface); color: var(--ink-2); line-height: 1.65; }
+  .note strong { color: var(--ink); }
+  .section-title { margin-bottom: 18px; }
+  .section-title h2 { margin-top: 4px; font: 600 29px var(--font-display); }
+  .section-title p { margin-top: 6px; color: var(--ink-2); }
+  .refs-layout { display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: 28px; align-items: start; }
+  .ref-tabs { position: sticky; top: 70px; display: flex; flex-direction: column; gap: 6px; max-height: calc(100vh - 92px); overflow-y: auto; padding-right: 5px; }
+  .ref-tab { display: grid; grid-template-columns: 28px 1fr; gap: 9px; align-items: center; border: 1px solid transparent; border-radius: 9px; padding: 9px 10px; background: transparent; color: var(--ink-2); font: 600 12.5px/1.25 var(--font-body); text-align: left; cursor: pointer; }
+  .ref-tab:hover { background: var(--surface-2); color: var(--ink); }
+  .ref-tab.on { background: var(--surface); border-color: var(--line-2); color: var(--accent); box-shadow: var(--shadow-1); }
+  .ref-tab .n { display: grid; place-items: center; width: 27px; height: 27px; border-radius: 7px; background: var(--surface-2); font: 700 10px var(--font-mono); }
+  .ref-tab.on .n { background: var(--accent); color: #fff; }
+  .ref-hero { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 16px; align-items: start; padding-bottom: 20px; border-bottom: 1px solid var(--line); }
+  .ref-hero h2 { margin-top: 5px; font: 600 clamp(29px, 4vw, 43px)/1.08 var(--font-display); }
+  .ref-hero .source { margin-top: 6px; color: var(--ink-3); font: 11.5px var(--font-mono); }
+  .chips { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+  .mechanism { border-radius: 100px; padding: 5px 9px; background: var(--accent-soft); color: var(--accent-ink); font: 700 9.5px var(--font-mono); text-transform: uppercase; letter-spacing: .05em; }
+  .sequence { margin: 18px 0; padding: 14px 16px; border-radius: 10px; background: var(--surface-2); color: var(--accent); font: 700 12px/1.6 var(--font-mono); text-transform: uppercase; text-align: center; }
+  .ref-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .ref-block { border: 1px solid var(--line); border-radius: 10px; padding: 16px; background: var(--surface); }
+  .ref-block h3 { font: 700 10px var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
+  .ref-block p { margin-top: 7px; font-size: 13.5px; line-height: 1.55; }
+  .principle { margin-top: 12px; border: 1px solid var(--accent); border-radius: 11px; padding: 17px; background: var(--surface); }
+  .principle h3 { font: 700 10px var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
+  .principle p { margin-top: 6px; font: 600 17px/1.45 var(--font-display); }
+  .media { margin-top: 14px; border: 1px solid var(--line); border-radius: 12px; padding: 13px; background: var(--surface); }
+  .media-head { display: flex; justify-content: space-between; gap: 12px; align-items: center; margin-bottom: 10px; }
+  .media-head span { font: 700 10px var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
+  .media-head a, .external { color: var(--accent); font-size: 12px; font-weight: 650; text-decoration: none; }
+  .media-head a:hover, .external:hover { text-decoration: underline; }
+  .video-wrap { position: relative; overflow: hidden; border-radius: 9px; background: #100d12; aspect-ratio: 16/9; }
+  .video-wrap.short { max-width: 350px; margin-inline: auto; aspect-ratio: 9/16; }
+  .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .media-link { display: grid; grid-template-columns: 54px 1fr auto; gap: 12px; align-items: center; min-height: 78px; border-radius: 9px; padding: 12px; background: var(--surface-2); color: var(--ink); text-decoration: none; }
+  .media-link:hover { outline: 1px solid var(--accent); }
+  .media-link .play { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; background: var(--accent); color: #fff; font-size: 18px; }
+  .media-link strong { display: block; }
+  .media-link small { color: var(--ink-3); }
+  .library { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .mechanism-card { border: 1px solid var(--line); border-radius: 11px; padding: 16px; background: var(--surface); }
+  .mechanism-card .n { font: 700 10px var(--font-mono); color: var(--accent); }
+  .mechanism-card h3 { margin-top: 9px; font: 600 17px var(--font-display); }
+  .mechanism-card p { margin-top: 5px; color: var(--ink-2); font-size: 12.5px; }
+  .actions { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 28px; }
+  .action { border: 1px solid var(--line-2); border-radius: 100px; padding: 7px 11px; background: var(--surface); font: 600 12px var(--font-body); }
+  .questions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 11px; margin-top: 30px; }
+  .question { border-top: 3px solid var(--accent); border-radius: 0 0 10px 10px; padding: 17px; background: var(--surface); box-shadow: var(--shadow-1); }
+  .question span { font: 700 10px var(--font-mono); color: var(--accent); }
+  .question h3 { margin-top: 9px; font: 600 18px var(--font-display); }
+  .question p { margin-top: 5px; color: var(--ink-2); font-size: 12.5px; }
+  .closing { margin: 34px 0 10px; border: 1px solid var(--accent); border-radius: 14px; padding: 24px; background: var(--surface); text-align: center; }
+  .closing p { margin-top: 7px; font: 600 25px var(--font-display); }
+  .closing strong { color: var(--accent); }
+  .footnote { margin-top: 45px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--ink-3); font-size: 11.5px; text-align: center; }
+  @media (max-width: 800px) {
+    .formula { grid-template-columns: 1fr; }
+    .arrow { transform: rotate(90deg); text-align: center; }
+    .refs-layout { grid-template-columns: 1fr; }
+    .ref-tabs { position: static; flex-direction: row; overflow-x: auto; padding-bottom: 8px; }
+    .ref-tab { min-width: 175px; }
+    .library, .questions { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 560px) {
+    .wrap { padding-inline: 16px; }
+    .masthead { padding-top: 20px; }
+    .masthead .ident { width: 100%; }
+    .panel { padding-top: 22px; }
+    .ref-hero, .ref-grid { grid-template-columns: 1fr; }
+    .chips { justify-content: flex-start; }
+    .library, .questions { grid-template-columns: 1fr; }
+    .media-link { grid-template-columns: 44px 1fr; }
+    .media-link .play { width: 42px; height: 42px; }
+    .media-link > span:last-child { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="monogram">HC</div>
+    <div class="masthead-text">
+      <span class="eyebrow">Desenvolvimento de produto</span>
+      <h1>Referências performáticas</h1>
+    </div>
+    <div class="ident"><a class="voltar" href="../produtos-desejaveis/">← Produtos desejáveis</a></div>
+  </header>
+  <nav class="tabs" aria-label="Seções">
+    <button class="tab on" data-panel="conceito">O conceito</button>
+    <button class="tab" data-panel="referencias">Referências · 8</button>
+    <button class="tab" data-panel="biblioteca">Biblioteca de mecanismos</button>
+  </nav>
+  <main id="panel" class="panel"></main>
+  <p class="footnote">Holy Cookie · Referências para desenvolvimento de produtos performáticos</p>
+</div>
+<script>
+const REFS = [
+  { id:"formaggio", nome:"Spaghetti Al Formaggio", fonte:"La Nonna di Lucca · São Paulo", mecanismos:["Transformação"], acao:"Misturar, raspar e incorporar", seq:"Aquecer → derreter → misturar → incorporar → levantar → servir", acontece:"A massa quente é finalizada diante do cliente utilizando uma grande peça de queijo. Ingredientes separados se transformam no prato final em uma pequena coreografia gastronômica.", atencao:"Não existe apenas um momento interessante. A pessoa entende que algo está sendo preparado e acompanha a sequência até a recompensa final.", principio:"Uma etapa da preparação pode acontecer diante da câmera ou do cliente. O produto não precisa chegar completamente finalizado.", video:"youtube", videoId:"1jylFLINt1I", url:"https://youtu.be/1jylFLINt1I" },
+  { id:"raclette", nome:"Raclette", fonte:"Queijo derretido e raspado", mecanismos:["Derretimento","Cascata"], acao:"Raspar", seq:"Aquecer → derreter → inclinar → raspar → cair", acontece:"Uma grande peça de queijo é aquecida até borbulhar. Depois, a camada derretida é raspada e cai inteira sobre o produto.", atencao:"Existe antecipação. A pessoa vê o queijo derretendo e sabe que, em algum momento, toda aquela camada vai cair. A gravidade faz parte da performance.", principio:"Algo pode ser preparado acima do produto para depois cair sobre ele. Coberturas podem acontecer diante da pessoa.", video:"link", url:"https://www.youtube.com/results?search_query=raclette+tableside+restaurant", linkLabel:"Ver referências de raclette no YouTube" },
+  { id:"matilda", nome:"Bolo Matilda + raclette de chocolate", fonte:"Pecatto · São Paulo", mecanismos:["Gooey","Cascata","Derretimento"], acao:"Derramar e raspar", seq:"Aquecer → derreter → raspar → cair → cobrir → escorrer", acontece:"A fatia recebe chocolate quente preparado em um equipamento semelhante a uma raclette. Uma etapa que ficaria na cozinha vira espetáculo na mesa.", atencao:"O equipamento gera a pergunta “o que vai acontecer?”. A antecipação começa antes de o chocolate cair, e o escorrer prolonga a recompensa.", principio:"Retirar uma etapa da cozinha e transformá-la em performance. Separar os elementos pode tornar filmável um sabor que seria o mesmo já montado.", video:"instagram", videoId:"DRVdhJnDwz-", url:"https://www.instagram.com/reel/DRVdhJnDwz-/" },
+  { id:"flambe", nome:"Flambé", fonte:"Fogo como transformação", mecanismos:["Fogo","Transformação","Sensorial"], acao:"Flambar", seq:"Preparar → acender → chama subir → apagar → revelar", acontece:"O prato é finalizado diante do cliente com uma transformação instantânea. A chama sobe, desaparece e revela o produto final.", atencao:"É impossível ignorar. Uma mesa pede, outras mesas veem e a atenção se espalha pelo salão. O acontecimento ultrapassa quem comprou.", principio:"Criar uma transformação instantânea e perceptível. Fogo real só pode ser considerado após avaliação operacional e de segurança.", video:"link", url:"https://www.youtube.com/results?search_query=dessert+flambe+tableside", linkLabel:"Ver referências de flambé" },
+  { id:"crosta", nome:"Peixe na crosta de sal", fonte:"Destruir para revelar", mecanismos:["Quebra","Reveal"], acao:"Quebrar", seq:"Bater → rachar → quebrar → abrir → retirar → revelar", acontece:"O alimento chega completamente escondido. É necessário destruir a camada externa para acessar a recompensa: um unboxing gastronômico.", atencao:"O mistério “o que tem aí dentro?” sustenta a atenção. A quebra é natural e a recompensa só existe depois dela.", principio:"Quebrar já é um comportamento natural do cookie. Podemos projetar a quebra deliberadamente para produzir uma grande recompensa visual.", video:"link", url:"https://www.youtube.com/results?search_query=salt+crusted+fish+tableside+restaurant", linkLabel:"Ver referências de crosta de sal" },
+  { id:"souffle", nome:"Soufflé + calda", fonte:"Palo · Disney Cruise Line", mecanismos:["Preenchimento","Gooey","Transbordamento"], acao:"Abrir, preencher e derramar", seq:"Furar → abrir → derramar → preencher → espalhar → transbordar", acontece:"O produto chega inteiro. Uma abertura é feita no centro e a calda entra no produto, preenche seu interior e começa a transbordar.", atencao:"Diferente de apenas cobrir, aqui o líquido entra. A pessoa assiste à finalização e à transformação do interior naquele momento.", principio:"O recheio não precisa entrar na cozinha. Existe uma forma interessante de fazê-lo entrar no produto diante da câmera ou do cliente?", video:"short", videoId:"Yer__wxtY-M", url:"https://www.youtube.com/shorts/Yer__wxtY-M?feature=share" },
+  { id:"fajita", nome:"Fajita na chapa", fonte:"Atenção multissensorial", mecanismos:["Sensorial"], acao:"Servir quente", seq:"Calor → chiado → vapor → aroma → atenção", acontece:"A chapa extremamente quente chega à mesa. O som vem antes da imagem, o vapor fica visível e o aroma se espalha pelo ambiente.", atencao:"A performance chama a atenção da loja inteira, não apenas de quem comprou. Ela amplia o conceito para além de gooey, reveal e quebra.", principio:"Pensar além da imagem. O produto produz som, vapor, aroma ou calor? Alguma coisa acontece quando ele chega?", video:"link", url:"https://www.azfamily.com/video/2022/04/13/sizzling-fajitas/", linkLabel:"Assistir à referência de fajitas" },
+  { id:"mousse", nome:"Mousse gigante", fonte:"Chez Janou · Paris", mecanismos:["Escala","Generosidade"], acao:"Servir", seq:"Recipiente gigante → colherada → servir → abundância", acontece:"Um recipiente enorme chega à mesa e é servido em colheradas generosas. A quantidade deixa de ser apenas visual e vira um acontecimento.", atencao:"A reação é imediata: “olha o tamanho disso”. Um elemento normalmente visual — generosidade — torna-se performático quando levado ao extremo.", principio:"Escala e abundância também podem ser acontecimentos. Quantidade inesperada ou colherada exagerada podem transformar o serviço em conteúdo.", video:"instagram", videoId:"DZ-4o71tLYq", url:"https://www.instagram.com/reel/DZ-4o71tLYq/" }
+];
+
+const MECANISMOS = [
+  ["Reveal","Alguma coisa aparece: quebrar → recheio aparece."],
+  ["Gooey / Derretimento","Algo muda de estado, escorre, derrete ou estica."],
+  ["Transformação","O produto muda diante da pessoa."],
+  ["Queda / Cascata","Algo cai sobre outra coisa; a gravidade cria antecipação."],
+  ["Quebra","É preciso destruir uma camada para acessar a recompensa."],
+  ["Preenchimento / Transbordamento","Alguma coisa entra no produto ou começa a sair dele."],
+  ["Escala / Abundância","A quantidade é tão inesperada que vira espetáculo."],
+  ["Sensorial","Vapor, som, fumaça, aroma ou calor ampliam a performance."],
+  ["Montagem / Interação","A finalização acontece diante ou pelas mãos da pessoa."]
+];
+const ACOES = ["Quebrar","Cortar","Puxar","Raspar","Derramar","Mergulhar","Apertar","Misturar","Levantar","Preencher","Aquecer","Esmagar","Separar","Montar","Abrir","Esticar"];
+let painelAtual = (location.hash || "#conceito").slice(1).split("/")[0];
+if (!["conceito","referencias","biblioteca"].includes(painelAtual)) painelAtual = "conceito";
+let refAtual = location.hash.slice(1).split("/")[1] || REFS[0].id;
+if (!REFS.some(r => r.id === refAtual)) refAtual = REFS[0].id;
+const panel = document.getElementById("panel");
+function h(tag, cls, text) { const n=document.createElement(tag); if(cls)n.className=cls; if(text!=null)n.textContent=text; return n; }
+
+function introBlock(kicker, title, text) { const s=h("section","intro"); s.append(h("span","label",kicker)); s.append(h("h2",null,title)); if(text)s.append(h("p",null,text)); return s; }
+function renderConceito() {
+  const f=document.createDocumentFragment();
+  f.append(introBlock("O foco agora é performance","Um produto performático contém um acontecimento visual.","Antes de desejar um produto, a pessoa precisa saber que ele existe. Por isso, queremos produtos que não sejam apenas bonitos ou gostosos: alguma coisa acontece quando interagimos com eles."));
+  f.append(h("div","main-question","“Quando alguém interage com esse produto, acontece alguma coisa que faz outra pessoa querer assistir?”"));
+  const formula=h("div","formula");
+  [["01","Ação","O verbo: quebrar, cortar, puxar, derramar, misturar."],["02","Acontecimento","A recompensa: revelar, escorrer, cair, transformar, soltar vapor."],["03","Atenção","A pessoa para porque quer acompanhar até o final."]].forEach((x,i)=>{ const c=h("article","formula-card"); c.append(h("span","num",x[0])); c.append(h("h3",null,x[1])); c.append(h("p",null,x[2])); formula.append(c); if(i<2)formula.append(h("span","arrow","→")); });
+  f.append(formula);
+  const note=h("div","note"); note.innerHTML="<strong>Ação não é o mesmo que acontecimento.</strong> Cortar é uma ação. Revelar camadas é o acontecimento. Derramar é uma ação. Preencher e transbordar são o acontecimento. O produto chama atenção quando a ação produz uma recompensa visual clara."; f.append(note);
+  const closing=h("section","closing"); closing.append(h("span","label","A pergunta de desenvolvimento")); const p=h("p"); p.innerHTML="Não perguntar apenas “como deixá-lo bonito?”. Perguntar: <strong>“O que podemos fazer acontecer com esse produto?”</strong>"; closing.append(p); f.append(closing);
+  panel.replaceChildren(f);
+}
+
+function mediaFor(r) {
+  const box=h("section","media"); const head=h("div","media-head"); head.append(h("span",null,"Vídeo de referência")); const link=h("a",null,"Abrir original ↗"); link.href=r.url; link.target="_blank"; link.rel="noopener noreferrer"; head.append(link); box.append(head);
+  if(r.video==="youtube" || r.video==="short") { const wrap=h("div","video-wrap"+(r.video==="short"?" short":"")); const iframe=document.createElement("iframe"); iframe.src="https://www.youtube-nocookie.com/embed/"+r.videoId; iframe.title="Vídeo de referência: "+r.nome; iframe.loading="lazy"; iframe.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"; iframe.allowFullscreen=true; wrap.append(iframe); box.append(wrap); }
+  else if(r.video==="instagram") { const wrap=h("div","video-wrap short"); const iframe=document.createElement("iframe"); iframe.src="https://www.instagram.com/reel/"+r.videoId+"/embed/"; iframe.title="Vídeo de referência: "+r.nome; iframe.loading="lazy"; iframe.allowFullscreen=true; wrap.append(iframe); box.append(wrap); }
+  else { const a=h("a","media-link"); a.href=r.url; a.target="_blank"; a.rel="noopener noreferrer"; a.append(h("span","play","▶")); const txt=h("span"); txt.append(h("strong",null,r.linkLabel)); txt.append(h("small",null,"Abre em uma nova aba")); a.append(txt); a.append(h("span",null,"Abrir ↗")); box.append(a); }
+  return box;
+}
+function renderReferencias() {
+  const r=REFS.find(x=>x.id===refAtual), layout=h("div","refs-layout"), nav=h("nav","ref-tabs"); nav.setAttribute("aria-label","Referências");
+  REFS.forEach((x,i)=>{ const b=h("button","ref-tab"+(x.id===r.id?" on":"")); b.type="button"; b.append(h("span","n",String(i+1).padStart(2,"0"))); b.append(h("span",null,x.nome)); b.onclick=()=>{refAtual=x.id;history.replaceState(null,"","#referencias/"+refAtual);renderReferencias();window.scrollTo({top:0,behavior:"instant"});};nav.append(b); }); layout.append(nav);
+  const content=h("article"); const hero=h("header","ref-hero"), title=h("div"); title.append(h("span","label","Referência "+String(REFS.indexOf(r)+1).padStart(2,"0")+" de "+REFS.length)); title.append(h("h2",null,r.nome)); title.append(h("p","source",r.fonte)); hero.append(title); const chips=h("div","chips"); r.mecanismos.forEach(m=>chips.append(h("span","mechanism",m))); hero.append(chips); content.append(hero); content.append(h("div","sequence",r.seq));
+  const grid=h("div","ref-grid"); [["O que acontece",r.acontece],["Ação principal",r.acao],["Por que chama atenção?",r.atencao]].forEach(x=>{const b=h("section","ref-block");b.append(h("h3",null,x[0]));b.append(h("p",null,x[1]));grid.append(b);}); const principle=h("section","principle"); principle.append(h("h3",null,"Princípio para a Holy Cookie")); principle.append(h("p",null,r.principio)); grid.append(principle); content.append(grid); content.append(mediaFor(r)); layout.append(content); panel.replaceChildren(layout);
+}
+
+function renderBiblioteca() {
+  const f=document.createDocumentFragment(); f.append(introBlock("Biblioteca de criação","Nove mecanismos para fazer alguma coisa acontecer.","Os mecanismos podem ser combinados. O objetivo não é copiar o prato de referência, mas transportar o princípio de atenção para um produto da Holy Cookie."));
+  const lib=h("div","library"); MECANISMOS.forEach((m,i)=>{const c=h("article","mechanism-card");c.append(h("span","n",String(i+1).padStart(2,"0")));c.append(h("h3",null,m[0]));c.append(h("p",null,m[1]));lib.append(c);}); f.append(lib);
+  const actionTitle=h("div","section-title"); actionTitle.style.marginTop="34px"; actionTitle.append(h("span","label","Biblioteca de ações")); actionTitle.append(h("h2",null,"O que podemos fazer com o produto?")); f.append(actionTitle); const actions=h("div","actions"); ACOES.forEach(a=>actions.append(h("span","action",a))); f.append(actions);
+  const qs=h("div","questions"); [["01","Qual é a ação?","O que fazemos?"],["02","Qual é o acontecimento?","O que muda, aparece, cai, quebra, derrete, estica ou transborda?"],["03","Qual é a recompensa?","Por que alguém continuaria assistindo até o final?"]].forEach(q=>{const c=h("article","question");c.append(h("span",null,q[0]));c.append(h("h3",null,q[1]));c.append(h("p",null,q[2]));qs.append(c);}); f.append(qs);
+  const closing=h("section","closing"); closing.append(h("span","label","Insight principal")); const p=h("p"); p.innerHTML="O produto performático não é apenas comida. <strong>Ele contém uma cena.</strong>"; closing.append(p); f.append(closing); panel.replaceChildren(f);
+}
+function redraw(){ document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("on",b.dataset.panel===painelAtual)); if(painelAtual==="conceito")renderConceito(); else if(painelAtual==="referencias")renderReferencias(); else renderBiblioteca(); }
+document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{painelAtual=b.dataset.panel;history.replaceState(null,"","#"+painelAtual+(painelAtual==="referencias"?"/"+refAtual:""));redraw();window.scrollTo({top:0,behavior:"instant"});});
+window.addEventListener("hashchange",()=>{const [p,r]=location.hash.slice(1).split("/");if(["conceito","referencias","biblioteca"].includes(p))painelAtual=p;if(REFS.some(x=>x.id===r))refAtual=r;redraw();});
+redraw();
+</script>
+</body>
+</html>
