@@ -281,9 +281,9 @@ const PROJETOS = [
         id: "torta-gelada",
         nome: "Torta gelada",
         tag: "refrigerado",
-        base: "Conforme o cardápio de Natal — a receita já existe e já rodou em loja. São três sabores.",
+        base: "Conforme o cardápio de Natal — a receita já existe e já rodou em loja. São três sabores. A construção é em camadas: base de brownie da Holy, creme da fruta feito com fruta de verdade e ganache de chocolate meio amargo por cima, com a fruta aparecendo na superfície.",
         foto: "cardapio-verao/fotos/torta.jpg",
-        fotoFonte: "foto da torta de cookie que a loja já faz",
+        fotoFonte: "foto provisória — a da torta de maracujá em camadas ainda vai entrar no lugar",
         perguntas: [
           "Quais são os três sabores do verão? São os mesmos do Natal ou muda?",
           "O CMV e o rendimento do Natal já estão levantados? Se estiverem, esse item entra com número na mão e economiza uma etapa.",
