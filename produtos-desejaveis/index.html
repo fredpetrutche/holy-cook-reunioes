@@ -22,7 +22,10 @@
   .intro .kicker, .label { font: 10.5px var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
   .intro h2 { margin-top: 5px; font: 600 clamp(26px, 4vw, 42px)/1.08 var(--font-display); letter-spacing: -.02em; text-wrap: balance; }
   .intro p { margin-top: 12px; color: var(--ink-2); font-size: 15.5px; line-height: 1.65; }
-  .manifesto { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 22px 0 34px; }
+  .dimensions-intro { max-width: 760px; margin: 34px 0 15px; }
+  .dimensions-intro h3 { margin-top: 4px; font: 600 24px var(--font-display); }
+  .dimensions-intro p { margin-top: 6px; color: var(--ink-2); font-size: 14px; line-height: 1.6; }
+  .manifesto { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 0 0 34px; }
   .manifesto-card { position: relative; overflow: hidden; min-height: 160px; border: 1px solid var(--line); border-radius: 14px; padding: 20px; background: var(--surface); box-shadow: var(--shadow-1); }
   .manifesto-card::after { content: attr(data-n); position: absolute; right: 12px; bottom: -32px; font: 700 100px var(--font-display); color: var(--surface-2); z-index: 0; }
   .manifesto-card > * { position: relative; z-index: 1; }
@@ -131,9 +134,9 @@
 
 <script>
 const DIMENSOES = [
-  { id: "performatico", icon: "🤯", nome: "Performático", promessa: "Faz parar", elementos: ["Ação", "Reveal", "Gooey"] },
-  { id: "visual", icon: "🤩", nome: "Visual", promessa: "Faz querer", elementos: ["Generosidade", "Textura visual", "Cor e contraste", "Ícone", "Imperfeição"] },
-  { id: "gustativo", icon: "🤤", nome: "Gustativo", promessa: "Faz voltar", elementos: ["Sabor", "Contraste", "Textura na boca", "Equilíbrio", "Repetição"] }
+  { id: "performatico", icon: "🤯", nome: "Performático", promessa: "Chama atenção", elementos: ["Ação", "Reveal", "Gooey"] },
+  { id: "visual", icon: "🤩", nome: "Visual", promessa: "Gera desejo", elementos: ["Generosidade", "Textura visual", "Cor e contraste", "Ícone", "Imperfeição"] },
+  { id: "gustativo", icon: "🤤", nome: "Gustativo", promessa: "Faz amar", elementos: ["Sabor", "Contraste", "Textura na boca", "Equilíbrio", "Repetição"] }
 ];
 
 const PRODUTOS = [
@@ -406,16 +409,22 @@ function h(tag, cls, text) {
 function renderBriefing() {
   const frag = document.createDocumentFragment();
   const intro = h("section", "intro");
-  intro.append(h("span", "kicker", "Briefing de desenvolvimento"));
-  intro.append(h("h2", null, "A Holy Cookie já faz produtos gostosos. Agora, queremos produtos que chamam atenção, geram desejo e geram divulgação de graça."));
-  intro.append(h("p", null, "Quando alguém experimenta um produto da Holy Cookie, volta. Isso a gente já sabe fazer. O próximo passo é criar produtos que a pessoa queira mostrar para os outros: comentar, dar de presente, indicar e postar no Instagram. Produtos que transformam o próprio cliente em divulgação espontânea da Holy Cookie."));
+  intro.append(h("span", "kicker", "O comando do briefing"));
+  intro.append(h("h2", null, "Não criar apenas produtos gostosos. Criar produtos que chamam atenção, geram desejo e são bons demais para guardar só para si."));
+  intro.append(h("p", null, "Fazer produtos gostosos, que as pessoas amam e querem comprar novamente, já é ponto comum na Holy Cookie. Agora, queremos criar produtos que façam alguém pensar: “Você precisa experimentar isso.” Produtos que dão vontade de mostrar, comentar, mandar para um amigo, postar, presentear ou levar alguém para conhecer."));
   frag.append(intro);
+
+  const dimensionsIntro = h("section", "dimensions-intro");
+  dimensionsIntro.append(h("span", "label", "Como vamos desenvolver e avaliar"));
+  dimensionsIntro.append(h("h3", null, "As três dimensões de um produto desejável"));
+  dimensionsIntro.append(h("p", null, "Cada dimensão provoca uma resposta diferente na pessoa. Primeiro, o produto chama atenção quando entra em ação. Depois, sua aparência gera desejo. Por fim, o sabor entrega aquilo que a Holy Cookie já sabe fazer: faz amar e querer voltar."));
+  frag.append(dimensionsIntro);
 
   const manifesto = h("div", "manifesto");
   DIMENSOES.forEach((d, i) => {
     const card = h("article", "manifesto-card"); card.dataset.n = String(i + 1);
     card.append(h("div", "emoji", d.icon)); card.append(h("h3", null, d.nome)); card.append(h("strong", null, d.promessa));
-    card.append(h("p", null, i === 0 ? "A interação cria uma cena que interrompe o scroll." : i === 1 ? "Parado, o produto vende pela imagem." : "A experiência sustenta a segunda mordida e a próxima compra."));
+    card.append(h("p", null, i === 0 ? "A interação cria uma cena que chama atenção e faz a pessoa parar para olhar." : i === 1 ? "Mesmo parado, o produto dá vontade de comer, fotografar e mostrar para alguém." : "Quando a pessoa experimenta, o sabor sustenta a segunda mordida e a vontade de voltar."));
     manifesto.append(card);
   });
   frag.append(manifesto);
