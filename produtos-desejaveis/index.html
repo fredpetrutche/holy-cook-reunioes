@@ -57,6 +57,9 @@
   .product-tab.on { background: var(--surface); border-color: var(--line-2); color: var(--accent); box-shadow: var(--shadow-1); }
   .product-tab .n { display: grid; place-items: center; width: 27px; height: 27px; border-radius: 7px; background: var(--surface-2); font: 700 10px var(--font-mono); }
   .product-tab.on .n { background: var(--accent); color: #fff; }
+  .product-photo { position: relative; display: grid; place-items: center; height: min(58vh, 560px); min-height: 390px; margin-bottom: 24px; overflow: hidden; border: 1px solid var(--line); border-radius: 14px; background: var(--surface-2); box-shadow: var(--shadow-1); }
+  .product-photo img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .product-photo figcaption { position: absolute; left: 12px; bottom: 12px; max-width: calc(100% - 24px); border-radius: 100px; padding: 6px 11px; background: color-mix(in srgb, var(--surface) 92%, transparent); color: var(--ink-2); font: 10.5px var(--font-mono); box-shadow: var(--shadow-1); }
   .product-hero { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(180px, .6fr); gap: 20px; border-bottom: 1px solid var(--line); padding-bottom: 24px; }
   .product-hero h2 { margin-top: 6px; font: 600 clamp(28px, 5vw, 45px)/1.05 var(--font-display); letter-spacing: -.025em; }
   .product-hero .base { margin-top: 12px; color: var(--ink-2); font-size: 14.5px; line-height: 1.65; }
@@ -110,6 +113,7 @@
     .tab { white-space: nowrap; }
     .panel { padding-top: 22px; }
     .product-hero h2 { font-size: 34px; }
+    .product-photo { height: 68vh; min-height: 440px; }
     .dimension-head { padding-inline: 15px; }
     .idea { padding-inline: 15px; }
   }
@@ -145,12 +149,13 @@ const DIMENSOES = [
 const PRODUTOS = [
   {
     id: "ice-cookie", nome: "Ice Cookie",
+    foto: "../cardapio-verao/fotos/ice-cookie.jpg",
     base: "Sanduíche de dois cookies com uma camada generosa de sorvete no centro. O produto precisa continuar reconhecível como cookie mesmo congelado.",
-    direcao: "Transformar a mordida lateral e o corte ao meio no grande momento do produto.",
+    direcao: "Construir uma casquinha de revelação: o consumo normal precisa produzir estalo, quebra, contraste e um centro escondido.",
     performance: [
-      ["Quebrar o sanduíche ao meio com as mãos", "Morder de perfil para marcar cookie + sorvete", "Mergulhar metade em chocolate e levantar"],
-      ["O corte revela uma faixa alta e limpa de sorvete", "Usar recheio ou calda escondida no centro", "Chocolate fino quebra e abre as camadas"],
-      ["Borda de sorvete começando a amolecer", "Fio curto de caramelo ou brigadeiro no miolo", "Cobertura de chocolate escorrendo no banho"]
+      ["Aplicar uma casquinha fina de chocolate que endurece no frio e estala sem dificultar a mordida", "Assar um cookie mais seco e estruturado por fora, mas que não fique duro demais quando congelado", "Dimensionar as camadas para que a pressão da mordida quebre a estrutura, em vez de apenas amassar o produto"],
+      ["Esconder no centro do sorvete um pequeno núcleo de ganache, caramelo ou creme de pistache", "Manter casquinha, cookie, sorvete e núcleo visualmente separados na seção interna", "Fazer o recheio aparecer apenas depois que a cobertura e o cookie forem rompidos"],
+      ["Usar sorvete mais macio que a estrutura externa para ele começar a sair quando pressionado", "Manter o núcleo mais fluido que o sorvete para criar um segundo movimento", "Combinar casquinha crocante, cookie estruturado, sorvete cremoso e centro fluido em uma única mordida"]
     ],
     visual: [
       ["Camada de sorvete quase da altura do cookie", "Chunks grandes aparentes na massa", "Borda recheada sem excesso de acabamento"],
@@ -166,16 +171,17 @@ const PRODUTOS = [
       ["Evitar camada de sorvete grande demais para a massa", "Calda apenas no centro", "Porção que termina antes de ficar pesada"],
       ["Primeira mordida entrega todas as camadas", "Cada mordida mantém cookie e sorvete", "Doçura baixa o suficiente para querer outro"]
     ],
-    cena: "Duas mãos quebram o Ice Cookie; a câmera vê a faixa de sorvete e um pequeno núcleo de calda aparecer."
+    cena: "Morder → casquinha estala → cookie quebra → sorvete aparece → núcleo é revelado."
   },
   {
     id: "cookie-sorvete", nome: "Cookie com sorvete",
+    foto: "../cardapio-verao/fotos/cookie-sorvete.jpg",
     base: "Cookie servido quente no pote com sorvete. A diferença de temperatura deve ser visível antes mesmo de ser provada.",
-    direcao: "Fazer o sorvete derretendo sobre o cookie quente ser o relógio visual da experiência.",
+    direcao: "Transformar o cookie em um recipiente quente que guarda um centro cremoso e faz o sorvete mudar de estado durante o consumo.",
     performance: [
-      ["Colocar a bola sobre o cookie recém-aberto", "Afundar a colher pegando quente e gelado", "Derramar uma calda na mesa"],
-      ["Cookie partido revela recheio sob o sorvete", "Colher levanta massa, sorvete e calda juntos", "O fundo do pote aparece conforme a colher entra"],
-      ["Sorvete derrete pelas rachaduras", "Calda quente escorre pelas laterais", "Recheio se mistura ao sorvete"]
+      ["Assar o cookie em formato de ninho: borda firme e centro mais fino, feito para ceder à colher", "Servir o ninho realmente quente e o sorvete em temperatura cremosa, não congelado como pedra", "Usar um pote estreito o suficiente para direcionar sorvete e recheio para o centro"],
+      ["Esconder uma camada de ganache ou calda quente sob a bola de sorvete", "Fazer o fundo do ninho ter cor e textura diferentes da borda", "Garantir que a primeira colher atravesse sorvete, cookie e núcleo de uma vez"],
+      ["Calibrar o calor para o sorvete começar a derreter sem virar líquido imediatamente", "Usar recheio que amolece com a temperatura do cookie e se mistura lentamente ao sorvete", "Projetar rachaduras no ninho para conduzir o derretimento e deixar o movimento visível"]
     ],
     visual: [
       ["Uma bola alta, não achatada", "Cookie visível sob e ao redor do sorvete", "Cobertura aplicada com volume"],
@@ -191,16 +197,17 @@ const PRODUTOS = [
       ["Menos calda do que parece necessário", "Bola proporcional ao cookie", "Servir antes de virar uma mistura líquida"],
       ["Toda colherada pega duas temperaturas", "Final não fica só com calda", "Tamanho permite terminar querendo mais"]
     ],
-    cena: "A bola cai sobre o cookie aberto; a calda entra e o sorvete começa a escorrer pelas rachaduras."
+    cena: "A colher rompe o ninho → encontra o núcleo quente → o sorvete derrete pelas rachaduras e se mistura ao recheio."
   },
   {
     id: "cookie-fries", nome: "Cookie Fries + sorvete",
+    foto: "../cardapio-verao/fotos/cookie-fries.jpg",
     base: "Tiras de cookie assadas como fritas, com sorvete de creme para mergulhar. O gesto de compartilhar pode ser parte do produto.",
-    direcao: "Apostar no mergulho repetível: cada tira cria um vídeo e cada cliente entende como comer sem explicação.",
+    direcao: "Construir uma fry que aguenta o mergulho, quebra com clareza e carrega o sorvete sem perder o centro macio.",
     performance: [
-      ["Mergulhar a tira no sorvete", "Quebrar uma fry para mostrar o centro", "Erguer uma tira com calda ou sorvete"],
-      ["A quebra revela miolo macio", "O mergulho cobre apenas a ponta", "Caixinha abre e revela volume"],
-      ["Sorvete forma um pico ao levantar", "Calda pinga da ponta", "Chocolate do interior amolece na quebra"]
+      ["Assar tiras com exterior seco e crocante, mas centro espesso o bastante para permanecer macio", "Criar pequenas ranhuras ou superfície rugosa para o sorvete aderir à fry", "Dimensionar a tira para não quebrar com o peso do mergulho, mas estalar quando mordida"],
+      ["Inserir em algumas fries um veio curto de chocolate ou caramelo que só aparece na quebra", "Manter chunks visíveis na seção interna para confirmar que é cookie", "Fazer a caixinha parecer cheia e esconder parte das fries até a pessoa retirar uma"],
+      ["Usar sorvete macio e aderente, capaz de formar um pico ao levantar a fry", "Aplicar no fundo do pote uma calda mais fluida que aparece depois do primeiro mergulho", "Combinar exterior crocante, centro macio, sorvete cremoso e recheio fluido"]
     ],
     visual: [
       ["Caixinha cheia e tiras altas", "Pote de sorvete encostado, não escondido", "Mais de um tamanho de chunk visível"],
@@ -216,16 +223,17 @@ const PRODUTOS = [
       ["Tiras finas para controlar a porção", "Um só sorvete e no máximo um molho", "Evitar açúcar extra na superfície"],
       ["Cada tira funciona como uma nova mordida", "O pote de sorvete dura até a última", "Produto compartilhável sem cansar"]
     ],
-    cena: "Uma Cookie Fry mergulha, gira e sobe com um pico de sorvete; outra mão quebra uma tira ao fundo."
+    cena: "Mergulhar → o sorvete adere às ranhuras → morder → a fry estala e revela o veio cremoso."
   },
   {
     id: "panelinha", nome: "Panelinha",
+    foto: "../cardapio-verao/fotos/panelinha.jpg",
     base: "Cookie assado e servido quente na panelinha com sorvete e fruta. É o encontro mais teatral entre forno e mesa.",
     direcao: "Criar uma superfície que se rompe e revela um centro quente, enquanto o sorvete começa a derreter.",
     performance: [
-      ["Romper o centro com a colher", "Colocar a bola sobre o cookie saindo do forno", "Puxar uma colherada funda"],
-      ["Casquinha abre e mostra o recheio", "Colher revela o fundo cremoso", "Fruta aparece entre massa e sorvete"],
-      ["Recheio quente escorre", "Sorvete derrete no centro", "Ganache se espalha ao pressionar"]
+      ["Assar uma borda alta e firme com um centro propositalmente mais fino e frágil", "Criar uma tampa crocante de cookie ou chocolate sob o sorvete, feita para romper à colher", "Usar panelinha rasa para que uma única colher atravesse todas as camadas"],
+      ["Esconder sob a tampa um núcleo quente de ganache, doce de leite ou creme de fruta", "Manter o recheio represado até o centro ser rompido", "Posicionar o sorvete exatamente sobre a área de quebra para que o interior não seja antecipado"],
+      ["Formular o núcleo para fluir quando quente, sem desaparecer dentro da massa", "Servir o sorvete macio o suficiente para encontrar o recheio no momento da quebra", "Fazer a temperatura criar três estados: crosta firme, centro fluido e sorvete derretendo"]
     ],
     visual: [
       ["Panelinha preenchida até perto da borda", "Uma bola central com altura", "Recheio visível em rachaduras"],
@@ -241,16 +249,17 @@ const PRODUTOS = [
       ["Panelinha rasa para não virar excesso de massa", "Calda localizada", "Acidez obrigatória nas versões mais doces"],
       ["Colheradas mantêm contraste até o fundo", "Não sobra uma poça doce no final", "Porção boa para dividir ou terminar"]
     ],
-    cena: "A colher rompe a crosta; o recheio aparece e encontra o sorvete que derrete em direção ao centro."
+    cena: "A colher quebra a tampa → o núcleo quente sobe → o sorvete desce e os dois se encontram no centro."
   },
   {
     id: "casquinha", nome: "Casquinha de sorvete de cookie",
+    foto: "../cardapio-verao/fotos/casquinha.jpg",
     base: "Sorvete servido em uma casquinha feita de cookie. A casquinha não é embalagem: ela é metade da experiência.",
     direcao: "Fazer a borda de cookie, o sorvete e o acabamento do sabor serem lidos em uma única silhueta.",
     performance: [
-      ["Preencher a casquinha com o sorvete", "Mergulhar a borda em chocolate", "Quebrar a ponta no final"],
-      ["A mordida revela a espessura da casquinha", "A ponta pode guardar um núcleo de chocolate", "Corte lateral mostra sorvete dentro do cookie"],
-      ["Chocolate do banho escorre antes de firmar", "Sorvete desce pelas bordas", "Núcleo da ponta aparece cremoso"]
+      ["Assar a casquinha com parede fina, seca e crocante, capaz de estalar sem se despedaçar inteira", "Revestir o interior com uma película de chocolate para conservar a crocância", "Reforçar a base para suportar o sorvete e deixar a borda mais delicada para a primeira mordida"],
+      ["Selar a ponta com um núcleo de chocolate, caramelo ou creme de pistache", "Manter esse centro escondido até as últimas mordidas", "Deixar a lateral da casquinha revelar chunks e textura real de cookie"],
+      ["Usar sorvete mais macio que a casquinha para criar contraste imediato", "Fazer a película interna de chocolate quebrar junto da parede de cookie", "Calibrar o núcleo da ponta para permanecer cremoso mesmo frio"]
     ],
     visual: [
       ["Casquinha espessa o bastante para parecer cookie", "Sorvete alto e volumoso", "Acabamento concentrado na borda"],
@@ -266,16 +275,17 @@ const PRODUTOS = [
       ["Espessura suficiente para segurar, não para pesar", "Cobertura só na borda", "Quantidade de sorvete proporcional"],
       ["A casquinha fica melhor conforme o sorvete amolece", "Última mordida tem recheio na ponta", "Não sobra uma base seca"]
     ],
-    cena: "A casquinha recebe o sorvete, gira no chocolate e termina com uma mordida que revela a parede de cookie."
+    cena: "Morder → cookie e película de chocolate estalam → sorvete macio aparece → a última mordida libera o núcleo da ponta."
   },
   {
     id: "cookie-palito", nome: "Cookie no palito",
+    foto: "../cardapio-verao/fotos/cookie-palito.jpg",
     base: "Cookie no formato de pop, coberto por uma casquinha fina de chocolate. Precisa ser imediatamente reconhecido como cookie, não como pirulito comum.",
     direcao: "Usar o estalo da cobertura e a revelação do cookie como assinatura de conteúdo.",
     performance: [
-      ["Mergulhar o cookie na cobertura", "Bater levemente para a casquinha estalar", "Morder de lado segurando pelo palito"],
-      ["Cobertura quebra e revela cookie + recheio", "Corte mostra as três camadas", "Um lado decorado esconde o centro"],
-      ["Chocolate escorre no banho", "Recheio aparece na mordida", "Fios finos de cobertura cruzam a superfície"]
+      ["Cobrir o cookie com uma casquinha integral muito fina, feita para estalar antes da massa", "Assar um cookie mais macio que a cobertura, mas firme o suficiente para permanecer preso ao palito", "Inserir o palito no eixo estrutural da massa para que o produto não gire ou se solte na mordida"],
+      ["Criar uma camada de recheio entre a casquinha e o centro do cookie, invisível por fora", "Deixar uma pequena faixa lateral sem decoração para a seção interna ficar legível após a mordida", "Usar topping externo como legenda do sabor, sem revelar o recheio central"],
+      ["Fazer a casquinha quebrar em placas pequenas e audíveis", "Manter o recheio cremoso em temperatura refrigerada", "Combinar estalo externo, massa macia e centro fluido sem transformar o produto em um bloco de chocolate"]
     ],
     visual: [
       ["Cookie espesso no palito", "Cobertura com volume só onde importa", "Pedaços grandes identificam o sabor"],
@@ -291,16 +301,17 @@ const PRODUTOS = [
       ["Evitar cobertura grossa e cerosa", "Uma camada de recheio, não várias", "Tamanho de lanche, não sobremesa gigante"],
       ["Cada mordida preserva cobertura e cookie", "O final não fica só massa seca", "Doçura convida a terminar"]
     ],
-    cena: "O cookie sai do banho de chocolate; depois, uma mordida faz a casquinha estalar e revela o centro."
+    cena: "Morder → a cobertura estala → o cookie macio aparece → o centro cremoso fica exposto ao redor do palito."
   },
   {
     id: "cookie-felicidade", nome: "Cookie da Felicidade",
+    foto: "../cardapio-verao/fotos/cookie-felicidade.jpg",
     base: "Pote em camadas inspirado no Pote da Felicidade, mas com leitura inequívoca de Holy Cookie. O pote precisa ter uma arquitetura, não uma mistura aleatória.",
     direcao: "Desenhar camadas largas e legíveis para que a colher cruze todas elas em um único movimento.",
     performance: [
-      ["Afundar a colher verticalmente", "Puxar uma colherada com todas as camadas", "Finalizar derramando a última camada"],
-      ["Colher abre um túnel no pote", "Lateral transparente revela a sequência", "Centro escondido aparece na primeira colherada"],
-      ["Creme desce entre pedaços de cookie", "Ganache se espalha", "Calda forma fios ao levantar a colher"]
+      ["Construir camadas largas em um pote estreito para a colher ser obrigada a atravessar a arquitetura inteira", "Inserir um disco fino e quebradiço de chocolate no meio do pote", "Usar chunks estruturados acima e abaixo do disco para criar resistência antes da quebra"],
+      ["Esconder sob o disco uma camada de cor e consistência inesperadas", "Manter o exterior parcialmente legível, mas impedir que o centro seja visto de cima", "Fazer a primeira colher romper a barreira e abrir um túnel que revela o interior"],
+      ["Colocar creme mais fluido acima do disco para ele descer quando a barreira quebrar", "Usar ganache ou fruta abaixo para que duas cores se encontrem", "Equilibrar creme, chunks e camada crocante para o movimento não virar apenas uma mistura uniforme"]
     ],
     visual: [
       ["Camadas largas, não muitas camadas finas", "Chunks grandes encostados na parede", "Topo alto e finalizado"],
@@ -316,16 +327,17 @@ const PRODUTOS = [
       ["Máximo de quatro componentes", "Creme funciona como respiro", "Pote menor e cheio em vez de grande e excessivo"],
       ["Proporção permite pegar tudo em cada colherada", "Última camada não é só creme", "Sabor evolui sem cansar"]
     ],
-    cena: "A colher atravessa o topo e sobe mostrando cookie, creme e ganache enquanto um fio volta ao pote."
+    cena: "A colher encontra resistência → quebra o disco → o creme desce → a colherada sobe com camadas antes separadas."
   },
   {
     id: "torta-quente", nome: "Torta quente",
+    foto: "../cardapio-verao/fotos/torta.jpg",
     base: "Fatia alta de massa de cookie servida quente, em três sabores. Precisa parecer uma torta própria, não apenas um cookie grande cortado.",
     direcao: "Construir um centro que se revela no corte e um topo que identifica o sabor antes da explicação.",
     performance: [
-      ["Cortar a fatia ainda quente", "Pressionar o centro com a colher", "Servir a fatia e derramar acabamento"],
-      ["Corte revela núcleo ou camadas", "Topo se rompe e mostra o interior", "Uma colherada revela base, centro e cobertura"],
-      ["Centro cremoso escorre lentamente", "Chocolate dos chunks amolece", "Calda quente corre pela lateral"]
+      ["Assar a torta com borda firme, topo seco e centro de cocção mais macia", "Aplicar uma lâmina fina de chocolate ou caramelo no topo para produzir uma primeira quebra", "Concentrar o recheio em um núcleo, não distribuí-lo por toda a massa"],
+      ["Criar contraste claro entre crosta, massa e núcleo no corte", "Usar ingrediente do sabor dentro do centro, não apenas como decoração", "Calibrar o tamanho do núcleo para ele permanecer completamente escondido antes do corte"],
+      ["Formular o recheio para ficar cremoso e escorrer lentamente na temperatura de serviço", "Usar chunks que amolecem sem sumir dentro da massa", "Garantir que o núcleo se mova quando a fatia é aberta, mas não esvazie a torta inteira"]
     ],
     visual: [
       ["Fatia alta e pesada visualmente", "Centro aparente no corte", "Topo com ingrediente em quantidade"],
@@ -341,16 +353,17 @@ const PRODUTOS = [
       ["Fatia mais baixa se houver sorvete", "Núcleo concentrado em vez de rechear tudo", "Acidez em pelo menos um dos sabores"],
       ["Segunda garfada ainda tem contraste", "A borda não fica seca", "Tamanho permite comer sem dividir"]
     ],
-    cena: "A faca atravessa a fatia quente; ao separar, o núcleo aparece e desce lentamente pela lateral."
+    cena: "Quebrar o topo → cortar → a crosta se separa → o núcleo quente aparece e desce lentamente pela massa."
   },
   {
     id: "torta-gelada", nome: "Torta gelada",
+    foto: "../cardapio-verao/fotos/torta.jpg",
     base: "Torta em camadas com brownie, creme de fruta e ganache meio amarga. A fruta verdadeira aparece na superfície e orienta o sabor.",
     direcao: "Tratar o corte limpo das camadas como o principal reveal e deixar a fruta romper a paleta de chocolate.",
     performance: [
-      ["Cortar uma fatia bem gelada", "Levantar uma garfada atravessando as camadas", "Derramar uma camada fina de ganache"],
-      ["O corte revela três faixas nítidas", "Interior contrasta com o topo escuro", "Fruta aparece no centro, não só decorando"],
-      ["Ganache cede lentamente", "Creme de fruta acompanha a garfada", "Calda da fruta escorre de forma curta"]
+      ["Construir a torta com três densidades: base firme, creme aerado e topo fino que oferece resistência", "Finalizar com uma película quebradiça de chocolate meio amargo", "Resfriar o suficiente para manter as camadas, sem congelar o creme e impedir o movimento"],
+      ["Esconder no centro uma faixa viva de fruta que só aparece na seção cortada", "Fazer cada camada ter cor e espessura próprias", "Manter a fruta verdadeira dentro e no topo para conectar a revelação ao sabor"],
+      ["Formular o creme para acompanhar o garfo sem escorrer como líquido", "Usar uma pequena faixa de coulis que começa a sair depois do corte", "Combinar estalo do topo, base densa, creme macio e fruta fluida"]
     ],
     visual: [
       ["Camadas espessas e fáceis de ler", "Fatia alta", "Fruta em pedaços reais no topo"],
@@ -366,16 +379,18 @@ const PRODUTOS = [
       ["Creme de fruta é o respiro", "Ganache mais fina que a base", "Fatia estreita e alta"],
       ["A acidez limpa cada garfada", "Todas as camadas chegam até o final", "Final de chocolate não pesa"]
     ],
-    cena: "A faca libera uma fatia e a lateral revela brownie, creme claro com fruta e ganache escura."
+    cena: "A faca quebra a película → atravessa três densidades → a seção revela a fruta viva e uma faixa curta de coulis."
   },
   {
     id: "frozen", nome: "Frozen de maracujá com manga",
+    foto: "../cardapio-verao/fotos/frozen-maracuja-manga-conceito.png",
+    fotoNota: "Imagem conceitual provisória · gerada por IA",
     base: "Frozen tropical que aproveita o processo já existente da loja. Maracujá traz acidez; manga dá corpo, cor e doçura natural.",
     direcao: "Fazer o encontro do amarelo da manga com a polpa do maracujá virar o ícone visual do produto.",
     performance: [
-      ["Servir o frozen em espiral", "Derramar a polpa por cima", "Misturar manga e maracujá diante da câmera"],
-      ["A colher abre o swirl e mostra duas cores", "Polpa aparece entre as voltas", "Copo transparente revela marmorização"],
-      ["Polpa escorre pelas curvas", "Frozen dobra ao sair da máquina", "Calda de fruta se espalha lentamente"]
+      ["Montar dois componentes com densidades diferentes em uma espiral marmorizada, não uma mistura uniforme", "Criar no topo uma película fina e congelada de fruta que oferece resistência à colher", "Usar copo transparente para que a arquitetura continue visível antes e depois da primeira colherada"],
+      ["Esconder sob a película um centro de polpa de maracujá mais fluido", "Manter manga e maracujá em cores separadas dentro da espiral", "Fazer a colher quebrar o topo e abrir um caminho até o núcleo ácido"],
+      ["Formular o frozen de manga mais cremoso e a polpa de maracujá mais fluida", "Usar sementes para mostrar o deslocamento da calda pelas curvas", "Calibrar a película para estalar e depois dissolver, sem formar um bloco duro"]
     ],
     visual: [
       ["Espiral alta acima do copo", "Polpa visível em mais de um ponto", "Copo cheio sem perder a forma"],
@@ -391,7 +406,7 @@ const PRODUTOS = [
       ["Acidez suficiente para refrescar", "Pouca calda adicionada", "Copo menor se a base for muito cremosa"],
       ["Cada colherada limpa a anterior", "Polpa distribuída até o fundo", "Final refrescante, não açucarado"]
     ],
-    cena: "O frozen sobe em espiral; a polpa de maracujá cai pelas curvas e revela o amarelo da manga sob as sementes."
+    cena: "A colher quebra a película → revela a polpa → o maracujá desce pelas curvas e se mistura ao frozen de manga."
   }
 ];
 
@@ -456,11 +471,12 @@ function dimensionCard(d, groups, scene) {
   const head = h("div", "dimension-head"); head.append(h("div", "dimension-icon", d.icon));
   const txt = h("div"); txt.append(h("h3", null, d.nome + " — " + d.promessa)); txt.append(h("p", null, d.elementos.join(" · "))); head.append(txt); card.append(head);
   const ideas = h("div", "ideas");
-  d.elementos.forEach((elemento, i) => {
+  const labels = d.id === "performatico" ? ["Como construir a ação", "Como construir o reveal", "Como construir o gooey"] : d.elementos;
+  labels.forEach((elemento, i) => {
     const idea = h("div", "idea"); idea.append(h("h4", null, elemento)); const ul = h("ul"); (groups[i] || []).forEach(x => ul.append(h("li", null, x))); idea.append(ul); ideas.append(idea);
   });
   card.append(ideas);
-  if (scene) { const s = h("p", "scene"); s.innerHTML = "<b>Vídeo de 3–5 segundos:</b> " + scene; card.append(s); }
+  if (scene) { const s = h("p", "scene"); s.innerHTML = "<b>O que acontece no consumo normal:</b> " + scene; card.append(s); }
   return card;
 }
 
@@ -499,7 +515,9 @@ function renderProdutos() {
     btn.addEventListener("click", () => { produtoAtual = produto.id; history.replaceState(null, "", "#produtos/" + produtoAtual); renderProdutos(); window.scrollTo({ top: 0, behavior: "instant" }); }); nav.append(btn);
   });
   layout.append(nav);
-  const content = h("article", "product-content"); const hero = h("header", "product-hero"); const title = h("div"); title.append(h("span", "label", "Produto " + String(PRODUTOS.indexOf(p) + 1).padStart(2, "0") + " de " + PRODUTOS.length)); title.append(h("h2", null, p.nome)); title.append(h("p", "base", p.base)); hero.append(title);
+  const content = h("article", "product-content");
+  const figure = h("figure", "product-photo"); const img = document.createElement("img"); img.src = p.foto; img.alt = "Referência visual de " + p.nome; img.loading = "eager"; figure.append(img); figure.append(h("figcaption", null, p.fotoNota || "Foto de referência do produto")); content.append(figure);
+  const hero = h("header", "product-hero"); const title = h("div"); title.append(h("span", "label", "Produto " + String(PRODUTOS.indexOf(p) + 1).padStart(2, "0") + " de " + PRODUTOS.length)); title.append(h("h2", null, p.nome)); title.append(h("p", "base", p.base)); hero.append(title);
   const direction = h("aside", "direction"); direction.append(h("span", null, "Direção sugerida")); direction.append(h("p", null, p.direcao)); hero.append(direction); content.append(hero);
   const dims = h("div", "dimensions"); dims.append(dimensionCard(DIMENSOES[0], p.performance, p.cena)); dims.append(dimensionCard(DIMENSOES[1], p.visual)); dims.append(dimensionCard(DIMENSOES[2], p.taste)); content.append(dims); content.append(evaluation(p)); layout.append(content); panel.replaceChildren(layout);
 }
