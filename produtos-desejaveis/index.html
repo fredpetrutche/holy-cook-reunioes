@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Produtos Desejáveis · Holy Cookie</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍪</text></svg>">
+<link rel="stylesheet" href="../base.css">
+<style>
+  :root { --maxw: 1120px; }
+  .masthead { align-items: flex-start; }
+  .masthead h1 { font-size: clamp(24px, 4vw, 34px); }
+  .voltar { color: var(--accent); font-size: 12.5px; font-weight: 600; text-decoration: none; white-space: nowrap; }
+  .voltar:hover { text-decoration: underline; }
+  .tabs { position: sticky; top: 0; z-index: 20; display: flex; gap: 8px; padding: 12px 0; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+  .tab { border: 1px solid var(--line-2); border-radius: 100px; padding: 9px 16px; background: var(--surface); color: var(--ink-2); font: 600 13px var(--font-body); cursor: pointer; }
+  .tab:hover { border-color: var(--accent); color: var(--accent); }
+  .tab.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .panel { padding-top: 28px; }
+  .intro { max-width: 780px; margin-bottom: 28px; }
+  .intro .kicker, .label { font: 10.5px var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+  .intro h2 { margin-top: 5px; font: 600 clamp(26px, 4vw, 42px)/1.08 var(--font-display); letter-spacing: -.02em; text-wrap: balance; }
+  .intro p { margin-top: 12px; color: var(--ink-2); font-size: 15.5px; line-height: 1.65; }
+  .manifesto { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 22px 0 34px; }
+  .manifesto-card { position: relative; overflow: hidden; min-height: 160px; border: 1px solid var(--line); border-radius: 14px; padding: 20px; background: var(--surface); box-shadow: var(--shadow-1); }
+  .manifesto-card::after { content: attr(data-n); position: absolute; right: 12px; bottom: -32px; font: 700 100px var(--font-display); color: var(--surface-2); z-index: 0; }
+  .manifesto-card > * { position: relative; z-index: 1; }
+  .manifesto-card .emoji { font-size: 25px; }
+  .manifesto-card h3 { margin-top: 14px; font: 600 19px var(--font-display); }
+  .manifesto-card strong { display: block; margin-top: 2px; color: var(--accent); font-size: 13px; }
+  .manifesto-card p { margin-top: 7px; color: var(--ink-2); font-size: 13px; }
+  .brief-section { margin: 38px 0; }
+  .brief-head { display: flex; gap: 12px; align-items: center; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+  .brief-num { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font: 700 12px var(--font-mono); }
+  .brief-head h3 { font: 600 22px var(--font-display); }
+  .brief-question { margin: 16px 0; padding: 14px 16px; border-left: 3px solid var(--accent); background: var(--accent-soft); color: var(--accent-ink); font-weight: 650; }
+  .element-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(205px, 1fr)); gap: 10px; }
+  .element { border: 1px solid var(--line); border-radius: 10px; padding: 15px; background: var(--surface); }
+  .element h4 { font: 600 16px var(--font-display); }
+  .element p { margin-top: 5px; color: var(--ink-2); font-size: 12.8px; }
+  .test { margin-top: 12px; color: var(--ink-2); font-size: 13px; }
+  .test b { color: var(--ink); }
+  .principio { margin: 38px 0 10px; border: 1px solid var(--accent); border-radius: 14px; padding: 24px; background: var(--surface); text-align: center; }
+  .principio h3 { font: 600 24px var(--font-display); }
+  .principio .troca { margin-top: 12px; color: var(--ink-2); }
+  .principio .troca strong { color: var(--accent); }
+
+  .product-layout { display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: 28px; align-items: start; }
+  .product-tabs { position: sticky; top: 70px; display: flex; flex-direction: column; gap: 6px; max-height: calc(100vh - 96px); overflow: auto; padding-right: 6px; }
+  .product-tab { display: grid; grid-template-columns: 28px 1fr; gap: 9px; align-items: center; width: 100%; border: 1px solid transparent; border-radius: 9px; padding: 9px 10px; background: transparent; color: var(--ink-2); font: 600 12.5px/1.25 var(--font-body); text-align: left; cursor: pointer; }
+  .product-tab:hover { background: var(--surface-2); color: var(--ink); }
+  .product-tab.on { background: var(--surface); border-color: var(--line-2); color: var(--accent); box-shadow: var(--shadow-1); }
+  .product-tab .n { display: grid; place-items: center; width: 27px; height: 27px; border-radius: 7px; background: var(--surface-2); font: 700 10px var(--font-mono); }
+  .product-tab.on .n { background: var(--accent); color: #fff; }
+  .product-hero { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(180px, .6fr); gap: 20px; border-bottom: 1px solid var(--line); padding-bottom: 24px; }
+  .product-hero h2 { margin-top: 6px; font: 600 clamp(28px, 5vw, 45px)/1.05 var(--font-display); letter-spacing: -.025em; }
+  .product-hero .base { margin-top: 12px; color: var(--ink-2); font-size: 14.5px; line-height: 1.65; }
+  .direction { align-self: stretch; border-radius: 12px; padding: 17px; background: var(--accent-soft); color: var(--accent-ink); }
+  .direction span { font: 10px var(--font-mono); letter-spacing: .1em; text-transform: uppercase; }
+  .direction p { margin-top: 7px; font: 600 16px/1.4 var(--font-display); }
+  .dimensions { display: grid; gap: 14px; margin-top: 22px; }
+  .dimension { border: 1px solid var(--line); border-radius: 13px; background: var(--surface); box-shadow: var(--shadow-1); overflow: hidden; }
+  .dimension-head { display: grid; grid-template-columns: 42px 1fr; gap: 12px; padding: 18px 20px 15px; border-bottom: 1px solid var(--line); }
+  .dimension-icon { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 10px; background: var(--surface-2); font-size: 22px; }
+  .dimension h3 { font: 600 19px var(--font-display); }
+  .dimension-head p { color: var(--ink-2); font-size: 12.5px; }
+  .ideas { display: grid; grid-template-columns: repeat(3, 1fr); }
+  .idea { padding: 15px 18px 17px; border-right: 1px solid var(--line); }
+  .idea:last-child { border-right: 0; }
+  .idea h4 { font: 700 10px var(--font-mono); letter-spacing: .09em; text-transform: uppercase; color: var(--accent); }
+  .idea ul { margin: 9px 0 0 17px; }
+  .idea li { margin-top: 6px; font-size: 13px; line-height: 1.45; }
+  .scene { margin: 0 18px 18px; padding: 11px 13px; border-radius: 8px; background: var(--surface-2); font-size: 12.5px; color: var(--ink-2); }
+  .scene b { color: var(--ink); }
+  .evaluation { margin-top: 28px; border-top: 1px solid var(--line); padding-top: 26px; }
+  .evaluation-head { display: flex; justify-content: space-between; gap: 12px; align-items: end; }
+  .evaluation h3 { font: 600 23px var(--font-display); }
+  .evaluation-head p { color: var(--ink-3); font-size: 12px; }
+  .score-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 14px; }
+  .score-card { border: 1px solid var(--line); border-radius: 10px; padding: 14px; background: var(--surface); }
+  .score-card label { display: block; font-size: 12px; font-weight: 650; }
+  .score-card select { width: 100%; margin-top: 8px; border: 1px solid var(--line-2); border-radius: 8px; padding: 9px; background: var(--bg); color: var(--ink); font: 13px var(--font-body); }
+  .notes { margin-top: 10px; }
+  .notes label { display: block; margin-bottom: 6px; font-size: 12px; font-weight: 650; }
+  .notes textarea { width: 100%; min-height: 110px; resize: vertical; border: 1px solid var(--line-2); border-radius: 10px; padding: 12px; background: var(--surface); color: var(--ink); font: 14px/1.5 var(--font-body); }
+  .save-state { min-height: 18px; margin-top: 6px; color: var(--ok); font: 10.5px var(--font-mono); }
+  .footnote { margin-top: 45px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--ink-3); font-size: 11.5px; text-align: center; }
+  @media (max-width: 800px) {
+    .manifesto { grid-template-columns: 1fr; }
+    .manifesto-card { min-height: 130px; }
+    .product-layout { grid-template-columns: 1fr; }
+    .product-tabs { position: static; flex-direction: row; overflow-x: auto; padding: 0 0 8px; scroll-snap-type: x mandatory; }
+    .product-tab { min-width: 175px; scroll-snap-align: start; }
+    .product-hero { grid-template-columns: 1fr; }
+    .ideas, .score-grid { grid-template-columns: 1fr; }
+    .idea { border-right: 0; border-bottom: 1px solid var(--line); }
+    .idea:last-child { border-bottom: 0; }
+  }
+  @media (max-width: 560px) {
+    .wrap { padding-inline: 16px; }
+    .masthead { padding-top: 20px; }
+    .masthead .ident { width: 100%; }
+    .tabs { overflow-x: auto; }
+    .tab { white-space: nowrap; }
+    .panel { padding-top: 22px; }
+    .product-hero h2 { font-size: 34px; }
+    .dimension-head { padding-inline: 15px; }
+    .idea { padding-inline: 15px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="monogram">HC</div>
+    <div class="masthead-text">
+      <span class="eyebrow">Desenvolvimento de produto</span>
+      <h1>Produtos desejáveis</h1>
+    </div>
+    <div class="ident"><a class="voltar" href="../cardapio-verao/">← Cardápio de Verão</a></div>
+  </header>
+
+  <nav class="tabs" aria-label="Seções principais">
+    <button class="tab on" data-panel="briefing">Briefing</button>
+    <button class="tab" data-panel="produtos">Brainstorm dos produtos <span id="product-count"></span></button>
+  </nav>
+  <main id="panel" class="panel"></main>
+  <p class="footnote">Holy Cookie · Ferramenta de brainstorming e avaliação do cardápio de verão</p>
+</div>
+
+<script>
+const DIMENSOES = [
+  { id: "performatico", icon: "🤯", nome: "Performático", promessa: "Faz parar", elementos: ["Ação", "Reveal", "Gooey"] },
+  { id: "visual", icon: "🤩", nome: "Visual", promessa: "Faz querer", elementos: ["Generosidade", "Textura visual", "Cor e contraste", "Ícone", "Imperfeição"] },
+  { id: "gustativo", icon: "🤤", nome: "Gustativo", promessa: "Faz voltar", elementos: ["Sabor", "Contraste", "Textura na boca", "Equilíbrio", "Repetição"] }
+];
+
+const PRODUTOS = [
+  {
+    id: "ice-cookie", nome: "Ice Cookie",
+    base: "Sanduíche de dois cookies com uma camada generosa de sorvete no centro. O produto precisa continuar reconhecível como cookie mesmo congelado.",
+    direcao: "Transformar a mordida lateral e o corte ao meio no grande momento do produto.",
+    performance: [
+      ["Quebrar o sanduíche ao meio com as mãos", "Morder de perfil para marcar cookie + sorvete", "Mergulhar metade em chocolate e levantar"],
+      ["O corte revela uma faixa alta e limpa de sorvete", "Usar recheio ou calda escondida no centro", "Chocolate fino quebra e abre as camadas"],
+      ["Borda de sorvete começando a amolecer", "Fio curto de caramelo ou brigadeiro no miolo", "Cobertura de chocolate escorrendo no banho"]
+    ],
+    visual: [
+      ["Camada de sorvete quase da altura do cookie", "Chunks grandes aparentes na massa", "Borda recheada sem excesso de acabamento"],
+      ["Cookie rugoso contra sorvete liso", "Casquinha fina de chocolate contra centro cremoso", "Migalhas aderidas à lateral"],
+      ["Cookie dourado + sorvete claro + chocolate escuro", "Faixa colorida quando o sabor pedir", "Laterais limpas para a leitura em miniatura"],
+      ["Ingrediente do sabor aplicado na borda", "Meio pistache, Oreo ou morango reconhecível", "Uma unidade cortada ao lado da inteira"],
+      ["Bordas levemente irregulares", "Sorvete pressionado de maneira orgânica", "Chocolate com quebra real, não perfeito"]
+    ],
+    taste: [
+      ["Cookie com sabor intenso mesmo gelado", "Sorvete de perfil simples para não apagar a massa", "Centro com sabor prometido claramente reconhecível"],
+      ["Pitada de sal no cookie contra o doce do sorvete", "Fruta ácida nos sabores mais doces", "Chocolate amargo como acabamento"],
+      ["Cookie macio o bastante para morder congelado", "Casquinha fina crocante + sorvete cremoso", "Chunks pequenos para não endurecer demais"],
+      ["Evitar camada de sorvete grande demais para a massa", "Calda apenas no centro", "Porção que termina antes de ficar pesada"],
+      ["Primeira mordida entrega todas as camadas", "Cada mordida mantém cookie e sorvete", "Doçura baixa o suficiente para querer outro"]
+    ],
+    cena: "Duas mãos quebram o Ice Cookie; a câmera vê a faixa de sorvete e um pequeno núcleo de calda aparecer."
+  },
+  {
+    id: "cookie-sorvete", nome: "Cookie com sorvete",
+    base: "Cookie servido quente no pote com sorvete. A diferença de temperatura deve ser visível antes mesmo de ser provada.",
+    direcao: "Fazer o sorvete derretendo sobre o cookie quente ser o relógio visual da experiência.",
+    performance: [
+      ["Colocar a bola sobre o cookie recém-aberto", "Afundar a colher pegando quente e gelado", "Derramar uma calda na mesa"],
+      ["Cookie partido revela recheio sob o sorvete", "Colher levanta massa, sorvete e calda juntos", "O fundo do pote aparece conforme a colher entra"],
+      ["Sorvete derrete pelas rachaduras", "Calda quente escorre pelas laterais", "Recheio se mistura ao sorvete"]
+    ],
+    visual: [
+      ["Uma bola alta, não achatada", "Cookie visível sob e ao redor do sorvete", "Cobertura aplicada com volume"],
+      ["Massa rachada + sorvete liso", "Cookie quente + bordas derretidas", "Chunks crocantes por cima"],
+      ["Sorvete claro separa do cookie dourado", "Calda escura desenha o volume", "Um acento de cor ligado ao sabor"],
+      ["Chunk, fruta ou castanha no topo identifica o sabor", "Cookie continua sendo o protagonista", "Pote deixa a composição visível"],
+      ["Calda irregular", "Migalhas no sorvete", "Derretimento real e controlado"]
+    ],
+    taste: [
+      ["Cookie quente e intenso", "Sorvete lácteo e limpo", "Calda concentrada em poucos pontos"],
+      ["Doce + sal na massa", "Chocolate + fruta ácida como opção", "Sorvete neutro contra recheio intenso"],
+      ["Quente + gelado", "Borda crocante + centro macio", "Sorvete cremoso + chunks"],
+      ["Menos calda do que parece necessário", "Bola proporcional ao cookie", "Servir antes de virar uma mistura líquida"],
+      ["Toda colherada pega duas temperaturas", "Final não fica só com calda", "Tamanho permite terminar querendo mais"]
+    ],
+    cena: "A bola cai sobre o cookie aberto; a calda entra e o sorvete começa a escorrer pelas rachaduras."
+  },
+  {
+    id: "cookie-fries", nome: "Cookie Fries + sorvete",
+    base: "Tiras de cookie assadas como fritas, com sorvete de creme para mergulhar. O gesto de compartilhar pode ser parte do produto.",
+    direcao: "Apostar no mergulho repetível: cada tira cria um vídeo e cada cliente entende como comer sem explicação.",
+    performance: [
+      ["Mergulhar a tira no sorvete", "Quebrar uma fry para mostrar o centro", "Erguer uma tira com calda ou sorvete"],
+      ["A quebra revela miolo macio", "O mergulho cobre apenas a ponta", "Caixinha abre e revela volume"],
+      ["Sorvete forma um pico ao levantar", "Calda pinga da ponta", "Chocolate do interior amolece na quebra"]
+    ],
+    visual: [
+      ["Caixinha cheia e tiras altas", "Pote de sorvete encostado, não escondido", "Mais de um tamanho de chunk visível"],
+      ["Exterior assado + miolo macio", "Sorvete liso + fries rústicas", "Açúcar ou crumble só onde cria leitura"],
+      ["Embalagem marcante + cookie dourado + sorvete branco", "Calda escura cria linhas", "Evitar cobrir todas as tiras da mesma cor"],
+      ["Silhueta de batata frita é o ícone", "Chunk de chocolate entrega que é cookie", "Uma fry mergulhada explica o uso"],
+      ["Comprimentos ligeiramente diferentes", "Bordas de corte visíveis", "Migalhas na caixinha"]
+    ],
+    taste: [
+      ["Cookie amanteigado e levemente salgado", "Sorvete de creme com baixa doçura", "Molho opcional de sabor direto"],
+      ["Doce + sal", "Chocolate + creme", "Opção de molho ácido para quebrar a gordura"],
+      ["Fry firme para mergulhar sem quebrar", "Centro ainda macio", "Sorvete cremoso e frio"],
+      ["Tiras finas para controlar a porção", "Um só sorvete e no máximo um molho", "Evitar açúcar extra na superfície"],
+      ["Cada tira funciona como uma nova mordida", "O pote de sorvete dura até a última", "Produto compartilhável sem cansar"]
+    ],
+    cena: "Uma Cookie Fry mergulha, gira e sobe com um pico de sorvete; outra mão quebra uma tira ao fundo."
+  },
+  {
+    id: "panelinha", nome: "Panelinha",
+    base: "Cookie assado e servido quente na panelinha com sorvete e fruta. É o encontro mais teatral entre forno e mesa.",
+    direcao: "Criar uma superfície que se rompe e revela um centro quente, enquanto o sorvete começa a derreter.",
+    performance: [
+      ["Romper o centro com a colher", "Colocar a bola sobre o cookie saindo do forno", "Puxar uma colherada funda"],
+      ["Casquinha abre e mostra o recheio", "Colher revela o fundo cremoso", "Fruta aparece entre massa e sorvete"],
+      ["Recheio quente escorre", "Sorvete derrete no centro", "Ganache se espalha ao pressionar"]
+    ],
+    visual: [
+      ["Panelinha preenchida até perto da borda", "Uma bola central com altura", "Recheio visível em rachaduras"],
+      ["Crosta assada + centro cremoso", "Sorvete liso + massa rústica", "Fruta fresca + chocolate"],
+      ["Recipiente escuro destaca massa e sorvete", "Fruta dá o ponto de cor", "Calda cria profundidade"],
+      ["Fruta ou castanha identifica o sabor", "Panelinha é a silhueta própria", "Cookie deve continuar legível"],
+      ["Rachadura central real", "Borda assada irregular", "Sorvete já começando a ceder"]
+    ],
+    taste: [
+      ["Massa de cookie bem assada na borda", "Centro de sabor concentrado", "Sorvete simples refresca"],
+      ["Doce + sal", "Chocolate + fruta ácida", "Quente intenso + sorvete lácteo"],
+      ["Crosta + miolo macio", "Quente + gelado", "Fruta firme + creme"],
+      ["Panelinha rasa para não virar excesso de massa", "Calda localizada", "Acidez obrigatória nas versões mais doces"],
+      ["Colheradas mantêm contraste até o fundo", "Não sobra uma poça doce no final", "Porção boa para dividir ou terminar"]
+    ],
+    cena: "A colher rompe a crosta; o recheio aparece e encontra o sorvete que derrete em direção ao centro."
+  },
+  {
+    id: "casquinha", nome: "Casquinha de sorvete de cookie",
+    base: "Sorvete servido em uma casquinha feita de cookie. A casquinha não é embalagem: ela é metade da experiência.",
+    direcao: "Fazer a borda de cookie, o sorvete e o acabamento do sabor serem lidos em uma única silhueta.",
+    performance: [
+      ["Preencher a casquinha com o sorvete", "Mergulhar a borda em chocolate", "Quebrar a ponta no final"],
+      ["A mordida revela a espessura da casquinha", "A ponta pode guardar um núcleo de chocolate", "Corte lateral mostra sorvete dentro do cookie"],
+      ["Chocolate do banho escorre antes de firmar", "Sorvete desce pelas bordas", "Núcleo da ponta aparece cremoso"]
+    ],
+    visual: [
+      ["Casquinha espessa o bastante para parecer cookie", "Sorvete alto e volumoso", "Acabamento concentrado na borda"],
+      ["Cookie rústico + sorvete liso", "Borda crocante + centro frio", "Chunks incorporados na casquinha"],
+      ["Massa dourada enquadra sorvete claro", "Cobertura escura separa as áreas", "Ingrediente do sabor dá o acento"],
+      ["A silhueta cone-cookie é o próprio ícone", "Topo identifica o sabor", "Borda mostra chunks de verdade"],
+      ["Borda artesanal", "Formato não perfeitamente simétrico", "Gotas firmadas organicamente"]
+    ],
+    taste: [
+      ["Casquinha com sabor real de cookie", "Sorvete não muito doce", "Ponta de chocolate fecha a experiência"],
+      ["Massa salgada + sorvete doce", "Chocolate amargo na borda", "Fruta ácida nos sabores brancos"],
+      ["Casquinha crocante sem ficar dura", "Sorvete cremoso", "Chunks pequenos para a mordida não quebrar tudo"],
+      ["Espessura suficiente para segurar, não para pesar", "Cobertura só na borda", "Quantidade de sorvete proporcional"],
+      ["A casquinha fica melhor conforme o sorvete amolece", "Última mordida tem recheio na ponta", "Não sobra uma base seca"]
+    ],
+    cena: "A casquinha recebe o sorvete, gira no chocolate e termina com uma mordida que revela a parede de cookie."
+  },
+  {
+    id: "cookie-palito", nome: "Cookie no palito",
+    base: "Cookie no formato de pop, coberto por uma casquinha fina de chocolate. Precisa ser imediatamente reconhecido como cookie, não como pirulito comum.",
+    direcao: "Usar o estalo da cobertura e a revelação do cookie como assinatura de conteúdo.",
+    performance: [
+      ["Mergulhar o cookie na cobertura", "Bater levemente para a casquinha estalar", "Morder de lado segurando pelo palito"],
+      ["Cobertura quebra e revela cookie + recheio", "Corte mostra as três camadas", "Um lado decorado esconde o centro"],
+      ["Chocolate escorre no banho", "Recheio aparece na mordida", "Fios finos de cobertura cruzam a superfície"]
+    ],
+    visual: [
+      ["Cookie espesso no palito", "Cobertura com volume só onde importa", "Pedaços grandes identificam o sabor"],
+      ["Casca lisa + lateral rústica", "Cookie macio + cobertura crocante", "Decoração com relevo"],
+      ["Cobertura cria alto contraste com a massa", "Duas cores no máximo", "Palito e embalagem não competem"],
+      ["Meio cookie aparente ou mordido", "Ingrediente aplicado em uma faixa", "Formato redondo reconhecível"],
+      ["Banho não perfeitamente reto", "Bordas de cookie expostas", "Topping distribuído de forma orgânica"]
+    ],
+    taste: [
+      ["Cookie protagonista", "Cobertura fina e de chocolate real", "Recheio pequeno, porém perceptível"],
+      ["Chocolate amargo + massa doce", "Sal na massa", "Fruta liofilizada ou castanha em versões específicas"],
+      ["Estalo da casquinha + cookie macio", "Chunk crocante + recheio cremoso", "Palito não atrapalha a mordida"],
+      ["Evitar cobertura grossa e cerosa", "Uma camada de recheio, não várias", "Tamanho de lanche, não sobremesa gigante"],
+      ["Cada mordida preserva cobertura e cookie", "O final não fica só massa seca", "Doçura convida a terminar"]
+    ],
+    cena: "O cookie sai do banho de chocolate; depois, uma mordida faz a casquinha estalar e revela o centro."
+  },
+  {
+    id: "cookie-felicidade", nome: "Cookie da Felicidade",
+    base: "Pote em camadas inspirado no Pote da Felicidade, mas com leitura inequívoca de Holy Cookie. O pote precisa ter uma arquitetura, não uma mistura aleatória.",
+    direcao: "Desenhar camadas largas e legíveis para que a colher cruze todas elas em um único movimento.",
+    performance: [
+      ["Afundar a colher verticalmente", "Puxar uma colherada com todas as camadas", "Finalizar derramando a última camada"],
+      ["Colher abre um túnel no pote", "Lateral transparente revela a sequência", "Centro escondido aparece na primeira colherada"],
+      ["Creme desce entre pedaços de cookie", "Ganache se espalha", "Calda forma fios ao levantar a colher"]
+    ],
+    visual: [
+      ["Camadas largas, não muitas camadas finas", "Chunks grandes encostados na parede", "Topo alto e finalizado"],
+      ["Cookie quebrado + creme liso", "Ganache densa + farofa crocante", "Fruta fresca quando houver"],
+      ["Três tons bem separados", "Pote transparente obrigatório", "Cor do ingrediente corta os marrons e cremes"],
+      ["Um mini-cookie ou pedaço grande no topo", "Ingrediente principal encostado na parede", "Camadas funcionam como legenda"],
+      ["Creme levemente irregular", "Pedaços em tamanhos diferentes", "Topo com movimento, sem roseta industrial"]
+    ],
+    taste: [
+      ["Creme base menos doce", "Cookie mantém sabor e estrutura", "Uma camada concentra o sabor prometido"],
+      ["Doce + ácido com fruta", "Chocolate + sal", "Creme lácteo reduz a intensidade da ganache"],
+      ["Cremoso + crocante", "Massa macia + chunks", "Camadas com densidades diferentes"],
+      ["Máximo de quatro componentes", "Creme funciona como respiro", "Pote menor e cheio em vez de grande e excessivo"],
+      ["Proporção permite pegar tudo em cada colherada", "Última camada não é só creme", "Sabor evolui sem cansar"]
+    ],
+    cena: "A colher atravessa o topo e sobe mostrando cookie, creme e ganache enquanto um fio volta ao pote."
+  },
+  {
+    id: "torta-quente", nome: "Torta quente",
+    base: "Fatia alta de massa de cookie servida quente, em três sabores. Precisa parecer uma torta própria, não apenas um cookie grande cortado.",
+    direcao: "Construir um centro que se revela no corte e um topo que identifica o sabor antes da explicação.",
+    performance: [
+      ["Cortar a fatia ainda quente", "Pressionar o centro com a colher", "Servir a fatia e derramar acabamento"],
+      ["Corte revela núcleo ou camadas", "Topo se rompe e mostra o interior", "Uma colherada revela base, centro e cobertura"],
+      ["Centro cremoso escorre lentamente", "Chocolate dos chunks amolece", "Calda quente corre pela lateral"]
+    ],
+    visual: [
+      ["Fatia alta e pesada visualmente", "Centro aparente no corte", "Topo com ingrediente em quantidade"],
+      ["Borda assada + miolo úmido", "Chunks + creme", "Topo crocante + centro macio"],
+      ["Cada sabor recebe uma cor de assinatura", "Lateral cortada precisa ter contraste", "Prato claro destaca a massa"],
+      ["Ingrediente do sabor no topo e no corte", "Fatia triangular comunica torta", "Um pedaço quebrado mostra a massa"],
+      ["Topo rachado", "Borda irregular", "Recheio não perfeitamente centralizado"]
+    ],
+    taste: [
+      ["Massa amanteigada com sabor próprio", "Recheio claro e direto", "Cobertura complementa, não repete"],
+      ["Doce + sal", "Chocolate + fruta", "Castanha tostada contra creme"],
+      ["Borda firme + centro macio", "Chunk crocante + recheio", "Opcional quente + gelado"],
+      ["Fatia mais baixa se houver sorvete", "Núcleo concentrado em vez de rechear tudo", "Acidez em pelo menos um dos sabores"],
+      ["Segunda garfada ainda tem contraste", "A borda não fica seca", "Tamanho permite comer sem dividir"]
+    ],
+    cena: "A faca atravessa a fatia quente; ao separar, o núcleo aparece e desce lentamente pela lateral."
+  },
+  {
+    id: "torta-gelada", nome: "Torta gelada",
+    base: "Torta em camadas com brownie, creme de fruta e ganache meio amarga. A fruta verdadeira aparece na superfície e orienta o sabor.",
+    direcao: "Tratar o corte limpo das camadas como o principal reveal e deixar a fruta romper a paleta de chocolate.",
+    performance: [
+      ["Cortar uma fatia bem gelada", "Levantar uma garfada atravessando as camadas", "Derramar uma camada fina de ganache"],
+      ["O corte revela três faixas nítidas", "Interior contrasta com o topo escuro", "Fruta aparece no centro, não só decorando"],
+      ["Ganache cede lentamente", "Creme de fruta acompanha a garfada", "Calda da fruta escorre de forma curta"]
+    ],
+    visual: [
+      ["Camadas espessas e fáceis de ler", "Fatia alta", "Fruta em pedaços reais no topo"],
+      ["Brownie denso + creme liso + ganache", "Fruta úmida + topo firme", "Corte limpo com pequenas imperfeições"],
+      ["Chocolate escuro + creme claro + cor viva da fruta", "Lateral é a foto principal", "Prato neutro"],
+      ["A fruta funciona como legenda", "Uma meia fruta ou polpa identifica sem texto", "Brownie visível preserva a Holy Cookie"],
+      ["Ganache com onda de espátula", "Fruta distribuída organicamente", "Borda do brownie real"]
+    ],
+    taste: [
+      ["Brownie intenso", "Creme com fruta de verdade", "Ganache meio amarga"],
+      ["Chocolate + acidez", "Doce + leve amargor", "Fruta perfumada + base amanteigada"],
+      ["Brownie denso + creme aerado", "Ganache firme + fruta", "Gelada sem estar congelada demais"],
+      ["Creme de fruta é o respiro", "Ganache mais fina que a base", "Fatia estreita e alta"],
+      ["A acidez limpa cada garfada", "Todas as camadas chegam até o final", "Final de chocolate não pesa"]
+    ],
+    cena: "A faca libera uma fatia e a lateral revela brownie, creme claro com fruta e ganache escura."
+  },
+  {
+    id: "frozen", nome: "Frozen de maracujá com manga",
+    base: "Frozen tropical que aproveita o processo já existente da loja. Maracujá traz acidez; manga dá corpo, cor e doçura natural.",
+    direcao: "Fazer o encontro do amarelo da manga com a polpa do maracujá virar o ícone visual do produto.",
+    performance: [
+      ["Servir o frozen em espiral", "Derramar a polpa por cima", "Misturar manga e maracujá diante da câmera"],
+      ["A colher abre o swirl e mostra duas cores", "Polpa aparece entre as voltas", "Copo transparente revela marmorização"],
+      ["Polpa escorre pelas curvas", "Frozen dobra ao sair da máquina", "Calda de fruta se espalha lentamente"]
+    ],
+    visual: [
+      ["Espiral alta acima do copo", "Polpa visível em mais de um ponto", "Copo cheio sem perder a forma"],
+      ["Frozen liso + sementes crocantes", "Polpa líquida + creme firme", "Cubinhos de manga opcionais"],
+      ["Amarelo manga + amarelo ácido + sementes pretas", "Copo transparente", "Evitar coberturas marrons que apagam o tropical"],
+      ["Sementes de maracujá são a legenda", "Fatia ou cubo de manga confirma o segundo sabor", "Swirl é a silhueta"],
+      ["Espiral orgânica", "Polpa cai de modo diferente em cada copo", "Começo de derretimento comunica cremosidade"]
+    ],
+    taste: [
+      ["Maracujá evidente primeiro", "Manga arredonda o final", "Base láctea leve, se houver"],
+      ["Doce da manga + ácido do maracujá", "Cremoso + frutado", "Pitada mínima de sal pode ampliar a fruta"],
+      ["Frozen cremoso + sementes", "Calda fluida + corpo gelado", "Cubos pequenos se não travarem o canudo"],
+      ["Acidez suficiente para refrescar", "Pouca calda adicionada", "Copo menor se a base for muito cremosa"],
+      ["Cada colherada limpa a anterior", "Polpa distribuída até o fundo", "Final refrescante, não açucarado"]
+    ],
+    cena: "O frozen sobe em espiral; a polpa de maracujá cai pelas curvas e revela o amarelo da manga sob as sementes."
+  }
+];
+
+let abaAtual = (location.hash || "#briefing").slice(1).split("/")[0];
+if (!["briefing", "produtos"].includes(abaAtual)) abaAtual = "briefing";
+let produtoAtual = (location.hash.split("/")[1] || PRODUTOS[0].id);
+if (!PRODUTOS.some(p => p.id === produtoAtual)) produtoAtual = PRODUTOS[0].id;
+const panel = document.getElementById("panel");
+document.getElementById("product-count").textContent = "· " + PRODUTOS.length;
+
+function h(tag, cls, text) {
+  const node = document.createElement(tag);
+  if (cls) node.className = cls;
+  if (text != null) node.textContent = text;
+  return node;
+}
+
+function renderBriefing() {
+  const frag = document.createDocumentFragment();
+  const intro = h("section", "intro");
+  intro.append(h("span", "kicker", "Briefing de desenvolvimento"));
+  intro.append(h("h2", null, "Não criar apenas produtos gostosos. Criar produtos que chamam atenção, geram desejo e geram recompra."));
+  intro.append(h("p", null, "A prioridade atual é atenção: antes de desejar ou experimentar a Holy Cookie, a pessoa precisa descobrir que ela existe. Por isso, a ordem de desenvolvimento começa pelo que faz parar, passa pelo que faz querer e termina no que faz voltar."));
+  frag.append(intro);
+
+  const manifesto = h("div", "manifesto");
+  DIMENSOES.forEach((d, i) => {
+    const card = h("article", "manifesto-card"); card.dataset.n = String(i + 1);
+    card.append(h("div", "emoji", d.icon)); card.append(h("h3", null, d.nome)); card.append(h("strong", null, d.promessa));
+    card.append(h("p", null, i === 0 ? "A interação cria uma cena que interrompe o scroll." : i === 1 ? "Parado, o produto vende pela imagem." : "A experiência sustenta a segunda mordida e a próxima compra."));
+    manifesto.append(card);
+  });
+  frag.append(manifesto);
+
+  const briefing = [
+    { n: "01", title: "Performático — Atenção", question: "Quando interagimos com esse produto, acontece alguma coisa que dá vontade de assistir?", test: "Qual é o vídeo de 3–5 segundos desse produto?", els: [["Ação", "Quebrar, cortar, puxar, apertar, mergulhar, derramar, colher, montar ou morder."], ["Reveal — Revelação", "A ação expõe algo antes escondido. Expectativa antes; recompensa depois."], ["Gooey", "Algo escorre, derrete, estica, pinga, puxa, transborda ou se espalha."]] },
+    { n: "02", title: "Visual — Desejo", question: "Agora que a pessoa está olhando, ela quer comer?", test: "Se ninguém puder tocar e eu tiver apenas uma foto, ele vende?", els: [["Generosidade", "Abundância: recheio aparente, chunks, camadas, altura e volume."], ["Textura visual", "O olhar antecipa crocância, maciez, cremosidade e temperatura."], ["Cor e contraste", "Os componentes se separam; o produto não fica visualmente chapado."], ["Ícone", "O ingrediente principal aparece como uma legenda comestível."], ["Imperfeição controlada", "Rachaduras, migalhas e irregularidades intencionais comunicam artesanalidade."]] },
+    { n: "03", title: "Gustativo — Recompra", question: "Depois da primeira mordida, eu quero a segunda? Depois de terminar, compraria novamente?", test: "O prazer continua até o fim, sem cansar?", els: [["Sabor", "É realmente gostoso e a promessa é percebida com clareza."], ["Contraste", "Doce, salgado, ácido, amargo e gordura se complementam."], ["Textura na boca", "Crocante, cremoso, macio, quente e gelado criam ritmo."], ["Equilíbrio", "Não é doce, pesado, gorduroso, seco ou enjoativo demais."], ["Repetição", "A experiência convida à próxima mordida e à próxima compra."]] }
+  ];
+  briefing.forEach(b => {
+    const sec = h("section", "brief-section");
+    const head = h("div", "brief-head"); head.append(h("span", "brief-num", b.n)); head.append(h("h3", null, b.title)); sec.append(head);
+    sec.append(h("div", "brief-question", "“" + b.question + "”"));
+    const grid = h("div", "element-grid");
+    b.els.forEach(e => { const item = h("article", "element"); item.append(h("h4", null, e[0])); item.append(h("p", null, e[1])); grid.append(item); });
+    sec.append(grid); const test = h("p", "test"); test.innerHTML = "<b>Teste:</b> “" + b.test + "”"; sec.append(test); frag.append(sec);
+  });
+  const principio = h("section", "principio");
+  principio.append(h("span", "label", "Princípio de desenvolvimento")); principio.append(h("h3", null, "Não pensar apenas no sabor. Pensar na experiência."));
+  const troca = h("p", "troca"); troca.innerHTML = "<s>Qual sabor queremos lançar?</s> &nbsp;→&nbsp; <strong>Que experiência queremos criar?</strong>"; principio.append(troca); frag.append(principio);
+  panel.replaceChildren(frag);
+}
+
+function dimensionCard(d, groups, scene) {
+  const card = h("section", "dimension");
+  const head = h("div", "dimension-head"); head.append(h("div", "dimension-icon", d.icon));
+  const txt = h("div"); txt.append(h("h3", null, d.nome + " — " + d.promessa)); txt.append(h("p", null, d.elementos.join(" · "))); head.append(txt); card.append(head);
+  const ideas = h("div", "ideas");
+  d.elementos.forEach((elemento, i) => {
+    const idea = h("div", "idea"); idea.append(h("h4", null, elemento)); const ul = h("ul"); (groups[i] || []).forEach(x => ul.append(h("li", null, x))); idea.append(ul); ideas.append(idea);
+  });
+  card.append(ideas);
+  if (scene) { const s = h("p", "scene"); s.innerHTML = "<b>Vídeo de 3–5 segundos:</b> " + scene; card.append(s); }
+  return card;
+}
+
+function storageKey(id) { return "hc-produto-desejavel:" + id; }
+function saved(id) { try { return JSON.parse(localStorage.getItem(storageKey(id))) || {}; } catch { return {}; } }
+function saveEvaluation(produto, wrap) {
+  const data = { notes: wrap.querySelector("textarea").value };
+  wrap.querySelectorAll("select").forEach(s => data[s.dataset.dim] = s.value);
+  localStorage.setItem(storageKey(produto.id), JSON.stringify(data));
+  const state = wrap.querySelector(".save-state"); state.textContent = "Salvo neste navegador";
+  clearTimeout(saveEvaluation._t); saveEvaluation._t = setTimeout(() => state.textContent = "", 1800);
+}
+
+function evaluation(produto) {
+  const data = saved(produto.id), box = h("section", "evaluation");
+  const head = h("div", "evaluation-head"); const title = h("div"); title.append(h("span", "label", "Ficha de avaliação")); title.append(h("h3", null, "O que sobrevive ao teste?")); head.append(title); head.append(h("p", null, "1 = fraco · 5 = excepcional")); box.append(head);
+  const grid = h("div", "score-grid");
+  DIMENSOES.forEach(d => {
+    const card = h("div", "score-card"); const label = h("label", null, d.icon + " " + d.nome + " — " + d.promessa); label.htmlFor = "score-" + d.id; card.append(label);
+    const select = h("select"); select.id = "score-" + d.id; select.dataset.dim = d.id;
+    [["", "Ainda não avaliado"], ["1", "1 · Fraco"], ["2", "2 · Precisa mudar"], ["3", "3 · Promissor"], ["4", "4 · Forte"], ["5", "5 · Excepcional"]].forEach(o => { const opt = h("option", null, o[1]); opt.value = o[0]; select.append(opt); });
+    select.value = data[d.id] || ""; card.append(select); grid.append(card);
+  });
+  box.append(grid);
+  const notes = h("div", "notes"); const label = h("label", null, "Decisões, alterações e próximos testes"); label.htmlFor = "product-notes"; notes.append(label);
+  const textarea = h("textarea"); textarea.id = "product-notes"; textarea.placeholder = "Ex.: manter o reveal, reduzir a calda, testar a versão com maracujá…"; textarea.value = data.notes || ""; notes.append(textarea); box.append(notes);
+  box.append(h("div", "save-state")); box.addEventListener("input", () => saveEvaluation(produto, box)); box.addEventListener("change", () => saveEvaluation(produto, box));
+  return box;
+}
+
+function renderProdutos() {
+  const p = PRODUTOS.find(x => x.id === produtoAtual) || PRODUTOS[0];
+  const layout = h("div", "product-layout"); const nav = h("nav", "product-tabs"); nav.setAttribute("aria-label", "Produtos");
+  PRODUTOS.forEach((produto, i) => {
+    const btn = h("button", "product-tab" + (produto.id === p.id ? " on" : "")); btn.type = "button"; btn.append(h("span", "n", String(i + 1).padStart(2, "0"))); btn.append(h("span", null, produto.nome));
+    btn.addEventListener("click", () => { produtoAtual = produto.id; history.replaceState(null, "", "#produtos/" + produtoAtual); renderProdutos(); window.scrollTo({ top: 0, behavior: "instant" }); }); nav.append(btn);
+  });
+  layout.append(nav);
+  const content = h("article", "product-content"); const hero = h("header", "product-hero"); const title = h("div"); title.append(h("span", "label", "Produto " + String(PRODUTOS.indexOf(p) + 1).padStart(2, "0") + " de " + PRODUTOS.length)); title.append(h("h2", null, p.nome)); title.append(h("p", "base", p.base)); hero.append(title);
+  const direction = h("aside", "direction"); direction.append(h("span", null, "Direção sugerida")); direction.append(h("p", null, p.direcao)); hero.append(direction); content.append(hero);
+  const dims = h("div", "dimensions"); dims.append(dimensionCard(DIMENSOES[0], p.performance, p.cena)); dims.append(dimensionCard(DIMENSOES[1], p.visual)); dims.append(dimensionCard(DIMENSOES[2], p.taste)); content.append(dims); content.append(evaluation(p)); layout.append(content); panel.replaceChildren(layout);
+}
+
+function redraw() {
+  document.querySelectorAll(".tab").forEach(b => b.classList.toggle("on", b.dataset.panel === abaAtual));
+  if (abaAtual === "briefing") renderBriefing(); else renderProdutos();
+}
+document.querySelectorAll(".tab").forEach(btn => btn.addEventListener("click", () => {
+  abaAtual = btn.dataset.panel; history.replaceState(null, "", abaAtual === "produtos" ? "#produtos/" + produtoAtual : "#briefing"); redraw(); window.scrollTo({ top: 0, behavior: "instant" });
+}));
+window.addEventListener("hashchange", () => { const [tab, product] = location.hash.slice(1).split("/"); if (["briefing", "produtos"].includes(tab)) abaAtual = tab; if (PRODUTOS.some(p => p.id === product)) produtoAtual = product; redraw(); });
+redraw();
+</script>
+</body>
+</html>
