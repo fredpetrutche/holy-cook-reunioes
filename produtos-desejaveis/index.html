@@ -39,6 +39,7 @@
   .brief-head h3 { font: 600 22px var(--font-display); }
   .brief-question { margin: 16px 0; padding: 14px 16px; border-left: 3px solid var(--accent); background: var(--accent-soft); color: var(--accent-ink); font-weight: 650; }
   .element-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(205px, 1fr)); gap: 10px; }
+  .element-grid.six { grid-template-columns: repeat(3, 1fr); }
   .element { border: 1px solid var(--line); border-radius: 10px; padding: 15px; background: var(--surface); }
   .element h4 { font: 600 16px var(--font-display); }
   .element p { margin-top: 5px; color: var(--ink-2); font-size: 12.8px; }
@@ -97,6 +98,7 @@
     .product-tab { min-width: 175px; scroll-snap-align: start; }
     .product-hero { grid-template-columns: 1fr; }
     .ideas, .score-grid { grid-template-columns: 1fr; }
+    .element-grid.six { grid-template-columns: repeat(auto-fit, minmax(205px, 1fr)); }
     .idea { border-right: 0; border-bottom: 1px solid var(--line); }
     .idea:last-child { border-bottom: 0; }
   }
@@ -432,13 +434,13 @@ function renderBriefing() {
   const briefing = [
     { n: "01", title: "Performático — Atenção", question: "Quando interagimos com esse produto, acontece alguma coisa que dá vontade de assistir?", test: "Qual é o vídeo de 3–5 segundos desse produto?", els: [["Ação", "Quebrar, cortar, puxar, apertar, mergulhar, derramar, colher, montar ou morder."], ["Reveal — Revelação", "A ação expõe algo antes escondido. Expectativa antes; recompensa depois."], ["Gooey", "Algo escorre, derrete, estica, pinga, puxa, transborda ou se espalha."]] },
     { n: "02", title: "Visual — Desejo", question: "Agora que a pessoa está olhando, ela quer comer?", test: "Se ninguém puder tocar e eu tiver apenas uma foto, ele vende?", els: [["Generosidade", "Abundância: recheio aparente, chunks, camadas, altura e volume."], ["Textura visual", "O olhar antecipa crocância, maciez, cremosidade e temperatura."], ["Cor e contraste", "Os componentes se separam; o produto não fica visualmente chapado."], ["Ícone", "O ingrediente principal aparece como uma legenda comestível."], ["Imperfeição controlada", "Rachaduras, migalhas e irregularidades intencionais comunicam artesanalidade."]] },
-    { n: "03", title: "Gustativo — Recompra", question: "Depois da primeira mordida, eu quero a segunda? Depois de terminar, compraria novamente?", test: "O prazer continua até o fim, sem cansar?", els: [["Sabor", "É realmente gostoso e a promessa é percebida com clareza."], ["Contraste", "Doce, salgado, ácido, amargo e gordura se complementam."], ["Textura na boca", "Crocante, cremoso, macio, quente e gelado criam ritmo."], ["Equilíbrio", "Não é doce, pesado, gorduroso, seco ou enjoativo demais."], ["Repetição", "A experiência convida à próxima mordida e à próxima compra."]] }
+    { n: "03", title: "Gustativo — Recomprar e compartilhar", question: "Depois da primeira mordida, eu quero a segunda? Depois de terminar, compraria novamente e faria alguém experimentar?", test: "O prazer continua até o fim e é bom demais para guardar só para si?", els: [["Sabor", "É realmente gostoso e a promessa é percebida com clareza."], ["Contraste", "Doce, salgado, ácido, amargo e gordura se complementam."], ["Textura na boca", "Crocante, cremoso, macio, quente e gelado criam ritmo."], ["Equilíbrio", "Não é doce, pesado, gorduroso, seco ou enjoativo demais."], ["Repetição", "A experiência convida à próxima mordida e à próxima compra."], ["Compartilhar", "É tão marcante que dá vontade de fazer outra pessoa experimentar."]] }
   ];
   briefing.forEach(b => {
     const sec = h("section", "brief-section");
     const head = h("div", "brief-head"); head.append(h("span", "brief-num", b.n)); head.append(h("h3", null, b.title)); sec.append(head);
     sec.append(h("div", "brief-question", "“" + b.question + "”"));
-    const grid = h("div", "element-grid");
+    const grid = h("div", "element-grid" + (b.n === "03" ? " six" : ""));
     b.els.forEach(e => { const item = h("article", "element"); item.append(h("h4", null, e[0])); item.append(h("p", null, e[1])); grid.append(item); });
     sec.append(grid); const test = h("p", "test"); test.innerHTML = "<b>Teste:</b> “" + b.test + "”"; sec.append(test); frag.append(sec);
   });
