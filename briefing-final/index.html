@@ -104,7 +104,7 @@
   .paraiso p { margin: 8px auto 0; max-width: 52ch; color: var(--ink-2); font-size: 14px; }
 
   /* ── 7. produtos ── */
-  .grade { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 22px; }
+  .grade { display: grid; gap: 12px; margin-top: 22px; }
   .prod { display: grid; grid-template-columns: 116px minmax(0, 1fr); gap: 18px; border: 1px solid var(--line); border-radius: 14px; padding: 18px; background: var(--surface); box-shadow: var(--shadow-1); }
   .prod.sem-foto { grid-template-columns: minmax(0, 1fr); }
   .prod .foto { position: relative; aspect-ratio: 1; border-radius: 10px; overflow: hidden; background: var(--surface-2); }
@@ -115,20 +115,28 @@
   .prod .base { margin-top: 4px; color: var(--ink-2); font-size: 13.5px; line-height: 1.5; }
   .prod .ref { display: inline-block; margin-top: 8px; color: var(--accent); font-size: 12.5px; font-weight: 650; text-decoration: none; }
   .prod .ref:hover { text-decoration: underline; }
-  .melhores { margin-top: 15px; border-radius: 11px; padding: 14px 16px; background: var(--accent-soft); }
-  .melhores b { display: block; margin-bottom: 8px; color: var(--accent-ink); font: 10.5px var(--font-mono); letter-spacing: .1em; text-transform: uppercase; }
-  .melhores ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 7px; }
-  .melhores li { display: grid; grid-template-columns: 15px 1fr; gap: 6px; color: var(--accent-ink); font-size: 14px; font-weight: 600; line-height: 1.45; }
-  .melhores li::before { content: "→"; opacity: .6; }
-  .outras { margin-top: 12px; }
-  .outras b { display: block; margin-bottom: 6px; color: var(--ink-3); font: 10.5px var(--font-mono); letter-spacing: .1em; text-transform: uppercase; }
-  .outras p { color: var(--ink-2); font-size: 13px; line-height: 1.6; }
+  .perf { display: flex; flex-wrap: wrap; gap: 9px; align-items: center; margin-top: 14px; padding-top: 13px; border-top: 1px solid var(--line); }
+  .perf .medidor { display: flex; gap: 3px; width: 54px; }
+  .perf .medidor i { flex: 1; height: 5px; border-radius: 100px; background: var(--surface-2); }
+  .perf .medidor i.on { background: var(--accent); }
+  .perf .medidor i.meio { background: var(--accent); opacity: .35; }
+  .perf-rot { font: 10.5px var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
+  .perf strong { color: var(--accent); font-size: 13.5px; font-weight: 700; }
+  .perf.vazia .perf-rot, .perf.vazia strong { color: var(--ink-3); font-weight: 600; }
+
+  .acontece { margin-top: 13px; border-radius: 11px; padding: 14px 16px; background: var(--accent-soft); }
+  .acontece b { display: block; margin-bottom: 8px; color: var(--accent-ink); font: 10.5px var(--font-mono); letter-spacing: .1em; text-transform: uppercase; }
+  .acontece ul, .acontece ol { margin: 0; padding: 0; list-style: none; counter-reset: passo; display: grid; gap: 7px; }
+  .acontece li { display: grid; grid-template-columns: 16px 1fr; gap: 7px; color: var(--accent-ink); font-size: 14px; font-weight: 600; line-height: 1.45; }
+  .acontece ul li::before { content: "→"; opacity: .55; }
+  .acontece ol li { counter-increment: passo; }
+  .acontece ol li::before { content: counter(passo); font: 700 10.5px/1.55 var(--font-mono); opacity: .6; }
+  .obs-prod { margin-top: 11px; color: var(--ink-2); font-size: 12.8px; line-height: 1.55; font-style: italic; }
 
   .footnote { margin-top: 60px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--ink-3); font-size: 11.5px; text-align: center; }
 
   @media (max-width: 760px) {
     .funil, .versus, .escala, .legenda, .saidas { grid-template-columns: 1fr; }
-    .grade { grid-template-columns: 1fr; }
     .prod { grid-template-columns: 84px minmax(0, 1fr); gap: 14px; }
     .barra { grid-template-columns: 96px minmax(0, 1fr) auto; }
   }
@@ -351,58 +359,120 @@ const PRODUTOS = [
     base: "Dois cookies com uma camada alta de sorvete no meio.",
     foto: "ice-cookie.jpg",
     ref: "https://www.instagram.com/reel/DbwEaSOMMbh/",
+    nota: "leve",
+    acontece: [
+      "Embalagem de alumínio que parece grande e, ao abrir, revela o Ice Cookie com três camadas: cookie, sorvete e pedaços de chocolate",
+      "Casquinha fina de chocolate que estala na mordida",
+      "Um núcleo escondido no centro do sorvete: ganache, caramelo ou creme de pistache"
+    ],
+    obs: "Nenhuma das três é uma transformação antes e depois. Este é o produto que mais precisa de ideia performática — se você tiver uma, é aqui que ela vale mais."
   },
   {
     n: "02", nome: "Cookie com sorvete",
     base: "Cookie quente servido no pote com sorvete.",
     foto: "cookie-sorvete.jpg",
     ref: "https://www.instagram.com/reels/DairYfHKOg5/",
+    nota: "mediana",
+    sequencia: true,
+    acontece: [
+      "A pessoa abre o pote e o cookie está em cima, separado do sorvete por um papel manteiga",
+      "Tira o cookie, tira o papel e esquenta dez segundos no micro-ondas",
+      "Coloca o cookie quente de volta sobre o sorvete"
+    ],
+    obs: "Quem faz a performance é o cliente, e ela funciona igual no delivery."
   },
   {
     n: "03", nome: "Cookie fries + sorvete",
     base: "Tiras de cookie assadas como fritas, com sorvete para mergulhar.",
     foto: "cookie-fries.jpg",
     ref: "https://www.instagram.com/p/DScWHVnD2z8/",
+    nota: "forte",
+    acontece: [
+      "A caixinha vermelha de batata frita e o sorvete de creme, para a pessoa reconhecer o McDonald\u2019s de imediato",
+      "Derramar o sorvete ou a calda por cima das tiras, como as batatarias fazem com cheddar e bacon",
+      "Mergulhar a tira, com um recipiente próprio de calda ou sorvete para o mergulho"
+    ],
+    obs: "Forte não pela transformação, e sim pelo reconhecimento: parece a batata frita do McDonald\u2019s com o sorvete do McDonald\u2019s. Falta decidir se a calda vai por cima ou fica para mergulhar."
   },
   {
     n: "04", nome: "Panelinha",
     base: "Cookie assado e servido quente na panelinha, com sorvete e fruta.",
     foto: "panelinha.jpg",
     ref: "https://www.instagram.com/reel/DbDmYEyu2XU/",
+    nota: "mediana",
+    acontece: [
+      "A crosta dura que a colher raspa, com som de craquelar",
+      "Uma calda por cima, depois da raspagem",
+      "A colher entra e o pedaço sai molhadinho por dentro"
+    ]
   },
   {
     n: "05", nome: "Casquinha de sorvete de cookie",
     base: "Sorvete dentro de uma casquinha feita de cookie.",
     foto: "casquinha.jpg",
     ref: "https://www.instagram.com/reel/Dav43gPyvfI/",
+    nota: "mediana",
+    acontece: [
+      "A máquina soft fazendo o giro do sorvete dentro da casquinha",
+      "Se for bola, uma calda por cima para escorrer pela borda",
+      "Mergulhar a casquinha de cookie na calda antes de encher"
+    ],
+    obs: "Mediana hoje. Vira forte se for sorvete de máquina soft em vez de bola — é a decisão que mais muda este produto."
   },
   {
     n: "06", nome: "Cookie no palito",
     base: "Cookie no palito com casquinha de chocolate.",
     foto: "cookie-palito.jpg",
     ref: "https://www.instagram.com/reel/DbJhK6vJVF2/",
+    nota: "mediana-forte",
+    acontece: [
+      "Enfiar o cookie no palito diante da câmera",
+      "Mergulhar a massa na calda e ela sair colorida",
+      "Jogar o topping para grudar enquanto a calda ainda está mole"
+    ],
+    obs: "O que puxa para o forte não é a transformação: é a curiosidade de ver um cookie virar outra coisa."
   },
   {
     n: "07", nome: "Cookie da Felicidade",
     base: "Pote em camadas, com leitura de Holy Cookie.",
     foto: "cookie-felicidade.jpg",
     ref: "https://www.instagram.com/reel/DTYKFq4jktg/",
+    nota: "mediana",
+    acontece: [
+      "O vídeo é a montagem: as camadas sendo feitas, uma a uma",
+      "Quanto mais contraste entre seco e molhado, cremoso e crocante, mais o vídeo performa"
+    ]
   },
   {
     n: "08", nome: "Torta quente",
     base: "Fatia alta de massa de cookie servida quente, em três sabores.",
     foto: "torta.jpg",
+    nota: null,
+    acontece: [
+      "O corte mostrando as camadas, com alguma coisa escorrendo",
+      "Uma calda jogada por cima na loja, na hora de servir",
+      "Uma casca de cookie na torta, que a colher raspa e entrega a crocância dura"
+    ],
+    obs: "Mesma performance da torta gelada."
   },
   {
     n: "09", nome: "Torta gelada",
     base: "Brownie, creme de fruta e ganache meio amarga.",
     foto: "torta.jpg",
+    nota: null,
+    acontece: [
+      "O corte mostrando as camadas, com alguma coisa escorrendo",
+      "Uma calda jogada por cima na loja, na hora de servir",
+      "Uma casca de cookie na torta, que a colher raspa e entrega a crocância dura"
+    ],
+    obs: "Mesma performance da torta quente."
   },
   {
     n: "10", nome: "Frozen de maracujá com manga",
     base: "O processo do frozen já existe; o que entra novo é o sabor.",
     foto: "frozen-maracuja-manga-conceito.png",
     fotoNota: "conceito · IA",
+    nota: null
   }
 ];
 
@@ -439,20 +509,31 @@ PRODUTOS.forEach(p => {
     corpo.append(a);
   }
 
-  if (p.melhores) {
-    const box = el("div", "melhores");
-    box.append(el("b", null, "As melhores ideias"));
-    const ul = el("ul");
-    p.melhores.forEach(t => ul.append(el("li", null, t)));
-    box.append(ul);
+  if (p.nota !== undefined) {
+    const nivel = { leve: 1, mediana: 2, "mediana-forte": 2, forte: 3 }[p.nota] || 0;
+    const rotulo = { leve: "Leve", mediana: "Mediana", "mediana-forte": "Mediana, indo para forte", forte: "Forte" }[p.nota] || "Ainda não avaliada";
+    const linha = el("div", "perf" + (nivel ? "" : " vazia"));
+    const medidor = el("span", "medidor");
+    for (let i = 1; i <= 3; i++) {
+      const seg = el("i", i <= nivel ? "on" : (p.nota === "mediana-forte" && i === 3 ? "meio" : null));
+      medidor.append(seg);
+    }
+    linha.append(medidor);
+    linha.append(el("span", "perf-rot", "Performance hoje"));
+    linha.append(el("strong", null, rotulo));
+    corpo.append(linha);
+  }
+
+  if (p.acontece) {
+    const box = el("div", "acontece");
+    box.append(el("b", null, "O que acontece"));
+    const lista = el(p.sequencia ? "ol" : "ul");
+    p.acontece.forEach(t => lista.append(el("li", null, t)));
+    box.append(lista);
     corpo.append(box);
   }
-  if (p.outras) {
-    const out = el("div", "outras");
-    out.append(el("b", null, "Outras opções"));
-    out.append(el("p", null, p.outras.join(" · ")));
-    corpo.append(out);
-  }
+
+  if (p.obs) corpo.append(el("p", "obs-prod", p.obs));
 
   card.append(corpo);
   grade.append(card);
