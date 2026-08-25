@@ -109,6 +109,7 @@
   .prod.sem-foto { grid-template-columns: minmax(0, 1fr); }
   .prod .foto { position: relative; aspect-ratio: 1; border-radius: 10px; overflow: hidden; background: var(--surface-2); }
   .prod .foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .prod .foto-nota { position: absolute; left: 5px; bottom: 5px; right: 5px; border-radius: 100px; padding: 3px 7px; background: color-mix(in srgb, var(--surface) 90%, transparent); color: var(--ink-2); font: 9px var(--font-mono); letter-spacing: .06em; text-align: center; }
   .prod .n { font: 700 10.5px var(--font-mono); letter-spacing: .1em; color: var(--ink-3); }
   .prod h3 { margin-top: 2px; font: 600 21px var(--font-display); }
   .prod .base { margin-top: 4px; color: var(--ink-2); font-size: 13.5px; line-height: 1.5; }
@@ -512,6 +513,8 @@ const PRODUTOS = [
   {
     n: "10", nome: "Frozen de maracujá com manga",
     base: "O processo do frozen já existe; o que entra novo é o sabor.",
+    foto: "frozen-maracuja-manga-conceito.png",
+    fotoNota: "conceito · IA",
     ideias: [
       "Servir em espiral alta, dobrando ao sair da máquina",
       "Derramar a polpa por cima e ela escorrer pelas curvas",
@@ -546,6 +549,7 @@ PRODUTOS.forEach(p => {
     img.alt = p.nome;
     img.loading = "lazy";
     moldura.append(img);
+    if (p.fotoNota) moldura.append(el("span", "foto-nota", p.fotoNota));
     card.append(moldura);
   }
 
