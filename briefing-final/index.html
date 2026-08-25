@@ -10,7 +10,9 @@
 <style>
   :root { --maxw: 900px; }
   .masthead { align-items: flex-start; }
-  .subtitulo { margin-top: 3px; color: var(--ink-2); font-size: 13px; }
+  .campanha { margin-top: 30px; border: 1px solid var(--accent); border-radius: 18px; padding: clamp(32px, 6vw, 58px) 22px; background: var(--surface); box-shadow: var(--shadow-2); text-align: center; }
+  .campanha h2 { margin-top: 10px; font: 600 clamp(40px, 9.5vw, 84px)/1 var(--font-display); letter-spacing: -.035em; color: var(--accent); text-wrap: balance; }
+  .campanha p { margin: 18px auto 0; max-width: 48ch; color: var(--ink-2); font-size: clamp(14.5px, 1.9vw, 16.5px); line-height: 1.6; }
   .voltar { color: var(--accent); font-size: 12.5px; font-weight: 600; text-decoration: none; white-space: nowrap; }
   .voltar:hover { text-decoration: underline; }
 
@@ -21,7 +23,7 @@
   .bloco > p strong { color: var(--ink); font-weight: 650; }
 
   /* ── 1. abertura ── */
-  .hero { margin-top: 34px; border: 1px solid var(--line); border-radius: 16px; padding: clamp(24px, 4vw, 38px); background: var(--surface); box-shadow: var(--shadow-1); }
+  .hero { margin-top: 22px; border: 1px solid var(--line); border-radius: 16px; padding: clamp(24px, 4vw, 38px); background: var(--surface); box-shadow: var(--shadow-1); }
   .hero h2 { margin-top: 8px; font: 600 clamp(28px, 5.2vw, 44px)/1.06 var(--font-display); letter-spacing: -.025em; text-wrap: balance; }
   .hero p { margin-top: 16px; max-width: 60ch; color: var(--ink-2); font-size: 15.5px; line-height: 1.68; }
   .hero p strong { color: var(--ink); font-weight: 650; }
@@ -185,13 +187,19 @@
     <div class="monogram">HC</div>
     <div class="masthead-text">
       <span class="eyebrow">Holy Cookie · Cardápio de Verão</span>
-      <h1>O jogo da atenção</h1>
-      <span class="subtitulo">Briefing para a fábrica</span>
+      <h1>Briefing para a fábrica</h1>
     </div>
     <div class="ident"><a class="voltar" href="../cardapio-verao/">← Cardápio de Verão</a></div>
   </header>
 
-  <!-- ═══ 1. abertura ═══ -->
+    <!-- ═══ 0. a campanha ═══ -->
+  <section class="campanha">
+    <span class="rot">A campanha</span>
+    <h2>O jogo da atenção</h2>
+    <p>Antes de alguém amar o nosso cookie, precisa ver o nosso cookie. É essa a disputa — e ela tem regras. Este briefing é sobre elas.</p>
+  </section>
+
+<!-- ═══ 1. abertura ═══ -->
   <section class="hero">
     <span class="rot">Por que este cardápio existe</span>
     <h2>Não é o melhor que vence. É o mais conhecido.</h2>
@@ -226,37 +234,11 @@
     <p class="nota">O gustativo é seu, e a Holy Cookie já é forte nele. Desta linha em diante, esta página só trata dos dois primeiros.</p>
   </section>
 
-  <!-- ═══ 3. performático × visual ═══ -->
+    <!-- ═══ 3. a fórmula ═══ -->
   <section class="bloco">
-    <span class="rot">O ponto mais importante</span>
-    <h2>A diferença entre performático e visual</h2>
-    <div class="versus">
-      <article class="lado">
-        <h3>Visual</h3>
-        <p>Olhar para ele gera desejo.</p>
-      </article>
-      <article class="lado forte">
-        <h3>Performático</h3>
-        <p>A transformação dele prende o olhar e gera curiosidade.</p>
-      </article>
-    </div>
-    <p class="teste"><b>O teste:</b> ele passa por alguma transformação? É performático. O desejo dele cabe numa foto parada? É visual.</p>
-
-    <span class="rot marcas-rot">Duas referências para calibrar o olho</span>
-    <div class="marcas">
-      <article class="marca">
-        <p>muito visual e pouco performática</p>
-        <h3>Viva Bakery</h3>
-      </article>
-      <article class="marca alvo">
-        <p>muito visual e muito performática</p>
-        <h3>Flakes</h3>
-        <span class="marca-tag">é para onde a gente quer ir</span>
-      </article>
-    </div>
-
-    <p class="pergunta">“Quando alguém interage com esse produto, acontece alguma coisa que faz outra pessoa querer assistir?”</p>
-
+    <span class="rot">A fórmula do jogo</span>
+    <h2>Como a atenção acontece</h2>
+    <p>Sempre que um produto prende alguém, a mesma sequência aconteceu — e é por isso que dá para projetar.</p>
     <div class="formula">
       <article class="passo"><span class="num">01</span><h3>Ação</h3><p>O verbo: quebrar, cortar, puxar, derramar, misturar.</p></article>
       <span class="seta">→</span>
@@ -265,41 +247,9 @@
       <article class="passo"><span class="num">03</span><h3>Atenção</h3><p>A pessoa para porque quer acompanhar até o final.</p></article>
     </div>
     <p class="nota"><strong>Ação não é a mesma coisa que acontecimento.</strong> Cortar é uma ação; revelar as camadas é o acontecimento. Derramar é uma ação; preencher e transbordar são o acontecimento.</p>
-
-    <div class="naoe">
-      <h3>O que <em>não</em> é performático</h3>
-      <ul>
-        <li>Muito recheio</li>
-        <li>Um cookie bonito na vitrine</li>
-        <li>A cobertura brilhando</li>
-        <li>Uma foto de tirar o fôlego</li>
-        <li>O corte parado, só mostrando as camadas</li>
-      </ul>
-      <p>Nada disso muda de estado — é tudo visual. E visual é bom, só não é o que segura a pessoa. Ver as camadas de uma fatia parada é visual; vira performático quando alguma coisa escorre, quebra ou raspa no meio do caminho.</p>
-    </div>
-
-    <div class="escala">
-      <article class="degrau">
-        <div class="medidor"><i class="on"></i><i></i><i></i></div>
-        <h3>Leve</h3>
-        <p>Abrir o cookie ao meio e ver o recheio. Puxar e sair um fio. Mudou pouco.</p>
-        <p class="obs">É o que a Holy Cookie já faz hoje — e é mais review do que performance.</p>
-      </article>
-      <article class="degrau">
-        <div class="medidor"><i class="on"></i><i class="on"></i><i></i></div>
-        <h3>Mediano</h3>
-        <p>Apertar o cookie e o recheio jorrar. A jarrinha derramando a calda quente sobre o produto na frente do cliente.</p>
-      </article>
-      <article class="degrau">
-        <div class="medidor"><i class="on"></i><i class="on"></i><i class="on"></i></div>
-        <h3>Forte</h3>
-        <p>A raclete de chocolate raspada por cima da fatia. A bola de chocolate que derrete inteira quando a calda quente cai em cima.</p>
-      </article>
-    </div>
-    <p>Não precisa ser sempre o forte. Mas <strong>se os 10 ficarem no leve, o cardápio não muda nada.</strong></p>
   </section>
 
-  <!-- ═══ 4. três referências ═══ -->
+<!-- ═══ 4. três referências ═══ -->
   <section class="bloco">
     <span class="rot">Referências</span>
     <h2>Três produtos que fazem acontecer</h2>
@@ -350,7 +300,76 @@
     </div>
   </section>
 
-  <!-- ═══ 6. diferenciação ═══ -->
+  <!-- ═══ 6. performático × visual ═══ -->
+  <section class="bloco">
+    <span class="rot">O ponto mais importante</span>
+    <h2>A diferença entre performático e visual</h2>
+    <div class="versus">
+      <article class="lado">
+        <h3>Visual</h3>
+        <p>Olhar para ele gera desejo.</p>
+      </article>
+      <article class="lado forte">
+        <h3>Performático</h3>
+        <p>A transformação dele prende o olhar e gera curiosidade.</p>
+      </article>
+    </div>
+    <p class="teste"><b>O teste:</b> ele passa por alguma transformação? É performático. O desejo dele cabe numa foto parada? É visual.</p>
+
+
+    <p class="pergunta">“Quando alguém interage com esse produto, acontece alguma coisa que faz outra pessoa querer assistir?”</p>
+
+    <div class="naoe">
+      <h3>O que <em>não</em> é performático</h3>
+      <ul>
+        <li>Muito recheio</li>
+        <li>Um cookie bonito na vitrine</li>
+        <li>A cobertura brilhando</li>
+        <li>Uma foto de tirar o fôlego</li>
+        <li>O corte parado, só mostrando as camadas</li>
+      </ul>
+      <p>Nada disso muda de estado — é tudo visual. E visual é bom, só não é o que segura a pessoa. Ver as camadas de uma fatia parada é visual; vira performático quando alguma coisa escorre, quebra ou raspa no meio do caminho.</p>
+    </div>
+
+    <div class="escala">
+      <article class="degrau">
+        <div class="medidor"><i class="on"></i><i></i><i></i></div>
+        <h3>Leve</h3>
+        <p>Abrir o cookie ao meio e ver o recheio. Puxar e sair um fio. Mudou pouco.</p>
+        <p class="obs">É o que a Holy Cookie já faz hoje — e é mais review do que performance.</p>
+      </article>
+      <article class="degrau">
+        <div class="medidor"><i class="on"></i><i class="on"></i><i></i></div>
+        <h3>Mediano</h3>
+        <p>Apertar o cookie e o recheio jorrar. A jarrinha derramando a calda quente sobre o produto na frente do cliente.</p>
+      </article>
+      <article class="degrau">
+        <div class="medidor"><i class="on"></i><i class="on"></i><i class="on"></i></div>
+        <h3>Forte</h3>
+        <p>A raclete de chocolate raspada por cima da fatia. A bola de chocolate que derrete inteira quando a calda quente cai em cima.</p>
+      </article>
+    </div>
+    <p>Não precisa ser sempre o forte. Mas <strong>se os 10 ficarem no leve, o cardápio não muda nada.</strong></p>
+  </section>
+
+    <!-- ═══ 7. duas referências de marca ═══ -->
+  <section class="bloco">
+    <span class="rot">Para calibrar o olho</span>
+    <h2>Duas marcas, dois lugares diferentes</h2>
+    <div class="marcas">
+      <article class="marca">
+        <p>muito visual e pouco performática</p>
+        <h3>Viva Bakery</h3>
+      </article>
+      <article class="marca alvo">
+        <p>muito visual e muito performática</p>
+        <h3>Flakes</h3>
+        <span class="marca-tag">é para onde a gente quer ir</span>
+      </article>
+    </div>
+  </section>
+
+<!-- ═══ 8. diferenciação ═══ -->
   <section class="bloco">
     <span class="rot">A regra que vale para os dez</span>
     <h2>O jogo da diferenciação</h2>
@@ -361,7 +380,7 @@
     </div>
   </section>
 
-  <!-- ═══ 7. onde a Holy Cookie está ═══ -->
+  <!-- ═══ 9. onde a Holy Cookie está ═══ -->
   <section class="bloco">
     <span class="rot">Diagnóstico</span>
     <h2>Onde a Holy Cookie está hoje</h2>
@@ -421,7 +440,7 @@
     <p>O recheio escorre, o produto é bonito, o crocante com o cremoso já está lá — o visual dá para subir. O performático é o buraco: <strong>o que acontece hoje é leve — e leve é mais review do que performance.</strong></p>
   </section>
 
-<!-- ═══ 8. os dez produtos ═══ -->
+<!-- ═══ 10. os dez produtos ═══ -->
   <section class="bloco">
     <span class="rot">O que a gente imaginou</span>
     <h2>Os 10 produtos</h2>
