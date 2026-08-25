@@ -96,6 +96,26 @@
   .degrau p { margin-top: 7px; color: var(--ink-2); font-size: 13px; line-height: 1.55; }
   .degrau .obs { margin-top: 9px; color: var(--ink-3); font-size: 12px; font-style: italic; }
 
+  .pergunta { margin-top: 22px; border-left: 3px solid var(--accent); border-radius: 0 10px 10px 0; padding: 16px 20px; background: var(--accent-soft); color: var(--accent-ink); font: 600 clamp(16px, 2.4vw, 19px)/1.45 var(--font-display); }
+  .formula { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: 10px; align-items: center; margin-top: 16px; }
+  .passo { border: 1px solid var(--line); border-radius: 13px; padding: 17px; background: var(--surface); box-shadow: var(--shadow-1); }
+  .passo .num { font: 700 10.5px var(--font-mono); letter-spacing: .1em; color: var(--accent); }
+  .passo h3 { margin-top: 5px; font: 600 18px var(--font-display); }
+  .passo p { margin-top: 6px; color: var(--ink-2); font-size: 13px; line-height: 1.5; }
+  .seta { color: var(--ink-3); font-size: 17px; }
+
+  .refs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 22px; }
+  .ref-card { display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: 14px; padding: 18px; background: var(--surface); box-shadow: var(--shadow-1); }
+  .ref-card h3 { font: 600 17px/1.25 var(--font-display); }
+  .ref-card > p { margin-top: 7px; color: var(--ink-2); font-size: 13px; line-height: 1.5; }
+  .ref-card .video-wrap { position: relative; margin-top: 14px; aspect-ratio: 9 / 16; border-radius: 10px; overflow: hidden; background: var(--surface-2); }
+  .ref-card iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .ref-card a { margin-top: 10px; color: var(--accent); font-size: 12.5px; font-weight: 650; text-decoration: none; }
+  .ref-card a:hover { text-decoration: underline; }
+
+  .fechamento { margin-top: 22px; border: 1px solid var(--accent); border-radius: 14px; padding: 26px 22px; background: var(--surface); text-align: center; }
+  .fechamento p { margin-top: 8px; color: var(--accent); font: 600 clamp(22px, 3.6vw, 30px)/1.15 var(--font-display); text-wrap: balance; }
+
   /* ── 5. você já fez ── */
   .caso-forte { margin-top: 20px; border: 1px solid var(--line); border-radius: 14px; padding: clamp(20px, 3vw, 28px); background: var(--surface); box-shadow: var(--shadow-1); }
   .caso-forte h3 { font: 600 clamp(20px, 3vw, 25px) var(--font-display); text-wrap: balance; }
@@ -144,7 +164,9 @@
   .footnote { margin-top: 60px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--ink-3); font-size: 11.5px; text-align: center; }
 
   @media (max-width: 760px) {
-    .funil, .versus, .escala, .legenda, .saidas, .marcas { grid-template-columns: 1fr; }
+    .funil, .versus, .escala, .legenda, .saidas, .marcas, .refs { grid-template-columns: 1fr; }
+    .formula { grid-template-columns: 1fr; }
+    .seta { display: none; }
     .prod { grid-template-columns: 84px minmax(0, 1fr); gap: 14px; }
     .barra { grid-template-columns: 96px minmax(0, 1fr) auto; }
   }
@@ -291,6 +313,17 @@
     </div>
     <p class="teste"><b>O teste:</b> ele passa por alguma transformação? É performático. O desejo dele cabe numa foto parada? É visual.</p>
 
+    <p class="pergunta">“Quando alguém interage com esse produto, acontece alguma coisa que faz outra pessoa querer assistir?”</p>
+
+    <div class="formula">
+      <article class="passo"><span class="num">01</span><h3>Ação</h3><p>O verbo: quebrar, cortar, puxar, derramar, misturar.</p></article>
+      <span class="seta">→</span>
+      <article class="passo"><span class="num">02</span><h3>Acontecimento</h3><p>A recompensa: revelar, escorrer, cair, transformar, soltar vapor.</p></article>
+      <span class="seta">→</span>
+      <article class="passo"><span class="num">03</span><h3>Atenção</h3><p>A pessoa para porque quer acompanhar até o final.</p></article>
+    </div>
+    <p class="nota"><strong>Ação não é a mesma coisa que acontecimento.</strong> Cortar é uma ação; revelar as camadas é o acontecimento. Derramar é uma ação; preencher e transbordar são o acontecimento.</p>
+
     <div class="naoe">
       <h3>O que <em>não</em> é performático</h3>
       <ul>
@@ -322,6 +355,37 @@
       </article>
     </div>
     <p>Não precisa ser sempre o forte. Mas <strong>se os 10 ficarem no leve, o cardápio não muda nada.</strong></p>
+  </section>
+
+  <!-- ═══ 4b. três referências ═══ -->
+  <section class="bloco">
+    <span class="rot">Referências</span>
+    <h2>Três produtos que fazem acontecer</h2>
+    <p>Não é para copiar o prato: é para ver o mecanismo. Em todos os três, uma etapa que ficaria na cozinha acontece diante da pessoa.</p>
+    <div class="refs">
+      <article class="ref-card">
+        <h3>Bolo Matilda + raclete de chocolate</h3>
+        <p>O chocolate quente é raspado sobre a fatia e escorre. O equipamento na mesa já cria a pergunta “o que vai acontecer?”.</p>
+        <div class="video-wrap"><iframe src="https://www.instagram.com/reel/DRVdhJnDwz-/embed/" title="Bolo Matilda + raclete de chocolate" loading="lazy" allowfullscreen></iframe></div>
+        <a href="https://www.instagram.com/reel/DRVdhJnDwz-/" target="_blank" rel="noopener noreferrer">Abrir o original ↗</a>
+      </article>
+      <article class="ref-card">
+        <h3>Cúpula de chocolate + calda quente</h3>
+        <p>A calda quente cai sobre a cúpula fechada, amolece a casca até ela perder a forma e revela o sorvete escondido dentro.</p>
+        <div class="video-wrap"><iframe src="https://www.youtube-nocookie.com/embed/PiMMTH69Ukc" title="Cúpula de chocolate + calda quente" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+        <a href="https://www.youtube.com/shorts/PiMMTH69Ukc" target="_blank" rel="noopener noreferrer">Abrir o original ↗</a>
+      </article>
+      <article class="ref-card">
+        <h3>Soufflé + calda</h3>
+        <p>A calda não cobre: ela entra por uma abertura no centro, preenche o produto por dentro e começa a transbordar.</p>
+        <div class="video-wrap"><iframe src="https://www.youtube-nocookie.com/embed/Yer__wxtY-M" title="Soufflé + calda" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+        <a href="https://www.youtube.com/shorts/Yer__wxtY-M" target="_blank" rel="noopener noreferrer">Abrir o original ↗</a>
+      </article>
+    </div>
+    <div class="fechamento">
+      <span class="rot">A pergunta de desenvolvimento</span>
+      <p>O que podemos fazer acontecer com esse produto?</p>
+    </div>
   </section>
 
   <!-- ═══ 5. você já fez isso ═══ -->
