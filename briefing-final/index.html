@@ -1,0 +1,590 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Briefing do Cardápio de Verão · Holy Cookie</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍪</text></svg>">
+<link rel="stylesheet" href="../base.css">
+<style>
+  :root { --maxw: 900px; }
+  .masthead { align-items: flex-start; }
+  .voltar { color: var(--accent); font-size: 12.5px; font-weight: 600; text-decoration: none; white-space: nowrap; }
+  .voltar:hover { text-decoration: underline; }
+
+  .bloco { margin-top: 58px; }
+  .rot { display: block; font: 10.5px var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+  .bloco h2 { margin-top: 7px; font: 600 clamp(23px, 3.6vw, 31px)/1.14 var(--font-display); letter-spacing: -.015em; text-wrap: balance; }
+  .bloco > p { margin-top: 12px; max-width: 66ch; color: var(--ink-2); font-size: 15px; line-height: 1.66; }
+  .bloco > p strong { color: var(--ink); font-weight: 650; }
+
+  /* ── 1. abertura ── */
+  .hero { margin-top: 34px; border: 1px solid var(--line); border-radius: 16px; padding: clamp(24px, 4vw, 38px); background: var(--surface); box-shadow: var(--shadow-1); }
+  .hero h2 { margin-top: 8px; font: 600 clamp(28px, 5.2vw, 44px)/1.06 var(--font-display); letter-spacing: -.025em; text-wrap: balance; }
+  .hero p { margin-top: 16px; max-width: 60ch; color: var(--ink-2); font-size: 15.5px; line-height: 1.68; }
+  .hero p strong { color: var(--ink); font-weight: 650; }
+
+  /* ── 2. funil ── */
+  .funil { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 22px; }
+  .etapa { position: relative; overflow: hidden; border: 1px solid var(--line); border-radius: 14px; padding: 20px; background: var(--surface); box-shadow: var(--shadow-1); }
+  .etapa::after { content: attr(data-n); position: absolute; right: 10px; bottom: -34px; font: 700 96px var(--font-display); color: var(--surface-2); z-index: 0; }
+  .etapa > * { position: relative; z-index: 1; }
+  .etapa .ico { font-size: 24px; }
+  .etapa h3 { margin-top: 12px; font: 600 18px var(--font-display); }
+  .etapa strong { display: block; margin-top: 3px; color: var(--accent); font-size: 13.5px; line-height: 1.4; }
+  .etapa p { margin-top: 8px; color: var(--ink-2); font-size: 13px; line-height: 1.5; }
+  .nota { margin-top: 14px; border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; padding: 13px 16px; background: var(--accent-soft); color: var(--accent-ink); font-size: 13.5px; line-height: 1.55; }
+
+  /* ── 3. círculos ── */
+  .venn-wrap { margin-top: 20px; overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; padding: 14px; background: var(--surface); box-shadow: var(--shadow-1); }
+  .venn { display: block; width: 100%; min-width: 560px; height: auto; }
+  .venn .nome { font: 700 15px var(--font-body); fill: var(--ink); letter-spacing: .01em; }
+  .venn .lente { font: 650 12.5px var(--font-body); fill: var(--ink-2); }
+  .venn .centro { font: 700 13px var(--font-body); fill: var(--accent-ink); }
+  .venn .pin { font: 700 11.5px var(--font-mono); fill: var(--accent); letter-spacing: .04em; }
+
+  .legenda { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 12px; }
+  .caso { border: 1px solid var(--line); border-radius: 11px; padding: 15px 16px; background: var(--surface); }
+  .caso.aqui { border-color: var(--accent); background: var(--accent-soft); }
+  .caso h4 { font: 600 15.5px var(--font-display); }
+  .caso.aqui h4 { color: var(--accent-ink); }
+  .caso .par { display: block; margin-top: 2px; font: 10px var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
+  .caso p { margin-top: 8px; color: var(--ink-2); font-size: 13px; line-height: 1.5; }
+  .caso.aqui p { color: var(--accent-ink); }
+  .caso.alvo { border-color: var(--ok); background: var(--ok-soft); }
+  .caso.alvo h4, .caso.alvo p { color: var(--ok); }
+
+  .barras { display: grid; gap: 9px; margin-top: 20px; }
+  .barra { display: grid; grid-template-columns: 118px minmax(0, 1fr) auto; gap: 12px; align-items: center; }
+  .barra span:first-child { font: 650 13px var(--font-body); }
+  .barra .trilho { height: 9px; border-radius: 100px; background: var(--surface-2); overflow: hidden; }
+  .barra .nivel { display: block; height: 100%; border-radius: 100px; background: var(--accent); }
+  .barra .nivel.zero { background: var(--late); width: 2% !important; }
+  .barra em { font: 10.5px var(--font-mono); letter-spacing: .08em; text-transform: uppercase; font-style: normal; color: var(--ink-3); }
+
+  /* ── 4. diferença ── */
+  .versus { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
+  .lado { border: 1px solid var(--line); border-radius: 13px; padding: 19px; background: var(--surface); box-shadow: var(--shadow-1); }
+  .lado.forte { border-color: var(--accent); }
+  .lado h3 { font: 600 19px var(--font-display); }
+  .lado.forte h3 { color: var(--accent); }
+  .lado p { margin-top: 7px; color: var(--ink-2); font-size: 13.5px; line-height: 1.55; }
+  .teste { margin-top: 14px; border: 1px dashed var(--line-2); border-radius: 11px; padding: 15px 17px; font-size: 14.5px; }
+  .teste b { color: var(--accent); }
+
+  .naoe { margin-top: 22px; border: 1px solid var(--line); border-radius: 13px; padding: 19px; background: var(--surface-2); }
+  .naoe h3 { font: 600 17px var(--font-display); color: var(--ink-2); }
+  .naoe ul { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 12px; }
+  .naoe li { list-style: none; border: 1px solid var(--line-2); border-radius: 100px; padding: 6px 13px; background: var(--surface); color: var(--ink-2); font-size: 12.5px; }
+  .naoe p { margin-top: 12px; color: var(--ink-2); font-size: 13px; line-height: 1.55; }
+
+  .escala { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 22px; }
+  .degrau { border: 1px solid var(--line); border-radius: 13px; padding: 18px; background: var(--surface); box-shadow: var(--shadow-1); }
+  .degrau .medidor { display: flex; gap: 4px; }
+  .degrau .medidor i { flex: 1; height: 5px; border-radius: 100px; background: var(--surface-2); }
+  .degrau .medidor i.on { background: var(--accent); }
+  .degrau h3 { margin-top: 13px; font: 600 17px var(--font-display); }
+  .degrau p { margin-top: 7px; color: var(--ink-2); font-size: 13px; line-height: 1.55; }
+  .degrau .obs { margin-top: 9px; color: var(--ink-3); font-size: 12px; font-style: italic; }
+
+  /* ── 5. você já fez ── */
+  .caso-forte { margin-top: 20px; border: 1px solid var(--line); border-radius: 14px; padding: clamp(20px, 3vw, 28px); background: var(--surface); box-shadow: var(--shadow-1); }
+  .caso-forte h3 { font: 600 clamp(20px, 3vw, 25px) var(--font-display); text-wrap: balance; }
+  .caso-forte p { margin-top: 12px; max-width: 62ch; color: var(--ink-2); font-size: 14.5px; line-height: 1.65; }
+  .caso-forte p strong { color: var(--ink); font-weight: 650; }
+  .saidas { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 18px; }
+  .saida { border-radius: 11px; padding: 15px; background: var(--surface-2); }
+  .saida b { display: block; margin-bottom: 5px; color: var(--accent); font: 10.5px var(--font-mono); letter-spacing: .1em; text-transform: uppercase; }
+  .saida p { margin: 0; font-size: 13px; line-height: 1.55; color: var(--ink-2); }
+
+  /* ── 6. diferenciação ── */
+  .paraiso { margin-top: 18px; border: 1px solid var(--accent); border-radius: 14px; padding: 22px; background: var(--surface); text-align: center; }
+  .paraiso h3 { font: 600 24px var(--font-display); color: var(--accent); }
+  .paraiso p { margin: 8px auto 0; max-width: 52ch; color: var(--ink-2); font-size: 14px; }
+
+  /* ── 7. produtos ── */
+  .grade { display: grid; gap: 12px; margin-top: 22px; }
+  .prod { display: grid; grid-template-columns: 116px minmax(0, 1fr); gap: 18px; border: 1px solid var(--line); border-radius: 14px; padding: 18px; background: var(--surface); box-shadow: var(--shadow-1); }
+  .prod.sem-foto { grid-template-columns: minmax(0, 1fr); }
+  .prod .foto { position: relative; aspect-ratio: 1; border-radius: 10px; overflow: hidden; background: var(--surface-2); }
+  .prod .foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .prod .n { font: 700 10.5px var(--font-mono); letter-spacing: .1em; color: var(--ink-3); }
+  .prod h3 { margin-top: 2px; font: 600 21px var(--font-display); }
+  .prod .base { margin-top: 4px; color: var(--ink-2); font-size: 13.5px; line-height: 1.5; }
+  .prod .ref { display: inline-block; margin-top: 8px; color: var(--accent); font-size: 12.5px; font-weight: 650; text-decoration: none; }
+  .prod .ref:hover { text-decoration: underline; }
+  .melhores { margin-top: 15px; border-radius: 11px; padding: 14px 16px; background: var(--accent-soft); }
+  .melhores b { display: block; margin-bottom: 8px; color: var(--accent-ink); font: 10.5px var(--font-mono); letter-spacing: .1em; text-transform: uppercase; }
+  .melhores ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 7px; }
+  .melhores li { display: grid; grid-template-columns: 15px 1fr; gap: 6px; color: var(--accent-ink); font-size: 14px; font-weight: 600; line-height: 1.45; }
+  .melhores li::before { content: "→"; opacity: .6; }
+  .outras { margin-top: 12px; }
+  .outras b { display: block; margin-bottom: 6px; color: var(--ink-3); font: 10.5px var(--font-mono); letter-spacing: .1em; text-transform: uppercase; }
+  .outras p { color: var(--ink-2); font-size: 13px; line-height: 1.6; }
+  .pendente { margin-top: 15px; border: 1px dashed var(--line-2); border-radius: 11px; padding: 13px 15px; }
+  .pendente b { display: block; margin-bottom: 7px; color: var(--warn); font: 10.5px var(--font-mono); letter-spacing: .1em; text-transform: uppercase; }
+  .pendente ol { margin: 0 0 0 18px; color: var(--ink-3); font-size: 12.5px; line-height: 1.55; }
+
+  .footnote { margin-top: 60px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--ink-3); font-size: 11.5px; text-align: center; }
+
+  @media (max-width: 760px) {
+    .funil, .versus, .escala, .legenda, .saidas { grid-template-columns: 1fr; }
+    .prod { grid-template-columns: 84px minmax(0, 1fr); gap: 14px; }
+    .barra { grid-template-columns: 96px minmax(0, 1fr) auto; }
+  }
+  @media (max-width: 560px) {
+    .wrap { padding-inline: 16px; }
+    .masthead .ident { width: 100%; }
+    .bloco { margin-top: 46px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="monogram">HC</div>
+    <div class="masthead-text">
+      <span class="eyebrow">Holy Cookie · Cardápio de Verão</span>
+      <h1>Briefing para a fábrica</h1>
+    </div>
+    <div class="ident"><a class="voltar" href="../cardapio-verao/">← Cardápio de Verão</a></div>
+  </header>
+
+  <!-- ═══ 1. abertura ═══ -->
+  <section class="hero">
+    <span class="rot">Por que este cardápio existe</span>
+    <h2>Não é o melhor que vence. É o mais conhecido.</h2>
+    <p>O McDonald's não faz o melhor hambúrguer do mundo. A Hamburgueria do Zezinho talvez faça. Todo mundo conhece o McDonald's.</p>
+    <p>A Holy Cookie já ganha no sabor — isso está resolvido, e é seu. O que falta é ser vista. O cardápio de verão existe para isso: produtos que fazem a pessoa <strong>parar de rolar o feed, ficar presa no vídeo até o fim, terminar com água na boca — e mandar para um amigo dizendo “a gente precisa ir lá comer isso”.</strong></p>
+  </section>
+
+  <!-- ═══ 2. o caminho até a venda ═══ -->
+  <section class="bloco">
+    <span class="rot">Três coisas, nesta ordem</span>
+    <h2>O caminho até a venda</h2>
+    <div class="funil">
+      <article class="etapa" data-n="1">
+        <div class="ico">🤯</div>
+        <h3>Performático</h3>
+        <strong>É o que faz a Holy Cookie ser conhecida.</strong>
+        <p>A pessoa para o dedo porque alguma coisa está acontecendo ali.</p>
+      </article>
+      <article class="etapa" data-n="2">
+        <div class="ico">🤩</div>
+        <h3>Visual</h3>
+        <strong>É o que dá vontade de comer.</strong>
+        <p>Agora que ela está olhando, ela fica com água na boca.</p>
+      </article>
+      <article class="etapa" data-n="3">
+        <div class="ico">🤤</div>
+        <h3>Gustativo</h3>
+        <strong>É o que ela não consegue guardar só para ela.</strong>
+        <p>Come, e a primeira reação é “você precisa experimentar isso”.</p>
+      </article>
+    </div>
+    <p class="nota">O gustativo é seu, e a Holy Cookie já é forte nele. Desta linha em diante, esta página só trata dos dois primeiros.</p>
+  </section>
+
+  <!-- ═══ 3. onde a Holy Cookie está ═══ -->
+  <section class="bloco">
+    <span class="rot">Diagnóstico</span>
+    <h2>Onde a Holy Cookie está hoje</h2>
+    <p>Os três se cruzam, e cada cruzamento produz um tipo de produto diferente. Só um deles é o que a gente quer.</p>
+
+    <div class="venn-wrap">
+      <svg class="venn" viewBox="0 0 760 640" role="img" aria-label="Três círculos: performático, visual e gustativo, com o que acontece em cada intersecção.">
+        <g fill="var(--accent)" fill-opacity=".11" stroke="var(--accent)" stroke-opacity=".45" stroke-width="1.5">
+          <circle cx="380" cy="235" r="190"></circle>
+          <circle cx="275" cy="415" r="190"></circle>
+          <circle cx="485" cy="415" r="190"></circle>
+        </g>
+
+        <text class="nome" x="380" y="102" text-anchor="middle">PERFORMÁTICO</text>
+        <text class="nome" x="180" y="548" text-anchor="middle">VISUAL</text>
+        <text class="nome" x="580" y="548" text-anchor="middle">GUSTATIVO</text>
+
+        <text class="lente" x="285" y="300" text-anchor="middle">Vende uma vez</text>
+        <text class="lente" x="475" y="300" text-anchor="middle">Só funciona ao vivo</text>
+        <text class="lente" x="380" y="466" text-anchor="middle">Segredo bem guardado</text>
+
+        <text class="centro" x="380" y="348" text-anchor="middle">O produto</text>
+        <text class="centro" x="380" y="366" text-anchor="middle">que a gente quer</text>
+
+        <circle cx="380" cy="506" r="5" fill="var(--accent)"></circle>
+        <text class="pin" x="380" y="530" text-anchor="middle">HOLY COOKIE HOJE</text>
+      </svg>
+    </div>
+
+    <div class="legenda">
+      <article class="caso">
+        <h4>Vende uma vez</h4>
+        <span class="par">performático + visual</span>
+        <p>A pessoa vem por causa do vídeo, prova, e não volta. Pior: ela conta para os outros que não era aquilo.</p>
+      </article>
+      <article class="caso">
+        <h4>Só funciona ao vivo</h4>
+        <span class="par">performático + gustativo</span>
+        <p>Na loja é uma festa e quem prova ama. Mas parado — na foto do cardápio, na vitrine, no aplicativo de delivery — ele não dá vontade.</p>
+      </article>
+      <article class="caso aqui">
+        <h4>Segredo bem guardado</h4>
+        <span class="par">visual + gustativo · é aqui que estamos</span>
+        <p>Quem conhece ama e volta sempre. O problema é que pouca gente descobre.</p>
+      </article>
+      <article class="caso alvo">
+        <h4>O produto que a gente quer</h4>
+        <span class="par">os três juntos</span>
+        <p>Chama, dá vontade, e é bom demais para guardar só para você.</p>
+      </article>
+    </div>
+
+    <div class="barras">
+      <div class="barra"><span>Gustativo</span><span class="trilho"><i class="nivel" style="width:92%"></i></span><em>alto</em></div>
+      <div class="barra"><span>Visual</span><span class="trilho"><i class="nivel" style="width:55%"></i></span><em>moderado</em></div>
+      <div class="barra"><span>Performático</span><span class="trilho"><i class="nivel zero"></i></span><em>zero</em></div>
+    </div>
+    <p>O recheio escorre, o produto é bonito, o crocante com o cremoso já está lá — o visual dá para subir. O performático não: <strong>hoje não existe um produto da Holy Cookie em que alguma coisa acontece.</strong></p>
+
+    <p class="nota">Duas referências para calibrar o olho: a <strong>Viva Bakery</strong> é muito visual e pouco performática — os produtos são lindos parados. A <strong>Flakes</strong> é muito visual e muito performática: é para onde a gente quer ir.</p>
+  </section>
+
+  <!-- ═══ 4. performático × visual ═══ -->
+  <section class="bloco">
+    <span class="rot">O ponto mais importante</span>
+    <h2>A diferença entre performático e visual</h2>
+    <div class="versus">
+      <article class="lado">
+        <h3>Visual</h3>
+        <p>O produto é bonito parado. Uma foto basta.</p>
+      </article>
+      <article class="lado forte">
+        <h3>Performático</h3>
+        <p>O produto muda. O que chegou não é o que a pessoa come.</p>
+      </article>
+    </div>
+    <p class="teste"><b>O teste:</b> tira uma foto antes e uma depois. Se as duas forem iguais, é visual.</p>
+
+    <div class="naoe">
+      <h3>O que <em>não</em> é performático</h3>
+      <ul>
+        <li>Muito recheio</li>
+        <li>Um cookie bonito na vitrine</li>
+        <li>A cobertura brilhando</li>
+        <li>Uma foto de tirar o fôlego</li>
+      </ul>
+      <p>Nada disso muda de estado — é tudo visual. E visual é bom. Só não é o que faz a pessoa parar o dedo.</p>
+    </div>
+
+    <div class="escala">
+      <article class="degrau">
+        <div class="medidor"><i class="on"></i><i></i><i></i></div>
+        <h3>Leve</h3>
+        <p>Abrir o cookie ao meio e ver o recheio. Puxar e sair um fio. Mudou pouco.</p>
+        <p class="obs">É o que a Holy Cookie já faz hoje — e é mais review do que performance.</p>
+      </article>
+      <article class="degrau">
+        <div class="medidor"><i class="on"></i><i class="on"></i><i></i></div>
+        <h3>Mediano</h3>
+        <p>Apertar o cookie e o recheio jorrar. A jarrinha derramando a calda quente sobre o produto na frente do cliente.</p>
+      </article>
+      <article class="degrau">
+        <div class="medidor"><i class="on"></i><i class="on"></i><i class="on"></i></div>
+        <h3>Forte</h3>
+        <p>A raclete de chocolate raspada por cima da fatia. A bola de chocolate que derrete inteira quando a calda quente cai em cima.</p>
+      </article>
+    </div>
+    <p>Não precisa ser sempre o forte. Mas <strong>se os 10 ficarem no leve, o cardápio não muda nada.</strong></p>
+  </section>
+
+  <!-- ═══ 5. você já fez isso ═══ -->
+  <section class="bloco">
+    <span class="rot">Já aconteceu aqui</span>
+    <h2>Você já fez isso</h2>
+    <div class="caso-forte">
+      <h3>O Brookie com Nutella foi uma decisão visual.</h3>
+      <p>Trocar o caramelo pela Nutella não mudou só o sabor: <strong>a Nutella brilha e o caramelo não.</strong> Na hora que abre, o produto reflete a luz.</p>
+      <div class="saidas">
+        <div class="saida">
+          <b>Sai daí uma economia</b>
+          <p>O mesmo brilho existe no chocolate próprio, que custa menos que a Nutella.</p>
+        </div>
+        <div class="saida">
+          <b>E sai daí um produto</b>
+          <p>A mesma receita, arrumada de outro jeito, vale um produto novo — tem gente servindo o cookie com o recheio <strong>por fora</strong>, uma piscina de creme na superfície em vez de escondido no meio.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 6. diferenciação ═══ -->
+  <section class="bloco">
+    <span class="rot">A regra que vale para os dez</span>
+    <h2>O jogo da diferenciação</h2>
+    <p><strong>Se a pessoa acha em outro lugar, acabou.</strong> A gente ganha na diferenciação, e ela atravessa tudo. Cada item precisa ter algo que só existe na Holy Cookie — e às vezes isso não é performance nem beleza, é só ser a primeira vez que a pessoa vê aquilo. Um picolé de cookie não tem grande transformação. Mas ninguém viu ainda.</p>
+    <div class="paraiso">
+      <h3>O paraíso dos cookies</h3>
+      <p>E tem o efeito do conjunto: dez jeitos diferentes de comer cookie, no mesmo lugar.</p>
+    </div>
+  </section>
+
+  <!-- ═══ 7. os dez produtos ═══ -->
+  <section class="bloco">
+    <span class="rot">O que a gente imaginou</span>
+    <h2>Os 10 produtos</h2>
+    <p>De cada produto, as ideias que a gente acha mais fortes. Não é receita: é <strong>o que pode acontecer</strong> com ele.</p>
+    <div class="grade" id="grade"></div>
+  </section>
+
+  <p class="footnote">Holy Cookie · Briefing do cardápio de verão para a fábrica</p>
+</div>
+
+<script>
+/* ═══ OS PRODUTOS ══════════════════════════════════════════════════════════
+   `ideias` é a lista de candidatas, numerada de 1 a 9 na mesma ordem em que
+   foi enviada para escolha. `melhores` e `outras` guardam só os NÚMEROS
+   escolhidos — para trocar a seleção, basta trocar os números.
+   Enquanto `melhores` estiver vazio, o card mostra as candidatas em cinza,
+   marcadas como pendentes.
+   ════════════════════════════════════════════════════════════════════════ */
+const PRODUTOS = [
+  {
+    n: "01", nome: "Ice Cookie",
+    base: "Dois cookies com uma camada alta de sorvete no meio.",
+    foto: "ice-cookie.jpg",
+    ref: "https://www.instagram.com/reel/DbwEaSOMMbh/",
+    ideias: [
+      "Quebrar o sanduíche ao meio com as mãos e a faixa de sorvete aparecer",
+      "Um núcleo de calda escondido no centro, que só aparece quando quebra",
+      "Mergulhar metade no chocolate na frente do cliente e levantar escorrendo",
+      "Casquinha fina de chocolate que estala e abre as camadas na mordida",
+      "Fio de caramelo puxando quando as duas metades se separam",
+      "Camada de sorvete quase da altura do cookie",
+      "Chunks grandes aparentes na massa, mesmo congelado",
+      "Ingrediente do sabor aplicado em toda a borda de sorvete",
+      "Borda do sorvete começando a amolecer e escorrer pela lateral"
+    ],
+    melhores: [], outras: []
+  },
+  {
+    n: "02", nome: "Cookie com sorvete",
+    base: "Cookie quente servido no pote com sorvete.",
+    foto: "cookie-sorvete.jpg",
+    ref: "https://www.instagram.com/reels/DairYfHKOg5/",
+    ideias: [
+      "Colocar a bola no cookie recém-saído do forno e o sorvete derreter pelas rachaduras",
+      "Derramar a calda quente na mesa, na frente do cliente",
+      "Partir o cookie por baixo do sorvete e o recheio aparecer",
+      "Afundar a colher e levantar quente e gelado na mesma colherada",
+      "Calda quente escorrendo pelas laterais até o fundo do pote",
+      "Uma bola alta, não achatada",
+      "Cookie aparecendo por baixo e em volta do sorvete",
+      "Chunks crocantes por cima, contra o sorvete liso",
+      "Migalhas de cookie grudadas na bola"
+    ],
+    melhores: [], outras: []
+  },
+  {
+    n: "03", nome: "Cookie fries + sorvete",
+    base: "Tiras de cookie assadas como fritas, com sorvete para mergulhar.",
+    foto: "cookie-fries.jpg",
+    ref: "https://www.instagram.com/p/DScWHVnD2z8/",
+    ideias: [
+      "Mergulhar a tira no sorvete e levantar com um pico formado",
+      "Quebrar uma tira ao meio e o miolo macio aparecer",
+      "Calda pingando da ponta da tira erguida",
+      "Abrir a caixinha e o volume das tiras aparecer",
+      "O chocolate de dentro amolecendo na hora da quebra",
+      "Caixinha cheia, tiras altas passando da borda",
+      "Pote de sorvete encostado e à vista, não escondido",
+      "Uma tira já mergulhada explica o uso sem ninguém falar nada",
+      "Tiras de comprimentos diferentes, bordas de corte visíveis"
+    ],
+    melhores: [], outras: []
+  },
+  {
+    n: "04", nome: "Panelinha",
+    base: "Cookie assado e servido quente na panelinha, com sorvete e fruta.",
+    foto: "panelinha.jpg",
+    ref: "https://www.instagram.com/reel/DbDmYEyu2XU/",
+    ideias: [
+      "A colher rompe a crosta e o centro quente escorre",
+      "Colocar a bola com a panelinha ainda saindo do forno",
+      "O sorvete derretendo para dentro do buraco aberto pela colher",
+      "Puxar uma colherada funda que traz massa, recheio e sorvete",
+      "Ganache se espalhando quando a colher pressiona",
+      "Panelinha cheia até perto da borda",
+      "Rachadura no centro mostrando o recheio",
+      "Recipiente escuro fazendo a massa e o sorvete saltarem",
+      "Fruta entre a massa e o sorvete, dando o ponto de cor"
+    ],
+    melhores: [], outras: []
+  },
+  {
+    n: "05", nome: "Casquinha de sorvete de cookie",
+    base: "Sorvete dentro de uma casquinha feita de cookie.",
+    foto: "casquinha.jpg",
+    ref: "https://www.instagram.com/reel/Dav43gPyvfI/",
+    ideias: [
+      "Girar a casquinha no chocolate e o banho escorrer antes de firmar",
+      "Um núcleo de chocolate guardado na ponta, que só aparece na última mordida",
+      "A mordida na borda revela a espessura da parede de cookie",
+      "Sorvete descendo pela borda da casquinha",
+      "Quebrar a ponta no final",
+      "Casquinha grossa o bastante para parecer cookie, não casquinha de sorvete",
+      "Sorvete alto e volumoso, bem acima da borda",
+      "Chunks de chocolate incorporados na própria casquinha",
+      "Borda artesanal, formato não perfeitamente simétrico"
+    ],
+    melhores: [], outras: []
+  },
+  {
+    n: "06", nome: "Cookie no palito",
+    base: "Cookie no palito com casquinha de chocolate.",
+    foto: "cookie-palito.jpg",
+    ref: "https://www.instagram.com/reel/DbJhK6vJVF2/",
+    ideias: [
+      "Mergulhar o cookie na cobertura na frente do cliente",
+      "A casquinha estala na mordida e revela o cookie",
+      "Recheio aparecendo na mordida, atrás da casca",
+      "Fios finos de cobertura cruzando a superfície",
+      "A cobertura quebrando ao bater levemente o palito",
+      "Cookie espesso no palito, não um pirulito fino",
+      "Pedaços grandes do ingrediente identificando o sabor",
+      "Banho torto, com a borda de cookie exposta de um lado",
+      "Duas cores no máximo, para ler bem em miniatura"
+    ],
+    melhores: [], outras: []
+  },
+  {
+    n: "07", nome: "Cookie da Felicidade",
+    base: "Pote em camadas, com leitura de Holy Cookie.",
+    foto: "cookie-felicidade.jpg",
+    ref: "https://www.instagram.com/reel/DTYKFq4jktg/",
+    ideias: [
+      "Afundar a colher de uma vez e subir com todas as camadas",
+      "A colher abrir um túnel e mostrar a sequência por dentro",
+      "Derramar a última camada na frente do cliente, fechando o pote",
+      "Calda formando fio ao levantar a colher",
+      "Creme descendo entre os pedaços de cookie",
+      "Camadas largas, não muitas camadas finas",
+      "Chunks grandes encostados na parede do pote",
+      "Pote transparente, três tons bem separados",
+      "Um mini-cookie inteiro no topo"
+    ],
+    melhores: [], outras: []
+  },
+  {
+    n: "08", nome: "Torta quente",
+    base: "Fatia alta de massa de cookie servida quente, em três sabores.",
+    foto: "torta.jpg",
+    ideias: [
+      "Cortar a fatia quente e o núcleo aparecer no corte",
+      "Pressionar o centro com a colher e o recheio ceder",
+      "Derramar a calda quente sobre a fatia já no prato",
+      "O centro cremoso escorrendo devagar pela lateral",
+      "Os chunks de chocolate amolecendo com o calor",
+      "Fatia alta, pesada de olhar",
+      "Ingrediente do sabor em quantidade no topo",
+      "Topo rachado e borda irregular",
+      "Fatia triangular, que comunica torta e não cookie grande"
+    ],
+    melhores: [], outras: []
+  },
+  {
+    n: "09", nome: "Torta gelada",
+    base: "Brownie, creme de fruta e ganache meio amarga.",
+    foto: "torta.jpg",
+    ideias: [
+      "Cortar uma fatia gelada e as três faixas aparecerem nítidas",
+      "Levantar a garfada atravessando as três camadas",
+      "Derramar uma ganache fina por cima, fechando a torta",
+      "A ganache cedendo devagar quando a faca entra",
+      "Calda da fruta escorrendo um pouco no corte",
+      "Camadas espessas e fáceis de ler de longe",
+      "Fruta de verdade em pedaços no topo",
+      "Chocolate escuro, creme claro e a cor viva da fruta",
+      "Onda de espátula na ganache, borda de brownie real"
+    ],
+    melhores: [], outras: []
+  },
+  {
+    n: "10", nome: "Frozen de maracujá com manga",
+    base: "O processo do frozen já existe; o que entra novo é o sabor.",
+    ideias: [
+      "Servir em espiral alta, dobrando ao sair da máquina",
+      "Derramar a polpa por cima e ela escorrer pelas curvas",
+      "Misturar manga e maracujá na frente do cliente, marmorizando",
+      "A colher abrir o swirl e mostrar as duas cores",
+      "Polpa aparecendo entre as voltas da espiral",
+      "Espiral passando bem acima da borda do copo",
+      "Copo transparente mostrando a marmorização",
+      "Sementes pretas do maracujá contra o amarelo da manga",
+      "Cubinhos de manga por cima"
+    ],
+    melhores: [], outras: []
+  }
+];
+
+const el = (tag, cls, txt) => {
+  const n = document.createElement(tag);
+  if (cls) n.className = cls;
+  if (txt != null) n.textContent = txt;
+  return n;
+};
+
+const grade = document.getElementById("grade");
+
+PRODUTOS.forEach(p => {
+  const card = el("article", "prod" + (p.foto ? "" : " sem-foto"));
+
+  if (p.foto) {
+    const moldura = el("div", "foto");
+    const img = el("img");
+    img.src = "../cardapio-verao/fotos/" + p.foto;
+    img.alt = p.nome;
+    img.loading = "lazy";
+    moldura.append(img);
+    card.append(moldura);
+  }
+
+  const corpo = el("div");
+  corpo.append(el("span", "n", p.n));
+  corpo.append(el("h3", null, p.nome));
+  corpo.append(el("p", "base", p.base));
+  if (p.ref) {
+    const a = el("a", "ref", "ver a referência ↗");
+    a.href = p.ref; a.target = "_blank"; a.rel = "noopener noreferrer";
+    corpo.append(a);
+  }
+
+  if (p.melhores.length) {
+    const box = el("div", "melhores");
+    box.append(el("b", null, "As melhores ideias"));
+    const ul = el("ul");
+    p.melhores.forEach(i => ul.append(el("li", null, p.ideias[i - 1])));
+    box.append(ul);
+    corpo.append(box);
+
+    if (p.outras.length) {
+      const out = el("div", "outras");
+      out.append(el("b", null, "Outras opções"));
+      out.append(el("p", null, p.outras.map(i => p.ideias[i - 1]).join(" · ")));
+      corpo.append(out);
+    }
+  } else {
+    const box = el("div", "pendente");
+    box.append(el("b", null, "Candidatas · seleção pendente"));
+    const ol = el("ol");
+    p.ideias.forEach(t => ol.append(el("li", null, t)));
+    box.append(ol);
+    corpo.append(box);
+  }
+
+  card.append(corpo);
+  grade.append(card);
+});
+</script>
+</body>
+</html>
