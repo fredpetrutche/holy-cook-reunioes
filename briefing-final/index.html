@@ -81,6 +81,8 @@
   .lado h3 { font: 600 19px var(--font-display); }
   .lado.forte h3 { color: var(--accent); }
   .lado p { margin-top: 7px; color: var(--ink-2); font-size: 13.5px; line-height: 1.55; }
+  .destrincha { margin-top: 16px; max-width: 68ch; color: var(--ink-2); font-size: 14.5px; line-height: 1.65; }
+  .destrincha strong { color: var(--ink); font-weight: 650; }
   .teste { margin-top: 14px; border: 1px dashed var(--line-2); border-radius: 11px; padding: 15px 17px; font-size: 14.5px; }
   .teste b { color: var(--accent); }
 
@@ -135,6 +137,14 @@
   .paraiso p { margin: 8px auto 0; max-width: 52ch; color: var(--ink-2); font-size: 14px; }
 
   /* ── 7. produtos ── */
+  .checklist { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 20px; }
+  .quadro { border: 1px solid var(--line); border-radius: 14px; padding: 18px; background: var(--surface); box-shadow: var(--shadow-1); }
+  .quadro b { color: var(--accent); font: 700 10.5px var(--font-mono); letter-spacing: .1em; text-transform: uppercase; }
+  .quadro span { display: block; margin-top: 4px; color: var(--ink-2); font-size: 13px; }
+  .quadro ul { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 13px; }
+  .quadro li { list-style: none; border: 1px solid var(--line-2); border-radius: 100px; padding: 5px 11px; font-size: 12.5px; }
+  .quadro.visual li { border-style: dashed; color: var(--ink-2); }
+
   .grade { display: grid; gap: 12px; margin-top: 22px; }
   .prod { display: grid; grid-template-columns: 116px minmax(0, 1fr); gap: 18px; border: 1px solid var(--line); border-radius: 14px; padding: 18px; background: var(--surface); box-shadow: var(--shadow-1); }
   .prod.sem-foto { grid-template-columns: minmax(0, 1fr); }
@@ -162,15 +172,19 @@
   .acontece ul li::before { content: "→"; opacity: .55; }
   .acontece ol li { counter-increment: passo; }
   .acontece ol li::before { content: counter(passo); font: 700 10.5px/1.55 var(--font-mono); opacity: .6; }
+  .resumo-prod { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 13px; border-top: 1px solid var(--line); padding-top: 12px; }
+  .resumo-prod span { color: var(--ink-2); font-size: 13px; line-height: 1.45; }
+  .resumo-prod b { display: block; color: var(--ink-3); font: 10px var(--font-mono); letter-spacing: .1em; text-transform: uppercase; }
   .obs-prod { margin-top: 11px; color: var(--ink-2); font-size: 12.8px; line-height: 1.55; font-style: italic; }
 
   .footnote { margin-top: 60px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--ink-3); font-size: 11.5px; text-align: center; }
 
   @media (max-width: 760px) {
-    .funil, .versus, .escala, .legenda, .saidas, .marcas, .refs { grid-template-columns: 1fr; }
+    .funil, .versus, .escala, .legenda, .saidas, .marcas, .refs, .checklist { grid-template-columns: 1fr; }
     .formula { grid-template-columns: 1fr; }
     .seta { display: none; }
     .prod { grid-template-columns: 84px minmax(0, 1fr); gap: 14px; }
+    .resumo-prod { grid-template-columns: 1fr; gap: 8px; }
     .barra { grid-template-columns: 96px minmax(0, 1fr) auto; }
   }
   @media (max-width: 560px) {
@@ -199,7 +213,7 @@
     <p>Antes de alguém amar o nosso cookie, precisa ver o nosso cookie. É essa a disputa — e ela tem regras. Este briefing é sobre elas.</p>
   </section>
 
-<!-- ═══ 1. abertura ═══ -->
+  <!-- ═══ 1. abertura ═══ -->
   <section class="hero">
     <span class="rot">Por que este cardápio existe</span>
     <h2>Não é o melhor que vence. É o mais conhecido.</h2>
@@ -260,7 +274,7 @@
     <p class="nota"><strong>Ação não é a mesma coisa que acontecimento.</strong> Cortar é uma ação; revelar as camadas é o acontecimento. Derramar é uma ação; preencher e transbordar são o acontecimento.</p>
   </section>
 
-<!-- ═══ 5. três referências ═══ -->
+  <!-- ═══ 5. três referências ═══ -->
   <section class="bloco">
     <span class="rot">Referências</span>
     <h2>Três produtos que fazem acontecer</h2>
@@ -302,9 +316,11 @@
       </article>
       <article class="lado forte">
         <h3>Performático</h3>
-        <p>A transformação dele prende o olhar e gera curiosidade.</p>
+        <p>Existe um antes e um depois — e uma espera entre os dois.</p>
       </article>
     </div>
+    <p class="destrincha">Só dizer “transformação” não resolve, porque quase tudo pode ser chamado de transformação. O que vale é isto: <strong>o produto que chega não é o produto que a pessoa come.</strong> Alguma coisa começa a acontecer, e entre o começo e o fim existe um intervalo em que a pessoa fica olhando para ver no que vai dar. <strong>É esse intervalo que gera a curiosidade</strong> — e é ele que segura o vídeo até o fim.</p>
+
     <p class="teste"><b>O teste:</b> ele passa por alguma transformação? É performático. O desejo dele cabe numa foto parada? É visual.</p>
 
 
@@ -380,7 +396,7 @@
     </div>
   </section>
 
-<!-- ═══ 9. onde a Holy Cookie está ═══ -->
+  <!-- ═══ 9. onde a Holy Cookie está ═══ -->
   <section class="bloco">
     <span class="rot">Diagnóstico</span>
     <h2>Onde a Holy Cookie está hoje</h2>
@@ -440,7 +456,34 @@
     <p>O recheio escorre, o produto é bonito, o crocante com o cremoso já está lá — o visual dá para subir. O performático é o buraco: <strong>o que acontece hoje é leve — e leve é mais review do que performance.</strong></p>
   </section>
 
-<!-- ═══ 10. os dez produtos ═══ -->
+  <!-- ═══ 10. o resumo ═══ -->
+  <section class="bloco">
+    <span class="rot">Resumo</span>
+    <h2>Antes de criar qualquer produto</h2>
+    <p>O caminho para vender mais não é ter produtos mais bonitos — é ter produtos em que alguma coisa acontece. <strong>Hoje a Holy Cookie está no tesouro escondido; ela precisa estar no produto estrela.</strong></p>
+    <p>Então, para cada produto novo, a pergunta deixa de ser “o que fica mais fácil de fazer?” e passa a ser <strong>“quais destes elementos esse produto marca?”</strong></p>
+
+    <div class="checklist">
+      <article class="quadro">
+        <b>01 · A ação</b>
+        <span>O que a gente faz com ele?</span>
+        <ul><li>Quebrar</li><li>Cortar</li><li>Puxar</li><li>Raspar</li><li>Derramar</li><li>Mergulhar</li><li>Apertar</li><li>Misturar</li><li>Levantar</li><li>Preencher</li><li>Aquecer</li><li>Abrir</li><li>Montar</li><li>Esticar</li></ul>
+      </article>
+      <article class="quadro">
+        <b>02 · O acontecimento</b>
+        <span>O que muda depois da ação?</span>
+        <ul><li>Escorre</li><li>Derrete</li><li>Estica</li><li>Pinga</li><li>Transborda</li><li>Revela</li><li>Cai</li><li>Quebra</li><li>Solta vapor</li><li>Se espalha</li><li>Muda de cor</li></ul>
+      </article>
+      <article class="quadro visual">
+        <b>03 · O visual</b>
+        <span>E parado, o que ele entrega?</span>
+        <ul><li>Generosidade</li><li>Textura visual</li><li>Cor e contraste</li><li>Ícone comestível</li><li>Imperfeição controlada</li><li>Brilho</li></ul>
+      </article>
+    </div>
+    <p class="nota">Não precisa marcar todos. Mas se um produto novo não marca nada dos dois primeiros quadros, ele é só bonito — e bonito a gente já tem.</p>
+  </section>
+
+  <!-- ═══ 11. os dez produtos ═══ -->
   <section class="bloco">
     <span class="rot">O que a gente imaginou</span>
     <h2>Os 10 produtos</h2>
@@ -459,7 +502,7 @@
    ════════════════════════════════════════════════════════════════════════ */
 const PRODUTOS = [
   {
-    n: "01", nome: "Ice Cookie",
+    n: "01", resumo: ["abre, quebra, revela", "camadas aparentes, generosidade"], nome: "Ice Cookie",
     base: "Dois cookies com uma camada alta de sorvete no meio.",
     foto: "ice-cookie.jpg",
     ref: "https://www.instagram.com/reel/DbwEaSOMMbh/",
@@ -472,7 +515,7 @@ const PRODUTOS = [
     obs: "Nenhuma das três é uma transformação antes e depois. Este é o produto que mais precisa de ideia performática — se você tiver uma, é aqui que ela vale mais."
   },
   {
-    n: "02", nome: "Cookie com sorvete",
+    n: "02", resumo: ["abre, aquece, revela o que está dentro", "sorvete escorrendo, quente contra gelado"], nome: "Cookie com sorvete",
     base: "Cookie quente servido no pote com sorvete.",
     foto: "cookie-sorvete.jpg",
     ref: "https://www.instagram.com/reels/DairYfHKOg5/",
@@ -486,7 +529,7 @@ const PRODUTOS = [
     obs: "Quem faz a performance é o cliente, e ela funciona igual no delivery."
   },
   {
-    n: "03", nome: "Cookie fries + sorvete",
+    n: "03", resumo: ["derrama, mergulha", "ícone reconhecível, cor forte, generosidade"], nome: "Cookie fries + sorvete",
     base: "Tiras de cookie assadas como fritas, com sorvete para mergulhar.",
     foto: "cookie-fries.jpg",
     ref: "https://www.instagram.com/p/DScWHVnD2z8/",
@@ -499,7 +542,7 @@ const PRODUTOS = [
     obs: "Forte não pela transformação, e sim pelo reconhecimento: parece a batata frita do McDonald\u2019s com o sorvete do McDonald\u2019s. Falta decidir se a calda vai por cima ou fica para mergulhar."
   },
   {
-    n: "04", nome: "Panelinha",
+    n: "04", resumo: ["raspa, rompe, escorre", "crosta rachada, quente contra gelado"], nome: "Panelinha",
     base: "Cookie assado e servido quente na panelinha, com sorvete e fruta.",
     foto: "panelinha.jpg",
     ref: "https://www.instagram.com/reel/DbDmYEyu2XU/",
@@ -511,7 +554,7 @@ const PRODUTOS = [
     ]
   },
   {
-    n: "05", nome: "Casquinha de sorvete de cookie",
+    n: "05", resumo: ["mergulha, derrama, escorre", "silhueta própria, textura de cookie na parede"], nome: "Casquinha de sorvete de cookie",
     base: "Sorvete dentro de uma casquinha feita de cookie.",
     foto: "casquinha.jpg",
     ref: "https://www.instagram.com/reel/Dav43gPyvfI/",
@@ -524,7 +567,7 @@ const PRODUTOS = [
     obs: "Mediana hoje. Vira forte se for sorvete de máquina soft em vez de bola — é a decisão que mais muda este produto."
   },
   {
-    n: "06", nome: "Cookie no palito",
+    n: "06", resumo: ["mergulha, cobre, estala", "cor, topping, formato diferente"], nome: "Cookie no palito",
     base: "Cookie no palito com casquinha de chocolate.",
     foto: "cookie-palito.jpg",
     ref: "https://www.instagram.com/reel/DbJhK6vJVF2/",
@@ -537,7 +580,7 @@ const PRODUTOS = [
     obs: "O que puxa para o forte não é a transformação: é a curiosidade de ver um cookie virar outra coisa."
   },
   {
-    n: "07", nome: "Cookie da Felicidade",
+    n: "07", resumo: ["monta, empilha", "camadas, contraste entre seco e cremoso"], nome: "Cookie da Felicidade",
     base: "Pote em camadas, com leitura de Holy Cookie.",
     foto: "cookie-felicidade.jpg",
     ref: "https://www.instagram.com/reel/DTYKFq4jktg/",
@@ -548,7 +591,7 @@ const PRODUTOS = [
     ]
   },
   {
-    n: "08", nome: "Torta quente",
+    n: "08", resumo: ["corta, escorre, raspa", "camadas no corte, generosidade"], nome: "Torta quente",
     base: "Fatia alta de massa de cookie servida quente, em três sabores.",
     foto: "torta.jpg",
     nota: "leve",
@@ -560,7 +603,7 @@ const PRODUTOS = [
     obs: "Na prática ela ainda não tem performance: é uma torta. Não sabemos o que fazer acontecer com ela — a ideia é bem-vinda."
   },
   {
-    n: "09", nome: "Torta gelada",
+    n: "09", resumo: ["corta, derrama", "camadas, cor da fruta, contraste"], nome: "Torta gelada",
     base: "Brownie, creme de fruta e ganache meio amarga.",
     foto: "torta.jpg",
     nota: "leve",
@@ -572,7 +615,7 @@ const PRODUTOS = [
     obs: "Mesmo caso da torta quente: hoje é uma torta e nada acontece com ela. Não sabemos o que fazer aqui."
   },
   {
-    n: "10", nome: "Frozen de maracujá com manga",
+    n: "10", resumo: ["monta", "cor, espiral, copo transparente"], nome: "Frozen de maracujá com manga",
     base: "O processo do frozen já existe; o que entra novo é o sabor.",
     foto: "frozen-maracuja-manga-conceito.png",
     fotoNota: "conceito · IA",
@@ -642,6 +685,17 @@ PRODUTOS.forEach(p => {
   }
 
   if (p.obs) corpo.append(el("p", "obs-prod", p.obs));
+
+  if (p.resumo) {
+    const box = el("div", "resumo-prod");
+    [["Performático", p.resumo[0]], ["Visual", p.resumo[1]]].forEach(([rot, txt]) => {
+      const linha = el("span");
+      linha.append(el("b", null, rot));
+      linha.append(document.createTextNode(txt));
+      box.append(linha);
+    });
+    corpo.append(box);
+  }
 
   card.append(corpo);
   grade.append(card);
