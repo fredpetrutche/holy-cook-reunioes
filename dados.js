@@ -6,6 +6,56 @@
 
 const REUNIOES = [
   {
+    id: "2026-08-31",
+    data: "2026-08-31",
+    titulo: "Apresentação visual dos produtos de verão",
+    participantes: "A confirmar",
+    ata: [
+      {
+        id: "briefing-visual",
+        titulo: "O briefing final foi apresentado",
+        projetoId: "cardapio-verao",
+        paragrafos: [
+          "A reunião foi sobre a apresentação visual dos produtos de verão e correu inteira em cima do briefing final, o documento que já está pronto para a fábrica. Ele não trata de quais produtos entram — isso fechou em 21/08 —, e sim de como cada um precisa aparecer: o que acontece com o produto na frente da pessoa, a diferença entre performático e visual, e o que cada item tem hoje.",
+          "O cardápio saiu validado. Nenhum item foi cortado e os dez definidos em 21/08 continuam de pé — a discussão daqui para frente não é mais quais produtos entram, é o que acontece com cada um deles na loja e na câmera.",
+          "Da reunião saíram duas coisas: duas sugestões de produto novas — o Cookie Gateau e uma bolachinha de cookie — e a entrada do marketing, que é briefado esta semana e apresenta as primeiras ideias de roteiro em 15 de setembro. A degustação, que era 11, passou para 12 de setembro, sábado."
+        ]
+      },
+      {
+        id: "duas-sugestoes",
+        titulo: "Duas sugestões novas: Cookie Gateau e bolachinha de cookie",
+        projetoId: "cardapio-verao",
+        produtosDe: "cardapio-verao",
+        paragrafos: [
+          "Entraram duas sugestões de produto, as duas fora da lista dos dez: o Cookie Gateau e uma bolachinha de cookie. Nenhuma foi descartada e nenhuma foi fechada — entram como sugestão, para serem tratadas junto com o resto.",
+          "O Cookie Gateau já aparecia no briefing final, mas do outro lado: como referência de performático simples, um gesto que cria um antes e um depois sem exigir equipamento novo. A sugestão é que ele deixe de ser só referência e vire produto do cardápio.",
+          "A bolachinha de cookie é a que começa mais do zero das duas: não tem referência em vídeo, não tem execução definida e o nome ainda precisa ser confirmado. É a versão pequena, de mordida, do que a loja já faz — e o que muda tudo nela é se é vendida por unidade ou em pacote, porque isso define embalagem, preço e como ela fica exposta.",
+          "As duas passam pela mesma régua dos outros dez: teste na cozinha, CMV, preço, utensílio e espaço. Como chegaram doze dias antes da degustação, é nela que se decide se viram produto do cardápio ou ficam para depois."
+        ]
+      },
+      {
+        id: "cronograma-degustacao",
+        titulo: "O cronograma segue — a degustação é dia 12",
+        projetoId: "cardapio-verao",
+        paragrafos: [
+          "O cronograma não mudou de forma: fechamento das ideias, degustação, material impresso, liberação na fábrica e início da venda continuam encadeados, e 1º de outubro continua sendo a data que não deveria se mexer.",
+          "A degustação passou de 11 para 12 de setembro, sábado. É nela que o cardápio validado vira cardápio aprovado, produto a produto — inclusive as duas sugestões novas. Para ela valer mais do que sabor, os produtos precisam ter sido testados na cozinha e o CMV de cada um levantado antes: sem isso, a degustação aprova gosto e não aprova produto, porque ninguém sabe se o preço fecha.",
+          "São doze dias entre esta reunião e a degustação, e nada do que vem depois dela — ficha técnica, vídeo de produção, material impresso e compra na fábrica — começa antes."
+        ]
+      },
+      {
+        id: "marketing-roteiros",
+        titulo: "O marketing entra agora",
+        projetoId: "cardapio-verao",
+        paragrafos: [
+          "A equipe de marketing é avisada esta semana e recebe o briefing do cardápio. É a primeira vez que o cardápio de verão sai da mesa de produto e entra na mesa de conteúdo.",
+          "Daqui a quinze dias, em 15 de setembro, a equipe apresenta as primeiras ideias de roteiro dos produtos. A data cai três dias depois da degustação, e isso ajuda: o roteiro nasce já sabendo o que foi aprovado.",
+          "O que vai na mão da equipe é o briefing final, não a lista de produtos. A lista diz o que existe; o briefing diz o que precisa acontecer na frente da câmera — e é isso que o roteiro tem de resolver."
+        ]
+      }
+    ]
+  },
+  {
     id: "2026-08-21",
     data: "2026-08-21",
     titulo: "Definição do cardápio de verão",
@@ -160,7 +210,7 @@ const PROJETOS = [
     id: "cardapio-verao",
     nome: "Cardápio de Verão",
     pagina: "cardapio-verao/",
-    resumo: "Os 10 produtos estão fechados e cada um já tem referência. Agora é teste, CMV e o que cada loja precisa comprar para conseguir produzir.",
+    resumo: "O cardápio foi validado e ganhou duas sugestões novas em 31/08. Agora é teste, CMV e o que cada loja precisa comprar para conseguir produzir.",
     responsavel: "Marketing",
     produtos: [
       {
@@ -301,6 +351,33 @@ const PROJETOS = [
           "A polpa de maracujá e a de manga são insumos novos: quem fornece e a que custo.",
           "Copo, tampa e canudo já são os mesmos do morango? Se forem, não entram como item novo na lista da loja."
         ]
+      },
+      {
+        id: "cookie-gateau",
+        nome: "Cookie Gateau",
+        tag: "sugestão · 31/08",
+        base: "Sugestão que entrou na reunião de 31/08. Ele já estava no briefing final, mas do outro lado: como referência de performático simples — um gesto que cria um antes e um depois sem exigir equipamento novo. A proposta é que deixe de ser referência e vire produto do cardápio.",
+        ref: "https://www.instagram.com/p/DbbgvjMSyxW/",
+        fotoFonte: "sem foto ainda — a referência é o post do Gran Cookie Gateau, o mesmo que está no briefing final",
+        perguntas: [
+          "Ele entra como produto ou continua só como referência de linguagem para os outros? É a primeira decisão, e ela é da degustação de 12/09.",
+          "Se entrar: é montado na loja ou chega pronto da fábrica? Muda a lista de compra e muda o CMV.",
+          "É vendido inteiro ou em fatia? Fatia exige corte na loja, utensílio e um lugar onde ele fique exposto sem perder a cara.",
+          "Depende de frio? Nove dos dez itens já dependem, e o espaço de freezer da loja é o ponto mais apertado do projeto."
+        ]
+      },
+      {
+        id: "bolachinha-cookie",
+        nome: "Bolachinha de cookie",
+        tag: "sugestão · 31/08",
+        base: "Sugestão que entrou na reunião de 31/08: a versão pequena, de mordida, do cookie. Não tem referência em vídeo nem execução definida, e o nome que apareceu na reunião ainda precisa ser confirmado — é a que começa mais do zero das duas.",
+        fotoFonte: "sem foto e sem referência ainda",
+        perguntas: [
+          "Ela entra no cardápio? Como as duas sugestões chegaram depois do cardápio validado, quem decide é a degustação de 12/09.",
+          "Venda por unidade ou em pacote? É a pergunta que define embalagem, preço e onde ela fica exposta — e é a que muda mais coisa.",
+          "Sai da mesma massa e do mesmo forno do cookie, só em outro tamanho? Se sair, é o item mais barato de entrar no cardápio.",
+          "Depende de frio ou vive em prateleira seca? Se não depender, é o segundo item do cardápio fora da cadeia de frio, junto da torta quente."
+        ]
       }
     ],
     detalhe: [
@@ -310,19 +387,24 @@ const PROJETOS = [
     ],
     acoes: [
       { id: "cv-ideias",        grupo: "Produto e custo", o: "Fechar as ideias do cardápio de verão", prazo: "2026-08-31", status: "aberta", reuniao: "2026-08-11" },
-      { id: "cv-testes",        grupo: "Produto e custo", o: "Testar os 10 produtos na cozinha e ajustar a execução para o padrão da loja", prazo: null, prazoTxt: "Antes de 11/09", status: "aberta", reuniao: "2026-08-21" },
-      { id: "cv-cmv",           grupo: "Produto e custo", o: "Levantar o CMV de cada um dos 10 produtos", prazo: null, prazoTxt: "Antes de 11/09", status: "aberta", reuniao: "2026-08-21", link: "https://fechamento-caixa-nu.vercel.app/cmv/laboratorio", linkTxt: "Laboratório de CMV, no Sistema HC" },
+      { id: "cv-testes",        grupo: "Produto e custo", o: "Testar os produtos na cozinha e ajustar a execução para o padrão da loja", prazo: null, prazoTxt: "Antes de 12/09", status: "aberta", reuniao: "2026-08-21" },
+      { id: "cv-cmv",           grupo: "Produto e custo", o: "Levantar o CMV de cada produto do cardápio", prazo: null, prazoTxt: "Antes de 12/09", status: "aberta", reuniao: "2026-08-21", link: "https://fechamento-caixa-nu.vercel.app/cmv/laboratorio", linkTxt: "Laboratório de CMV, no Sistema HC" },
       { id: "cv-preco",         grupo: "Produto e custo", o: "Definir o preço de venda de cada produto a partir do CMV", prazo: null, prazoTxt: "Antes de 24/09", status: "aberta", reuniao: "2026-08-21", link: "https://fechamento-caixa-nu.vercel.app/cmv/laboratorio", linkTxt: "Preço sugerido sai do laboratório" },
-      { id: "cv-degustacao",    grupo: "Produto e custo", o: "Degustação do cardápio", prazo: "2026-09-11", status: "aberta", reuniao: "2026-08-11" },
-      { id: "cv-aprovados",     grupo: "Produto e custo", o: "Registrar o que foi aprovado na degustação e o que sai do cardápio", prazo: "2026-09-11", status: "aberta", reuniao: "2026-08-21" },
+      { id: "cv-degustacao",    grupo: "Produto e custo", o: "Degustação do cardápio", prazo: "2026-09-12", status: "aberta", reuniao: "2026-08-11" },
+      { id: "cv-aprovados",     grupo: "Produto e custo", o: "Registrar o que foi aprovado na degustação e o que sai do cardápio", prazo: "2026-09-12", status: "aberta", reuniao: "2026-08-21" },
+      { id: "cv-gateau",        grupo: "Produto e custo", o: "Decidir se o Cookie Gateau entra no cardápio e como ele é feito na loja", prazo: "2026-09-12", status: "aberta", reuniao: "2026-08-31" },
+      { id: "cv-bolachinha",    grupo: "Produto e custo", o: "Decidir se a bolachinha de cookie entra no cardápio — e se é vendida por unidade ou em pacote", prazo: "2026-09-12", status: "aberta", reuniao: "2026-08-31" },
 
       { id: "cv-utensilios",    grupo: "O que a loja precisa", o: "Listar, produto a produto, os utensílios que cada loja precisa comprar", prazo: null, prazoTxt: "Depois do teste, antes de 25/09", status: "aberta", reuniao: "2026-08-21" },
       { id: "cv-logistica",     grupo: "O que a loja precisa", o: "Viabilizar o transporte dos insumos até a loja, com cadeia de frio para os congelados", prazo: null, prazoTxt: "Antes de 25/09", status: "aberta", reuniao: "2026-08-21" },
       { id: "cv-armazenamento", grupo: "O que a loja precisa", o: "Calcular o espaço de armazenamento por loja — 9 dos 10 itens dependem de frio", prazo: null, prazoTxt: "Antes de 25/09", status: "aberta", reuniao: "2026-08-21" },
 
-      { id: "cv-fichas",        grupo: "Ficha técnica e treino", o: "Criar a ficha técnica de cada produto aprovado", prazo: null, prazoTxt: "Depois de 11/09", status: "aberta", reuniao: "2026-08-21" },
-      { id: "cv-videos",        grupo: "Ficha técnica e treino", o: "Gravar o vídeo do processo de produção de cada produto nas lojas", prazo: null, prazoTxt: "Depois de 11/09", status: "aberta", reuniao: "2026-08-21" },
+      { id: "cv-fichas",        grupo: "Ficha técnica e treino", o: "Criar a ficha técnica de cada produto aprovado", prazo: null, prazoTxt: "Depois de 12/09", status: "aberta", reuniao: "2026-08-21" },
+      { id: "cv-videos",        grupo: "Ficha técnica e treino", o: "Gravar o vídeo do processo de produção de cada produto nas lojas", prazo: null, prazoTxt: "Depois de 12/09", status: "aberta", reuniao: "2026-08-21" },
       { id: "cv-repasse",       grupo: "Ficha técnica e treino", o: "Entregar as fichas e os vídeos às lojas antes de a venda começar", prazo: null, prazoTxt: "Antes de 01/10", status: "aberta", reuniao: "2026-08-21" },
+
+      { id: "cv-brief-mkt",     grupo: "Conteúdo e roteiros", o: "Briefar a equipe de marketing sobre o cardápio de verão", prazo: null, prazoTxt: "Esta semana", status: "aberta", reuniao: "2026-08-31", link: "https://fredpetrutche.github.io/holy-cook-reunioes/briefing-final/", linkTxt: "O briefing final é o que vai na mão da equipe" },
+      { id: "cv-roteiros",      grupo: "Conteúdo e roteiros", o: "Apresentar as primeiras ideias de roteiro dos produtos de verão", prazo: "2026-09-15", status: "aberta", reuniao: "2026-08-31" },
 
       { id: "cv-imagens",       grupo: "Material e divulgação", o: "Decidir como saem as fotos do cardápio: sessão fotográfica profissional ou IA", prazo: null, prazoTxt: "Trava a produção de 24/09", status: "aberta", reuniao: "2026-08-21" },
       { id: "cv-producao",      grupo: "Material e divulgação", o: "Produzir o cardápio completo e o material impresso", prazo: "2026-09-24", status: "aberta", reuniao: "2026-08-11" },
@@ -333,6 +415,9 @@ const PROJETOS = [
       { id: "cv-venda",         grupo: "Calendário e liberação", o: "Início da venda nas lojas, com divulgação de marketing", prazo: "2026-10-01", status: "aberta", reuniao: "2026-08-11" }
     ],
     abertos: [
+      "As duas sugestões de 31/08 entraram depois do cardápio validado: elas viram produto do cardápio de verão ou ficam para a próxima? A degustação de 12/09 é onde isso se decide — e, se entrarem, são doze produtos e não dez.",
+      "A bolachinha de cookie não tem referência, não tem execução definida e o nome ainda precisa ser confirmado.",
+      "A equipe de marketing recebe o briefing de quem e em que formato — reunião ou documento? A apresentação dos roteiros é 15/09 e depende disso.",
       "As fotos do cardápio saem de sessão profissional ou de IA? A decisão trava a produção do material impresso de 24/09 e ninguém ficou responsável por ela.",
       "Nove dos dez itens dependem de frio. Não se sabe se o freezer que a loja já tem comporta o volume — nem quem paga o freezer novo, se não comportar.",
       "Os utensílios: cada loja compra por conta ou a compra é centralizada e rateada? Muda o prazo, porque compra centralizada tem lead time.",
@@ -340,7 +425,7 @@ const PROJETOS = [
       "Faltam sabores definidos: quantos entram no Ice Cookie, qual o sorvete do cookie com sorvete e do cookie da felicidade, e quais são os três sabores de cada torta.",
       "O laboratório de CMV do Sistema HC já tem os 10 produtos com um rascunho de ficha e alvo de 40%, mas as quantidades não foram validadas e o frozen ainda está lá com o nome antigo, de morango. Precisa ser revisado produto a produto.",
       "O Marketing aciona a fábrica direto no dia 25/09 ou depende da operação para liberar?",
-      "Onde acontece a degustação de 11/09 e quem participa.",
+      "Onde acontece a degustação de 12/09 e quem participa.",
       "A divulgação no Instagram cai antes ou no mesmo dia da venda?"
     ]
   }

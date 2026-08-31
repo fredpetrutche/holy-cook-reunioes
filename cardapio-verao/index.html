@@ -50,18 +50,23 @@
 RAIZ = "../";   /* as fotos são guardadas a partir da raiz do site */
 const P = PROJETOS.find(x => x.id === "cardapio-verao");
 
-/* cada marco do cronograma puxa as ações que vencem nele — todas as 18 estão
+/* cada marco do cronograma puxa as ações que vencem nele — todas as 22 estão
    em exatamente um passo, para nenhuma ficar sem data de referência */
 const PASSOS = [
   {
     id: "ideias", data: "2026-08-31", titulo: "Ideias fechadas",
-    texto: "Fechado em 21/08, dez dias antes do prazo. Os dez itens estão definidos e cada um saiu com um ponto de partida: referência em vídeo, receita que já rodou em loja ou modelagem que a equipe já faz.",
+    texto: "Fechado em 21/08, dez dias antes do prazo, e validado na apresentação de 31/08. Os dez itens estão definidos e cada um saiu com um ponto de partida: referência em vídeo, receita que já rodou em loja ou modelagem que a equipe já faz.",
     acoes: ["cv-ideias"]
   },
   {
-    id: "degustacao", data: "2026-09-11", titulo: "Degustação",
-    texto: "É o marco que valida o que foi definido. Até chegar nele, os produtos precisam ter sido testados na cozinha e o CMV de cada um levantado — sem isso a degustação aprova sabor, mas não aprova produto, porque ninguém sabe se o preço fecha.",
-    acoes: ["cv-testes", "cv-cmv", "cv-degustacao", "cv-aprovados"]
+    id: "degustacao", data: "2026-09-12", titulo: "Degustação",
+    texto: "É o marco que valida o que foi definido — passou de 11 para 12 de setembro, sábado. Até chegar nele, os produtos precisam ter sido testados na cozinha e o CMV de cada um levantado, senão a degustação aprova sabor e não aprova produto, porque ninguém sabe se o preço fecha. É aqui também que se decide se as duas sugestões de 31/08 entram no cardápio.",
+    acoes: ["cv-testes", "cv-cmv", "cv-degustacao", "cv-aprovados", "cv-gateau", "cv-bolachinha"]
+  },
+  {
+    id: "roteiros", data: "2026-09-15", titulo: "Primeiras ideias de roteiro",
+    texto: "O cardápio entra na mesa de conteúdo. A equipe de marketing é briefada ainda esta semana e apresenta as primeiras ideias de roteiro três dias depois da degustação — já sabendo o que foi aprovado. O que vai na mão dela é o briefing final, que diz o que precisa acontecer com cada produto na frente da câmera.",
+    acoes: ["cv-brief-mkt", "cv-roteiros"]
   },
   {
     id: "impresso", data: "2026-09-24", titulo: "Material impresso",
@@ -102,7 +107,8 @@ function painelBriefing() {
   const acoes = acoesDe(P);
   const feitas = acoes.filter(a => a.feita).length;
   const prox = proximaAcao(P);
-  const comFrio = P.produtos.filter(x => x.tag !== "forno").length;
+  const sugestoes = P.produtos.filter(x => /sugest/.test(x.tag || "")).length;
+  const comFrio = P.produtos.filter(x => /frio|gelado|congelado|refrigerado/.test(x.tag || "")).length;
   const total = P.produtos.length;
 
   const placar = el("div", "placar");
@@ -112,16 +118,17 @@ function painelBriefing() {
     i.append(el("span", "placar-rot", rot));
     placar.append(i);
   };
-  num(String(total), "produtos definidos");
+  num(String(total - sugestoes), "produtos fechados");
+  if (sugestoes) num(String(sugestoes), "sugestões novas, a decidir na degustação");
   num(String(comFrio), "dependem de frio");
   num(feitas + "/" + acoes.length, "ações feitas");
   num(prox && prox.prazo ? fmtCurto(prox.prazo) : "—", prox ? prox.o : "tudo feito");
   box.append(placar);
 
-  const ata = REUNIOES.find(r => r.id === "2026-08-21");
+  const ata = REUNIOES.find(r => r.id === "2026-08-31");
   const upd = el("div", "upd");
-  upd.append(el("span", "upd-data", "Definido em · " + fmtLongo(ata.data)));
-  upd.append(el("h4", "upd-titulo", "Os dez itens do cardápio foram fechados"));
+  upd.append(el("span", "upd-data", "Última reunião · " + fmtLongo(ata.data)));
+  upd.append(el("h4", "upd-titulo", "O cardápio foi validado e entraram duas sugestões"));
   ata.ata[0].paragrafos.forEach(par => upd.append(el("p", null, par)));
   box.append(upd);
 
@@ -134,7 +141,7 @@ function painelBriefing() {
 /* ── Os produtos ────────────────────────────────────────────────────────── */
 function painelProdutos() {
   const box = el("div", "tab-panel");
-  box.append(el("p", "painel-nota", "Nove dos dez precisam de frio — só a torta quente não. Para todos vale a mesma lista: CMV, preço, utensílio, espaço no freezer, ficha técnica e vídeo. Dentro de cada card fica a referência e só o que é específico dele."));
+  box.append(el("p", "painel-nota", "Dos dez fechados, só a torta quente não precisa de frio. Os dois últimos são as sugestões de 31/08 e ainda não têm resposta para nada. Para todos vale a mesma lista: CMV, preço, utensílio, espaço no freezer, ficha técnica e vídeo. Dentro de cada card fica a referência e só o que é específico dele."));
   box.append(gradeProdutos(P));
   return box;
 }
