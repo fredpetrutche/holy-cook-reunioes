@@ -515,7 +515,7 @@
     <span class="rot">O que a gente imaginou</span>
     <h2>Os produtos</h2>
     <p>Os dez itens já estão definidos, e cada um tem uma referência. A pergunta que vale para todos é a mesma: <strong>o que acontece com ele?</strong> Em quatro deles a gente ainda não tem uma boa resposta — está dito no card.</p>
-    <p>Na apresentação de 31 de agosto entraram mais duas sugestões, o Cookie Gateau e uma bolachinha de cookie. Elas fecham a lista como 11 e 12, ainda sem resposta para a pergunta: quem decide se viram produto do cardápio é a degustação de 12 de setembro.</p>
+    <p>Na apresentação de 31 de agosto entraram mais duas sugestões, o Cookie Gateau e a bolacha de cookie. Elas fecham a lista como 11 e 12 e as duas já ganharam referência em vídeo depois da apresentação, mas seguem sem resposta para a pergunta: quem decide se viram produto do cardápio é a degustação de 12 de setembro.</p>
     <div class="grade" id="grade"></div>
   </section>
 
@@ -654,17 +654,32 @@ const PRODUTOS = [
     obs: "É o item menos resolvido dos dez: fora a montagem, ainda não temos ideia."
   },
   {
-    n: "11", nome: "Cookie Gateau",
-    base: "Sugestão nova. Ele já estava neste briefing, mas do outro lado: como referência de performático simples. A proposta é que deixe de ser referência e vire produto.",
-    ref: "https://www.instagram.com/p/DbbgvjMSyxW/",
+    n: "11", resumo: ["derrama, abre", "cascata branca, lava escura, contraste"], nome: "Cookie Gateau",
+    base: "Cúpula de cookie de chocolate com o miolo mole: o creme branco é derramado por cima e a colher abre o centro.",
+    foto: "cookie-gateau.jpg",
+    fotoNota: "frame do reel de referência",
+    ref: "https://www.instagram.com/reel/DZDtIawvs-3/",
     nota: "a avaliar",
-    obs: "Entrou em 31/08, na apresentação deste briefing. Não tem execução definida nem resposta para a pergunta — a referência é o próprio vídeo que já está aqui em cima, na performance simples."
+    acontece: [
+      "O creme branco derramado por cima escorre pelas laterais da cúpula",
+      "A colher abre a cúpula e o chocolate do centro sai correndo",
+      "São dois acontecimentos em sequência: primeiro a cascata, depois a lava"
+    ],
+    obs: "Entrou em 31/08 e ganhou referência em vídeo depois da apresentação. As duas performances são montagem no balcão. Falta decidir se é individual ou inteiro para fatiar, e se o miolo mole sai de massa assada por menos tempo ou de um recheio congelado colocado no centro."
   },
   {
-    n: "12", nome: "Bolachinha de cookie",
-    base: "A versão pequena, de mordida, do cookie. Sem referência em vídeo e sem execução definida.",
+    n: "12", resumo: ["quebra, estica", "poço, camadas no corte, sal"], nome: "Bolacha de cookie (piscininha)",
+    base: "Tarte de cookie assada dentro de um aro, com um poço de caramelo salgado selado por uma tampa lisa de chocolate.",
+    foto: "bolacha-cookie.jpg",
+    fotoNota: "frame do reel de referência",
+    ref: "https://www.instagram.com/reel/DZYCkbBo_jy/",
     nota: "a avaliar",
-    obs: "Entrou em 31/08, junto com o Cookie Gateau. É a que começa mais do zero: o nome ainda precisa ser confirmado, e o que muda tudo nela é se é vendida por unidade ou em pacote."
+    acontece: [
+      "Quebrar ao meio e o caramelo sair em fio grosso entre as duas metades",
+      "O corte mostra a parede de cookie, a camada de caramelo e a tampa de chocolate",
+      "Na versão de poço aberto, o recheio já está à vista antes de qualquer gesto"
+    ],
+    obs: "Entrou em 31/08 como “a versão pequena do cookie”. As referências que vieram depois mostram outro produto: assada dentro de um aro, com o poço prensado no centro ainda quente. A decisão que muda tudo é poço tampado ou recheio exposto — tampado esconde e paga na quebra, aberto já vende na foto."
   }
 ];
 

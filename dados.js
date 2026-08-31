@@ -356,27 +356,41 @@ const PROJETOS = [
         id: "cookie-gateau",
         nome: "Cookie Gateau",
         tag: "sugestão · 31/08",
-        base: "Sugestão que entrou na reunião de 31/08. Ele já estava no briefing final, mas do outro lado: como referência de performático simples — um gesto que cria um antes e um depois sem exigir equipamento novo. A proposta é que deixe de ser referência e vire produto do cardápio.",
-        ref: "https://www.instagram.com/p/DbbgvjMSyxW/",
-        fotoFonte: "sem foto ainda — a referência é o post do Gran Cookie Gateau, o mesmo que está no briefing final",
+        base: "Sugestão que entrou na reunião de 31/08. Ele já estava no briefing final do outro lado — como referência de performático simples — e a proposta é que deixe de ser referência e vire produto. Nas referências ele é uma cúpula de cookie de chocolate com o miolo mole: o creme branco é derramado por cima e escorre pelas laterais, e depois a colher abre a cúpula para o chocolate do centro sair. São dois acontecimentos em sequência, a cascata e a lava, e os dois são montagem no balcão — nenhum depende de equipamento novo.",
+        ref: "https://www.instagram.com/reel/DZDtIawvs-3/",
+        foto: "cardapio-verao/fotos/cookie-gateau.jpg",
+        fotoFonte: "frame do reel de referência — o creme já derramado e a cúpula aberta",
+        refs: [
+          { url: "https://www.instagram.com/reel/DZDtIawvs-3/", o: "A cúpula com creme e lava — de onde saiu a capa" },
+          { url: "https://www.instagram.com/p/DCj3FPju8Gk/", o: "Segunda referência do Fred" },
+          { url: "https://www.instagram.com/p/DbbgvjMSyxW/", o: "Gran Cookie Gateau — o que já estava no briefing" }
+        ],
         perguntas: [
           "Ele entra como produto ou continua só como referência de linguagem para os outros? É a primeira decisão, e ela é da degustação de 12/09.",
-          "Se entrar: é montado na loja ou chega pronto da fábrica? Muda a lista de compra e muda o CMV.",
-          "É vendido inteiro ou em fatia? Fatia exige corte na loja, utensílio e um lugar onde ele fique exposto sem perder a cara.",
-          "Depende de frio? Nove dos dez itens já dependem, e o espaço de freezer da loja é o ponto mais apertado do projeto."
+          "Individual ou inteiro para fatiar? As referências novas são porção individual; o Gran Cookie Gateau do briefing é a versão grande. São dois produtos diferentes de custo, utensílio e exposição.",
+          "O miolo mole sai de massa assada por menos tempo ou de um recheio congelado colocado no centro? A segunda saída é montagem e repete igual em toda loja; a primeira é receita e depende do forno de cada uma.",
+          "É servido quente? Se for, o forno entra no pedido e a fila sente. Se não for, o chocolate do centro não corre — e é ele que justifica o produto.",
+          "O creme por cima é derramado na frente do cliente ou já vai montado? É o gesto mais barato do cardápio inteiro, e o único que não precisa de nada novo na loja."
         ]
       },
       {
         id: "bolachinha-cookie",
-        nome: "Bolachinha de cookie",
+        nome: "Bolacha de cookie (piscininha)",
         tag: "sugestão · 31/08",
-        base: "Sugestão que entrou na reunião de 31/08: a versão pequena, de mordida, do cookie. Não tem referência em vídeo nem execução definida, e o nome que apareceu na reunião ainda precisa ser confirmado — é a que começa mais do zero das duas.",
-        fotoFonte: "sem foto e sem referência ainda",
+        base: "Sugestão que entrou na reunião de 31/08. Na reunião ela apareceu como “a versão pequena, de mordida, do cookie”, mas as referências que vieram depois mostram outra coisa: a massa é assada dentro de um aro de tarte, o que dá parede reta e disco perfeito, e ainda quente um aro menor é prensado no centro para abrir um poço. O poço recebe caramelo salgado e, por cima, uma camada de chocolate que sela até a borda, lisa e brilhante, com sal em flocos. Na quebra o caramelo sai em fio. A segunda referência é a mesma ideia sem tampa, com o recheio exposto desde o forno.",
+        ref: "https://www.instagram.com/reel/DZYCkbBo_jy/",
+        foto: "cardapio-verao/fotos/bolacha-cookie.jpg",
+        fotoFonte: "frame do reel de referência — o corte com a parede de cookie, o caramelo e a tampa de chocolate",
+        refs: [
+          { url: "https://www.instagram.com/reel/DZYCkbBo_jy/", o: "A piscininha selada com chocolate — de onde saiu a capa" },
+          { url: "https://www.instagram.com/p/DYfgemmxwdp/", o: "A versão de poço aberto, com o recheio exposto" }
+        ],
         perguntas: [
-          "Ela entra no cardápio? Como as duas sugestões chegaram depois do cardápio validado, quem decide é a degustação de 12/09.",
-          "Venda por unidade ou em pacote? É a pergunta que define embalagem, preço e onde ela fica exposta — e é a que muda mais coisa.",
-          "Sai da mesma massa e do mesmo forno do cookie, só em outro tamanho? Se sair, é o item mais barato de entrar no cardápio.",
-          "Depende de frio ou vive em prateleira seca? Se não depender, é o segundo item do cardápio fora da cadeia de frio, junto da torta quente."
+          "Poço tampado com chocolate ou recheio exposto? São as duas referências, e elas puxam para lados opostos: tampado esconde e paga na quebra, aberto já vende na foto mas dura menos no balcão.",
+          "O aro de tarte é utensílio novo e é um por unidade. Quantos cada loja precisa comprar, e isso cabe na lista que fecha em 25/09?",
+          "O poço é prensado com o cookie ainda quente e a janela é curta — quente demais desaba, frio demais racha. Esse gesto sai na loja ou já vem pronto da fábrica?",
+          "Depende de frio? Se viver em prateleira seca, é o segundo item do cardápio fora da cadeia de frio, junto da torta quente.",
+          "Vendida por unidade ou em pacote? Era a pergunta que apareceu na reunião, e ela muda embalagem, preço e onde o produto fica exposto."
         ]
       }
     ],
@@ -393,7 +407,7 @@ const PROJETOS = [
       { id: "cv-degustacao",    grupo: "Produto e custo", o: "Degustação do cardápio", prazo: "2026-09-12", status: "aberta", reuniao: "2026-08-11" },
       { id: "cv-aprovados",     grupo: "Produto e custo", o: "Registrar o que foi aprovado na degustação e o que sai do cardápio", prazo: "2026-09-12", status: "aberta", reuniao: "2026-08-21" },
       { id: "cv-gateau",        grupo: "Produto e custo", o: "Decidir se o Cookie Gateau entra no cardápio e como ele é feito na loja", prazo: "2026-09-12", status: "aberta", reuniao: "2026-08-31" },
-      { id: "cv-bolachinha",    grupo: "Produto e custo", o: "Decidir se a bolachinha de cookie entra no cardápio — e se é vendida por unidade ou em pacote", prazo: "2026-09-12", status: "aberta", reuniao: "2026-08-31" },
+      { id: "cv-bolachinha",    grupo: "Produto e custo", o: "Decidir se a bolacha de cookie (piscininha) entra no cardápio — e se o poço vai tampado com chocolate ou com o recheio exposto", prazo: "2026-09-12", status: "aberta", reuniao: "2026-08-31" },
 
       { id: "cv-utensilios",    grupo: "O que a loja precisa", o: "Listar, produto a produto, os utensílios que cada loja precisa comprar", prazo: null, prazoTxt: "Depois do teste, antes de 25/09", status: "aberta", reuniao: "2026-08-21" },
       { id: "cv-logistica",     grupo: "O que a loja precisa", o: "Viabilizar o transporte dos insumos até a loja, com cadeia de frio para os congelados", prazo: null, prazoTxt: "Antes de 25/09", status: "aberta", reuniao: "2026-08-21" },
@@ -416,7 +430,7 @@ const PROJETOS = [
     ],
     abertos: [
       "As duas sugestões de 31/08 entraram depois do cardápio validado: elas viram produto do cardápio de verão ou ficam para a próxima? A degustação de 12/09 é onde isso se decide — e, se entrarem, são doze produtos e não dez.",
-      "A bolachinha de cookie não tem referência, não tem execução definida e o nome ainda precisa ser confirmado.",
+      "A bolacha de cookie ganhou referência em vídeo depois da reunião, e a referência mudou o que o produto é: não é a versão pequena do cookie, é uma tarte de cookie assada no aro com um poço recheado. Falta decidir o formato — poço tampado com chocolate ou recheio exposto — e confirmar o nome.",
       "A equipe de marketing recebe o briefing de quem e em que formato — reunião ou documento? A apresentação dos roteiros é 15/09 e depende disso.",
       "As fotos do cardápio saem de sessão profissional ou de IA? A decisão trava a produção do material impresso de 24/09 e ninguém ficou responsável por ela.",
       "Nove dos dez itens dependem de frio. Não se sabe se o freezer que a loja já tem comporta o volume — nem quem paga o freezer novo, se não comportar.",

@@ -383,6 +383,21 @@ function pintarProduto() {
     corpo.append(link);
   }
 
+  /* quando o produto tem mais de uma referência, a capa continua levando à
+     principal e as outras entram como uma fileira de links logo abaixo */
+  if (pr.refs && pr.refs.length) {
+    corpo.append(el("span", "visor-rot", "Referências em vídeo"));
+    const linha = el("div", "item-refs");
+    pr.refs.forEach(r => {
+      const link = el("a", "item-ref", r.o + " →");
+      link.href = r.url;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      linha.append(link);
+    });
+    corpo.append(linha);
+  }
+
   corpo.append(el("span", "visor-rot", "A responder no teste"));
   const ul = el("ul", "openlist");
   pr.perguntas.forEach(x => ul.append(el("li", null, x)));
