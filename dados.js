@@ -18,18 +18,19 @@ const REUNIOES = [
         paragrafos: [
           "A reunião foi sobre a apresentação visual dos produtos de verão e correu inteira em cima do briefing final, o documento que já está pronto para a fábrica. Ele não trata de quais produtos entram — isso fechou em 21/08 —, e sim de como cada um precisa aparecer: o que acontece com o produto na frente da pessoa, a diferença entre performático e visual, e o que cada item tem hoje.",
           "O cardápio saiu validado. Nenhum item foi cortado e os dez definidos em 21/08 continuam de pé — a discussão daqui para frente não é mais quais produtos entram, é o que acontece com cada um deles na loja e na câmera.",
-          "Da reunião saíram duas coisas: duas sugestões de produto novas — o Cookie Gateau e uma bolachinha de cookie — e a entrada do marketing, que é briefado esta semana e apresenta as primeiras ideias de roteiro em 15 de setembro. A degustação, que era 11, passou para 12 de setembro, sábado."
+          "Da reunião saíram duas coisas: duas sugestões de produto novas — o Cookie Gateau e a bolacha de cookie, a piscininha — e a entrada do marketing, que é briefado esta semana e apresenta as primeiras ideias de roteiro em 15 de setembro. A degustação, que era 11, passou para 12 de setembro, sábado."
         ]
       },
       {
         id: "duas-sugestoes",
-        titulo: "Duas sugestões novas: Cookie Gateau e bolachinha de cookie",
+        titulo: "Duas sugestões novas: Cookie Gateau e bolacha de cookie",
         projetoId: "cardapio-verao",
         produtosDe: "cardapio-verao",
         paragrafos: [
-          "Entraram duas sugestões de produto, as duas fora da lista dos dez: o Cookie Gateau e uma bolachinha de cookie. Nenhuma foi descartada e nenhuma foi fechada — entram como sugestão, para serem tratadas junto com o resto.",
+          "Entraram duas sugestões de produto, as duas fora da lista dos dez: o Cookie Gateau e a bolacha de cookie, que na reunião foi chamada de piscininha. Nenhuma foi descartada e nenhuma foi fechada — entram como sugestão, para serem tratadas junto com o resto.",
           "O Cookie Gateau já aparecia no briefing final, mas do outro lado: como referência de performático simples, um gesto que cria um antes e um depois sem exigir equipamento novo. A sugestão é que ele deixe de ser só referência e vire produto do cardápio.",
-          "A bolachinha de cookie é a que começa mais do zero das duas: não tem referência em vídeo, não tem execução definida e o nome ainda precisa ser confirmado. É a versão pequena, de mordida, do que a loja já faz — e o que muda tudo nela é se é vendida por unidade ou em pacote, porque isso define embalagem, preço e como ela fica exposta.",
+          "A bolacha de cookie apareceu na reunião como a versão pequena, de mordida, do que a loja já faz. As referências que chegaram no mesmo dia mostram outra coisa: uma tarte de cookie assada dentro de um aro, com um poço prensado no centro enquanto a massa ainda está quente e recheado de caramelo salgado. É o item que mais mudou de cara entre o que foi falado e o que foi mostrado.",
+          "Depois da reunião, Fred mandou as referências em vídeo das duas, e elas estão nos cards: o Cookie Gateau com a cúpula, o creme derramado por cima e a lava do centro saindo na colher; a bolacha com o poço de caramelo, numa versão selada com tampa de chocolate e outra de poço aberto. As duas performances são montagem no balcão — nenhuma depende de equipamento novo.",
           "As duas passam pela mesma régua dos outros dez: teste na cozinha, CMV, preço, utensílio e espaço. Como chegaram doze dias antes da degustação, é nela que se decide se viram produto do cardápio ou ficam para depois."
         ]
       },
@@ -430,7 +431,7 @@ const PROJETOS = [
     ],
     abertos: [
       "As duas sugestões de 31/08 entraram depois do cardápio validado: elas viram produto do cardápio de verão ou ficam para a próxima? A degustação de 12/09 é onde isso se decide — e, se entrarem, são doze produtos e não dez.",
-      "A bolacha de cookie ganhou referência em vídeo depois da reunião, e a referência mudou o que o produto é: não é a versão pequena do cookie, é uma tarte de cookie assada no aro com um poço recheado. Falta decidir o formato — poço tampado com chocolate ou recheio exposto — e confirmar o nome.",
+      "A bolacha de cookie ganhou referência em vídeo depois da reunião, e a referência mudou o que o produto é: não é a versão pequena do cookie, é uma tarte de cookie assada no aro com um poço recheado. Falta decidir o formato: poço tampado com chocolate ou recheio exposto.",
       "A equipe de marketing recebe o briefing de quem e em que formato — reunião ou documento? A apresentação dos roteiros é 15/09 e depende disso.",
       "As fotos do cardápio saem de sessão profissional ou de IA? A decisão trava a produção do material impresso de 24/09 e ninguém ficou responsável por ela.",
       "Nove dos dez itens dependem de frio. Não se sabe se o freezer que a loja já tem comporta o volume — nem quem paga o freezer novo, se não comportar.",
