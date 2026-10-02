@@ -18,6 +18,7 @@ nunca divergirem:
 | `base.css` | estilos comuns |
 | `index.html` + `render-home.js` | a home: cards de projeto, lista de reuniões, diálogo |
 | `cardapio-verao/index.html` | a página do projeto Cardápio de Verão, em abas |
+| `cardapio-verao/o-que-falta.pdf` | documento de mesa: as 21 ações abertas por etapa, para a reunião de 07/10 — gerado do `.src.html` ao lado, que não é página de navegação |
 | `cardapio-verao/fotos/` | referências de produto: capa do reel (`og:image`), foto do cardápio digital ou modelo de mercado |
 
 Cada página define o seu próprio `redesenhar()` — o `salvar()` do `app.js`
