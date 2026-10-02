@@ -7,7 +7,14 @@
      FONTE DO PDF `o-que-falta.pdf` — uma folha, para levar na reunião.
      É só a lista dos itens a discutir, agrupados pelas seis etapas. Sem
      explicação, sem prazo, sem "o que trava": isso vive na página do projeto.
-     Os 21 itens são as ações abertas de dados.js, com o nome encurtado.
+     Os itens são as ações abertas de dados.js, com o nome encurtado.
+
+     COLUNA ÚNICA de propósito: a primeira versão usava column-count:2 e o
+     Fred não conseguia navegar — o texto descia numa coluna e saltava para o
+     topo da outra, e nada distinguia um bloco do outro. Cada etapa tem a sua
+     cor, que aparece no número e na régua do cabeçalho; em preto e branco a
+     hierarquia continua de pé pelo peso e pelo tamanho.
+
      Para regerar:
        "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
          --headless --disable-gpu --no-pdf-header-footer \
@@ -15,22 +22,21 @@
          file:///<caminho>/cardapio-verao/o-que-falta.src.html
      ══════════════════════════════════════════════════════════════════════ -->
 <style>
-@page{size:A4;margin:16mm 16mm 14mm}
+@page{size:A4;margin:11mm 18mm 9mm}
 
 :root{
   --tinta:#111418;
   --tinta-2:#5a6168;
   --tinta-3:#9aa0a6;
-  --linha:#dcdfe2;
-  --linha-forte:#111418;
+  --linha:#e4e7ea;
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
 
 body{
   font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
-  font-size:10pt;
-  line-height:1.4;
+  font-size:10.5pt;
+  line-height:1.35;
   color:var(--tinta);
   -webkit-print-color-adjust:exact;
   print-color-adjust:exact;
@@ -41,78 +47,85 @@ body{
   display:flex;
   align-items:baseline;
   gap:4mm;
-  padding-bottom:2.5mm;
-  border-bottom:1.4pt solid var(--linha-forte);
+  padding-bottom:2.2mm;
+  border-bottom:1.5pt solid var(--tinta);
 }
 h1{
-  font-size:17pt;
+  font-size:16pt;
   font-weight:700;
   letter-spacing:-.02em;
   line-height:1.1;
 }
 .quando{
   margin-left:auto;
-  font-size:8pt;
-  color:var(--tinta-3);
+  font-size:8.5pt;
+  color:var(--tinta-2);
   white-space:nowrap;
 }
 .linha-fina{
-  margin-top:2mm;
+  margin-top:1.8mm;
   font-size:9pt;
   color:var(--tinta-2);
 }
 
-/* ───────── duas colunas ───────── */
-.colunas{
-  margin-top:7mm;
-  column-count:2;
-  column-gap:11mm;
-}
-
-.etapa{
-  break-inside:avoid;
-  margin-bottom:7mm;
-}
-.etapa:last-child{margin-bottom:0}
+/* ───────── etapa ───────── */
+.etapa{margin-top:4.4mm}
 
 .etapa h2{
   display:flex;
-  align-items:baseline;
-  gap:2mm;
-  font-size:8pt;
+  align-items:center;
+  gap:2.4mm;
+  font-size:9pt;
   font-weight:700;
-  letter-spacing:.12em;
+  letter-spacing:.1em;
   text-transform:uppercase;
-  padding-bottom:1.6mm;
-  margin-bottom:2mm;
-  border-bottom:.9pt solid var(--linha-forte);
+  color:var(--cor);
+  padding-bottom:1.4mm;
+  margin-bottom:.8mm;
+  border-bottom:1.3pt solid var(--cor);
 }
 .etapa h2 .n{
-  color:var(--tinta-3);
+  flex:0 0 auto;
+  width:5.4mm;height:5.4mm;
+  background:var(--cor);
+  color:#fff;
+  border-radius:50%;
+  font-size:7.4pt;
+  letter-spacing:0;
+  display:grid;
+  place-items:center;
   font-variant-numeric:tabular-nums;
+}
+.etapa h2 .quantos{
+  margin-left:auto;
+  font-size:7.6pt;
+  font-weight:400;
+  letter-spacing:.02em;
+  text-transform:none;
+  color:var(--tinta-3);
 }
 
 ul{list-style:none}
 li{
   display:flex;
-  gap:2.4mm;
-  padding:1.8mm 0;
+  align-items:flex-start;
+  gap:3mm;
+  padding:1.4mm 0 1.4mm 1mm;
   border-bottom:.5pt solid var(--linha);
-  break-inside:avoid;
 }
 li:last-child{border-bottom:none}
 .caixa{
   flex:0 0 auto;
-  width:3.4mm;height:3.4mm;
-  margin-top:.7mm;
-  border:1pt solid var(--tinta-3);
-  border-radius:.7mm;
+  width:3.8mm;height:3.8mm;
+  margin-top:.5mm;
+  border:1.1pt solid var(--cor);
+  border-radius:.8mm;
 }
 
 footer{
-  margin-top:9mm;
-  padding-top:2.5mm;
-  border-top:.9pt solid var(--linha);
+  margin-top:4mm;
+  padding-top:2mm;
+  border-top:.8pt solid var(--linha);
   font-size:7.4pt;
   color:var(--tinta-3);
 }
@@ -126,66 +139,62 @@ footer{
 </div>
 <p class="linha-fina">O que falta discutir, pelas seis etapas do projeto.</p>
 
-<div class="colunas">
+<div class="etapa" style="--cor:#C2410C">
+  <h2><span class="n">01</span>Produto e custo<span class="quantos">8 itens</span></h2>
+  <ul>
+    <li><span class="caixa"></span><span>A lista do que foi produzido</span></li>
+    <li><span class="caixa"></span><span>Testar os produtos na cozinha</span></li>
+    <li><span class="caixa"></span><span>Levantar o CMV de cada produto</span></li>
+    <li><span class="caixa"></span><span>Definir o preço de venda</span></li>
+    <li><span class="caixa"></span><span>Degustação: dia, local e quem participa</span></li>
+    <li><span class="caixa"></span><span>Registrar o que foi aprovado</span></li>
+    <li><span class="caixa"></span><span>O Cookie Gateau entra?</span></li>
+    <li><span class="caixa"></span><span>A bolacha de cookie (piscininha) entra?</span></li>
+  </ul>
+</div>
 
-  <div class="etapa">
-    <h2><span class="n">01</span>Produto e custo</h2>
-    <ul>
-      <li><span class="caixa"></span><span>A lista do que foi produzido</span></li>
-      <li><span class="caixa"></span><span>Testar os produtos na cozinha</span></li>
-      <li><span class="caixa"></span><span>Levantar o CMV de cada produto</span></li>
-      <li><span class="caixa"></span><span>Definir o preço de venda</span></li>
-      <li><span class="caixa"></span><span>Degustação: dia, local e quem participa</span></li>
-      <li><span class="caixa"></span><span>Registrar o que foi aprovado</span></li>
-      <li><span class="caixa"></span><span>O Cookie Gateau entra?</span></li>
-      <li><span class="caixa"></span><span>A bolacha de cookie (piscininha) entra?</span></li>
-    </ul>
-  </div>
+<div class="etapa" style="--cor:#1D4ED8">
+  <h2><span class="n">02</span>O que a loja precisa<span class="quantos">3 itens</span></h2>
+  <ul>
+    <li><span class="caixa"></span><span>Os utensílios que cada loja compra</span></li>
+    <li><span class="caixa"></span><span>Transporte dos insumos, com cadeia de frio</span></li>
+    <li><span class="caixa"></span><span>Espaço de armazenamento por loja</span></li>
+  </ul>
+</div>
 
-  <div class="etapa">
-    <h2><span class="n">02</span>O que a loja precisa</h2>
-    <ul>
-      <li><span class="caixa"></span><span>Os utensílios que cada loja compra</span></li>
-      <li><span class="caixa"></span><span>Transporte dos insumos, com cadeia de frio</span></li>
-      <li><span class="caixa"></span><span>Espaço de armazenamento por loja</span></li>
-    </ul>
-  </div>
+<div class="etapa" style="--cor:#15803D">
+  <h2><span class="n">03</span>Ficha técnica e treino<span class="quantos">3 itens</span></h2>
+  <ul>
+    <li><span class="caixa"></span><span>Ficha técnica de cada produto</span></li>
+    <li><span class="caixa"></span><span>Vídeo do processo de produção</span></li>
+    <li><span class="caixa"></span><span>Entregar fichas e vídeos às lojas</span></li>
+  </ul>
+</div>
 
-  <div class="etapa">
-    <h2><span class="n">03</span>Ficha técnica e treino</h2>
-    <ul>
-      <li><span class="caixa"></span><span>Ficha técnica de cada produto</span></li>
-      <li><span class="caixa"></span><span>Vídeo do processo de produção</span></li>
-      <li><span class="caixa"></span><span>Entregar fichas e vídeos às lojas</span></li>
-    </ul>
-  </div>
+<div class="etapa" style="--cor:#7E22CE">
+  <h2><span class="n">04</span>Conteúdo e roteiros<span class="quantos">2 itens</span></h2>
+  <ul>
+    <li><span class="caixa"></span><span>Briefar a equipe de marketing</span></li>
+    <li><span class="caixa"></span><span>Primeiras ideias de roteiro</span></li>
+  </ul>
+</div>
 
-  <div class="etapa">
-    <h2><span class="n">04</span>Conteúdo e roteiros</h2>
-    <ul>
-      <li><span class="caixa"></span><span>Briefar a equipe de marketing</span></li>
-      <li><span class="caixa"></span><span>Primeiras ideias de roteiro</span></li>
-    </ul>
-  </div>
+<div class="etapa" style="--cor:#BE185D">
+  <h2><span class="n">05</span>Material e divulgação<span class="quantos">3 itens</span></h2>
+  <ul>
+    <li><span class="caixa"></span><span>As fotos: sessão profissional ou IA</span></li>
+    <li><span class="caixa"></span><span>Produzir o cardápio e o material impresso</span></li>
+    <li><span class="caixa"></span><span>Data da divulgação no Instagram</span></li>
+  </ul>
+</div>
 
-  <div class="etapa">
-    <h2><span class="n">05</span>Material e divulgação</h2>
-    <ul>
-      <li><span class="caixa"></span><span>As fotos: sessão profissional ou IA</span></li>
-      <li><span class="caixa"></span><span>Produzir o cardápio e o material impresso</span></li>
-      <li><span class="caixa"></span><span>Data da divulgação no Instagram</span></li>
-    </ul>
-  </div>
-
-  <div class="etapa">
-    <h2><span class="n">06</span>Calendário e liberação</h2>
-    <ul>
-      <li><span class="caixa"></span><span>Apresentar o calendário às lojas</span></li>
-      <li><span class="caixa"></span><span>Liberar os produtos na fábrica</span></li>
-      <li><span class="caixa"></span><span>Data de início da venda</span></li>
-    </ul>
-  </div>
-
+<div class="etapa" style="--cor:#0F766E">
+  <h2><span class="n">06</span>Calendário e liberação<span class="quantos">3 itens</span></h2>
+  <ul>
+    <li><span class="caixa"></span><span>Apresentar o calendário às lojas</span></li>
+    <li><span class="caixa"></span><span>Liberar os produtos na fábrica</span></li>
+    <li><span class="caixa"></span><span>Data de início da venda</span></li>
+  </ul>
 </div>
 
 <footer>Cardápio de Verão · Holy Cook — fredpetrutche.github.io/holy-cook-reunioes/cardapio-verao</footer>
