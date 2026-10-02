@@ -4,658 +4,191 @@
 <meta charset="utf-8">
 <title>Cardápio de Verão · o que falta</title>
 <!-- ══════════════════════════════════════════════════════════════════════════
-     FONTE DO PDF `o-que-falta.pdf` — documento de mesa para a reunião de
-     quarta, 07/10/2026. Não é página de navegação: é feito para imprimir.
-     Para regerar o PDF:
+     FONTE DO PDF `o-que-falta.pdf` — uma folha, para levar na reunião.
+     É só a lista dos itens a discutir, agrupados pelas seis etapas. Sem
+     explicação, sem prazo, sem "o que trava": isso vive na página do projeto.
+     Os 21 itens são as ações abertas de dados.js, com o nome encurtado.
+     Para regerar:
        "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
          --headless --disable-gpu --no-pdf-header-footer \
          --print-to-pdf=cardapio-verao/o-que-falta.pdf \
          file:///<caminho>/cardapio-verao/o-que-falta.src.html
-     Todo número daqui sai de dados.js (as 22 ações, os 6 marcos, os produtos)
-     e da tabela hc_acoes do Supabase (o que está marcado como feito).
      ══════════════════════════════════════════════════════════════════════ -->
 <style>
-@page{size:A4;margin:14mm 15mm 16mm}
+@page{size:A4;margin:16mm 16mm 14mm}
 
 :root{
   --tinta:#111418;
-  --tinta-2:#4a5158;
-  --tinta-3:#868d94;
-  --linha:#d8dcdf;
+  --tinta-2:#5a6168;
+  --tinta-3:#9aa0a6;
+  --linha:#dcdfe2;
   --linha-forte:#111418;
-  --fundo-suave:#f5f6f7;
-  --vence:#b3261e;
-  --vence-fundo:#fcf0ef;
-  --ok:#1f6d3a;
-  --ok-fundo:#eef6f0;
-  --alerta:#8a5200;
-  --alerta-fundo:#fdf5e8;
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
 
 body{
   font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
-  font-size:9.3pt;
-  line-height:1.42;
+  font-size:10pt;
+  line-height:1.4;
   color:var(--tinta);
   -webkit-print-color-adjust:exact;
   print-color-adjust:exact;
 }
 
-/* ───────── capa do documento ───────── */
-.chapeu{
-  font-size:7pt;
-  font-weight:700;
-  letter-spacing:.16em;
-  text-transform:uppercase;
-  color:var(--tinta-3);
+/* ───────── topo ───────── */
+.topo{
+  display:flex;
+  align-items:baseline;
+  gap:4mm;
+  padding-bottom:2.5mm;
+  border-bottom:1.4pt solid var(--linha-forte);
 }
 h1{
-  font-size:21pt;
+  font-size:17pt;
   font-weight:700;
   letter-spacing:-.02em;
   line-height:1.1;
-  margin:2mm 0 1.5mm;
 }
-.sub{
-  font-size:10pt;
-  color:var(--tinta-2);
-  max-width:150mm;
-}
-.credito{
-  margin-top:3mm;
-  padding-top:2.5mm;
-  border-top:1.2pt solid var(--linha-forte);
-  font-size:7.4pt;
-  color:var(--tinta-3);
-  display:flex;
-  gap:6mm;
-  flex-wrap:wrap;
-}
-
-/* ───────── placar ───────── */
-.placar{
-  display:flex;
-  gap:0;
-  margin-top:5mm;
-  border:.8pt solid var(--linha);
-  border-radius:2mm;
-  overflow:hidden;
-}
-.placar div{
-  flex:1;
-  padding:3mm 3.5mm;
-  border-right:.8pt solid var(--linha);
-}
-.placar div:last-child{border-right:none}
-.placar b{
-  display:block;
-  font-size:17pt;
-  font-weight:700;
-  letter-spacing:-.025em;
-  line-height:1;
-}
-.placar span{
-  display:block;
-  margin-top:1.2mm;
-  font-size:7.2pt;
-  line-height:1.3;
-  color:var(--tinta-2);
-}
-.placar .mal b{color:var(--vence)}
-.placar .bem b{color:var(--ok)}
-
-/* ───────── seção ───────── */
-section{margin-top:7mm}
-h2{
-  font-size:8pt;
-  font-weight:700;
-  letter-spacing:.13em;
-  text-transform:uppercase;
-  color:var(--tinta);
-  padding-bottom:1.5mm;
-  border-bottom:1.2pt solid var(--linha-forte);
-  margin-bottom:3mm;
-}
-h2 em{
-  float:right;
-  font-style:normal;
-  font-weight:400;
-  letter-spacing:0;
-  text-transform:none;
+.quando{
+  margin-left:auto;
   font-size:8pt;
   color:var(--tinta-3);
-}
-
-p{margin-bottom:2.2mm}
-p:last-child{margin-bottom:0}
-strong{font-weight:700}
-
-/* caixa de recado — o fato que manda no documento */
-.recado{
-  background:var(--vence-fundo);
-  border-left:2.2pt solid var(--vence);
-  padding:3.2mm 4mm;
-  border-radius:0 1.5mm 1.5mm 0;
-  font-size:9.3pt;
-}
-.recado .tit{
-  font-weight:700;
-  margin-bottom:1.5mm;
-}
-
-/* ───────── tabela ───────── */
-table{
-  width:100%;
-  border-collapse:collapse;
-  font-size:8.6pt;
-}
-th{
-  text-align:left;
-  font-size:7pt;
-  font-weight:700;
-  letter-spacing:.1em;
-  text-transform:uppercase;
-  color:var(--tinta-3);
-  padding:0 2.5mm 1.5mm 0;
-  border-bottom:.8pt solid var(--linha);
-}
-td{
-  padding:1.8mm 2.5mm 1.8mm 0;
-  border-bottom:.5pt solid var(--linha);
-  vertical-align:top;
-}
-td:last-child,th:last-child{padding-right:0}
-tr:last-child td{border-bottom:none}
-.data{
-  white-space:nowrap;
-  font-variant-numeric:tabular-nums;
-  font-weight:700;
-}
-
-/* selo de estado */
-.selo{
-  display:inline-block;
-  font-size:6.8pt;
-  font-weight:700;
-  letter-spacing:.05em;
-  text-transform:uppercase;
-  padding:.5mm 1.6mm;
-  border-radius:1mm;
   white-space:nowrap;
 }
-.selo.v{color:var(--vence);background:var(--vence-fundo)}
-.selo.o{color:var(--ok);background:var(--ok-fundo)}
-.selo.a{color:var(--alerta);background:var(--alerta-fundo)}
+.linha-fina{
+  margin-top:2mm;
+  font-size:9pt;
+  color:var(--tinta-2);
+}
 
-/* ───────── etapa ───────── */
+/* ───────── duas colunas ───────── */
+.colunas{
+  margin-top:7mm;
+  column-count:2;
+  column-gap:11mm;
+}
+
 .etapa{
-  border:.8pt solid var(--linha);
-  border-radius:2mm;
-  padding:3.5mm 4mm 4mm;
-  margin-bottom:3.5mm;
   break-inside:avoid;
+  margin-bottom:7mm;
 }
-.etapa-topo{
+.etapa:last-child{margin-bottom:0}
+
+.etapa h2{
   display:flex;
   align-items:baseline;
-  gap:2.5mm;
-  padding-bottom:2mm;
-  margin-bottom:2.5mm;
-  border-bottom:.8pt solid var(--linha);
-}
-.etapa-n{
+  gap:2mm;
   font-size:8pt;
   font-weight:700;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  padding-bottom:1.6mm;
+  margin-bottom:2mm;
+  border-bottom:.9pt solid var(--linha-forte);
+}
+.etapa h2 .n{
   color:var(--tinta-3);
   font-variant-numeric:tabular-nums;
 }
-.etapa-nome{
-  font-size:11pt;
-  font-weight:700;
-  letter-spacing:-.015em;
-}
-.etapa-conta{
-  margin-left:auto;
-  font-size:7.4pt;
-  font-weight:700;
-  color:var(--vence);
-  white-space:nowrap;
-}
-.etapa-conta.zerado{color:var(--ok)}
 
-.rotulo{
-  font-size:7pt;
-  font-weight:700;
-  letter-spacing:.11em;
-  text-transform:uppercase;
-  color:var(--tinta-3);
-  margin:3mm 0 1.5mm;
-}
-.rotulo:first-child{margin-top:0}
-
-/* lista de ações que faltam */
-ul.falta{list-style:none}
-ul.falta li{
+ul{list-style:none}
+li{
   display:flex;
-  gap:2.5mm;
-  padding:1.4mm 0;
-  border-bottom:.5pt solid var(--linha);
-}
-ul.falta li:last-child{border-bottom:none}
-ul.falta .caixa{
-  flex:0 0 auto;
-  width:3mm;height:3mm;
-  margin-top:.9mm;
-  border:.9pt solid var(--tinta-3);
-  border-radius:.6mm;
-}
-ul.falta .txt{flex:1}
-ul.falta .era{
-  flex:0 0 auto;
-  font-size:7.2pt;
-  color:var(--tinta-3);
-  white-space:nowrap;
-  text-align:right;
-  padding-top:.4mm;
-}
-ul.falta .nota{
-  display:block;
-  font-size:8pt;
-  color:var(--tinta-2);
-  margin-top:.5mm;
-}
-
-/* trava / pergunta */
-ul.trava{list-style:none}
-ul.trava li{
-  position:relative;
-  padding:0 0 1.6mm 4mm;
-  font-size:8.6pt;
-  color:var(--tinta-2);
-}
-ul.trava li:last-child{padding-bottom:0}
-ul.trava li::before{
-  content:"";
-  position:absolute;
-  left:.8mm;top:1.5mm;
-  width:1.4mm;height:1.4mm;
-  border-radius:50%;
-  background:var(--tinta-3);
-}
-ul.trava li b{color:var(--tinta)}
-
-.decide{
-  margin-top:3mm;
-  background:var(--fundo-suave);
-  border-radius:1.5mm;
-  padding:2.8mm 3.2mm;
-}
-.decide .rotulo{margin-top:0}
-.decide p{font-size:8.6pt;color:var(--tinta)}
-
-/* ───────── pauta numerada ───────── */
-ol.pauta{list-style:none;counter-reset:p}
-ol.pauta li{
-  counter-increment:p;
-  position:relative;
-  padding:2.4mm 0 2.4mm 9mm;
+  gap:2.4mm;
+  padding:1.8mm 0;
   border-bottom:.5pt solid var(--linha);
   break-inside:avoid;
 }
-ol.pauta li:last-child{border-bottom:none}
-ol.pauta li::before{
-  content:counter(p);
-  position:absolute;
-  left:0;top:2.2mm;
-  width:5.5mm;height:5.5mm;
-  background:var(--linha-forte);
-  color:#fff;
-  border-radius:50%;
-  font-size:7.6pt;
-  font-weight:700;
-  display:grid;
-  place-items:center;
-}
-ol.pauta .o{font-weight:700;font-size:9.3pt}
-ol.pauta .por{
-  display:block;
-  font-size:8.4pt;
-  color:var(--tinta-2);
-  margin-top:.6mm;
+li:last-child{border-bottom:none}
+.caixa{
+  flex:0 0 auto;
+  width:3.4mm;height:3.4mm;
+  margin-top:.7mm;
+  border:1pt solid var(--tinta-3);
+  border-radius:.7mm;
 }
 
 footer{
-  margin-top:7mm;
+  margin-top:9mm;
   padding-top:2.5mm;
-  border-top:.8pt solid var(--linha);
-  font-size:7.2pt;
+  border-top:.9pt solid var(--linha);
+  font-size:7.4pt;
   color:var(--tinta-3);
 }
-
-.quebra{break-before:page}
 </style>
 </head>
 <body>
 
-<div class="chapeu">Holy Cook · documento de mesa</div>
-<h1>Cardápio de Verão: o que falta, etapa por etapa</h1>
-<p class="sub">O lançamento tem 22 ações registradas, distribuídas em seis etapas. Uma está feita. Este documento é a lista das outras 21, agrupadas por etapa, com o que trava cada uma e a decisão que falta.</p>
-<div class="credito">
-  <span><strong>Para a reunião de</strong> quarta, 07/10/2026</span>
-  <span><strong>Levantado em</strong> 02/10/2026</span>
-  <span><strong>Fonte</strong> página do projeto · holy-cook-reunioes/cardapio-verao</span>
+<div class="topo">
+  <h1>Cardápio de Verão</h1>
+  <span class="quando">reunião de quarta, 07/10/2026</span>
+</div>
+<p class="linha-fina">O que falta discutir, pelas seis etapas do projeto.</p>
+
+<div class="colunas">
+
+  <div class="etapa">
+    <h2><span class="n">01</span>Produto e custo</h2>
+    <ul>
+      <li><span class="caixa"></span><span>A lista do que foi produzido</span></li>
+      <li><span class="caixa"></span><span>Testar os produtos na cozinha</span></li>
+      <li><span class="caixa"></span><span>Levantar o CMV de cada produto</span></li>
+      <li><span class="caixa"></span><span>Definir o preço de venda</span></li>
+      <li><span class="caixa"></span><span>Degustação: dia, local e quem participa</span></li>
+      <li><span class="caixa"></span><span>Registrar o que foi aprovado</span></li>
+      <li><span class="caixa"></span><span>O Cookie Gateau entra?</span></li>
+      <li><span class="caixa"></span><span>A bolacha de cookie (piscininha) entra?</span></li>
+    </ul>
+  </div>
+
+  <div class="etapa">
+    <h2><span class="n">02</span>O que a loja precisa</h2>
+    <ul>
+      <li><span class="caixa"></span><span>Os utensílios que cada loja compra</span></li>
+      <li><span class="caixa"></span><span>Transporte dos insumos, com cadeia de frio</span></li>
+      <li><span class="caixa"></span><span>Espaço de armazenamento por loja</span></li>
+    </ul>
+  </div>
+
+  <div class="etapa">
+    <h2><span class="n">03</span>Ficha técnica e treino</h2>
+    <ul>
+      <li><span class="caixa"></span><span>Ficha técnica de cada produto</span></li>
+      <li><span class="caixa"></span><span>Vídeo do processo de produção</span></li>
+      <li><span class="caixa"></span><span>Entregar fichas e vídeos às lojas</span></li>
+    </ul>
+  </div>
+
+  <div class="etapa">
+    <h2><span class="n">04</span>Conteúdo e roteiros</h2>
+    <ul>
+      <li><span class="caixa"></span><span>Briefar a equipe de marketing</span></li>
+      <li><span class="caixa"></span><span>Primeiras ideias de roteiro</span></li>
+    </ul>
+  </div>
+
+  <div class="etapa">
+    <h2><span class="n">05</span>Material e divulgação</h2>
+    <ul>
+      <li><span class="caixa"></span><span>As fotos: sessão profissional ou IA</span></li>
+      <li><span class="caixa"></span><span>Produzir o cardápio e o material impresso</span></li>
+      <li><span class="caixa"></span><span>Data da divulgação no Instagram</span></li>
+    </ul>
+  </div>
+
+  <div class="etapa">
+    <h2><span class="n">06</span>Calendário e liberação</h2>
+    <ul>
+      <li><span class="caixa"></span><span>Apresentar o calendário às lojas</span></li>
+      <li><span class="caixa"></span><span>Liberar os produtos na fábrica</span></li>
+      <li><span class="caixa"></span><span>Data de início da venda</span></li>
+    </ul>
+  </div>
+
 </div>
 
-<div class="placar">
-  <div><b>22</b><span>ações no projeto</span></div>
-  <div class="bem"><b>1</b><span>feita: as ideias, em 21/08</span></div>
-  <div class="mal"><b>21</b><span>abertas</span></div>
-  <div class="mal"><b>5</b><span>dos 6 marcos venceram sem acontecer</span></div>
-  <div><b>10+2</b><span>produtos fechados, mais duas sugestões a decidir</span></div>
-</div>
-
-<section>
-  <h2>O que mudou desde a última ata<em>31/08/2026</em></h2>
-  <div class="recado">
-    <div class="tit">O cronograma original venceu inteiro, e o lançamento ainda não aconteceu.</div>
-    <p>A degustação estava marcada para <strong>12/09, sábado</strong>, e não aconteceu. Ela passou para a <strong>semana de 05 a 11/10</strong> — dia, local e participantes ainda não estão definidos. Como nada depois dela começa antes dela, os três marcos seguintes caíram junto: material impresso (24/09), liberação de compra na fábrica (25/09) e <strong>início da venda (01/10) — a data que a ata de 31/08 chamou de "a data que não deveria se mexer"</strong>.</p>
-    <p><strong>Os produtos foram produzidos, mas não existe lista registrada do que foi feito.</strong> Esse é o primeiro buraco: sem saber exatamente o que saiu da cozinha, a degustação não tem pauta, a ficha técnica não tem o que descrever e o CMV não tem o que calcular.</p>
-  </div>
-</section>
-
-<section>
-  <h2>Os seis marcos do cronograma<em>como estão hoje, 02/10</em></h2>
-  <table>
-    <tr>
-      <th style="width:19mm">Era para</th>
-      <th>Marco</th>
-      <th style="width:26mm">Estado</th>
-      <th style="width:52mm">O que ele destravava</th>
-    </tr>
-    <tr>
-      <td class="data">31/08</td>
-      <td>Ideias fechadas</td>
-      <td><span class="selo o">cumprido</span></td>
-      <td>Fechou em 21/08, dez dias antes do prazo</td>
-    </tr>
-    <tr>
-      <td class="data">12/09</td>
-      <td>Degustação</td>
-      <td><span class="selo v">não aconteceu</span></td>
-      <td>Tudo. É ela que transforma cardápio validado em cardápio aprovado</td>
-    </tr>
-    <tr>
-      <td class="data">15/09</td>
-      <td>Primeiras ideias de roteiro</td>
-      <td><span class="selo v">venceu</span></td>
-      <td>O conteúdo de lançamento</td>
-    </tr>
-    <tr>
-      <td class="data">24/09</td>
-      <td>Material impresso pronto</td>
-      <td><span class="selo v">venceu</span></td>
-      <td>Cardápio na loja; depende do preço e da decisão das fotos</td>
-    </tr>
-    <tr>
-      <td class="data">25/09</td>
-      <td>Fábrica libera a compra</td>
-      <td><span class="selo v">venceu</span></td>
-      <td>A loja poder comprar o insumo; ela precisava do calendário antes</td>
-    </tr>
-    <tr>
-      <td class="data">01/10</td>
-      <td>Venda começa</td>
-      <td><span class="selo v">venceu</span></td>
-      <td>O lançamento. Precisa de data nova</td>
-    </tr>
-  </table>
-</section>
-
-<section class="quebra">
-  <h2>As seis etapas<em>as 21 ações abertas, com o que trava cada uma</em></h2>
-
-  <div class="etapa">
-    <div class="etapa-topo">
-      <span class="etapa-n">01</span>
-      <span class="etapa-nome">Produto e custo</span>
-      <span class="etapa-conta">7 de 8 abertas</span>
-    </div>
-
-    <div class="rotulo">O que falta</div>
-    <ul class="falta">
-      <li><span class="caixa"></span><span class="txt">Testar os produtos na cozinha e ajustar a execução para o padrão da loja<span class="nota">Aconteceu na prática — os produtos foram criados —, mas não há lista registrada do que foi feito. A ação só fecha quando essa lista existir.</span></span><span class="era">era antes de 12/09</span></li>
-      <li><span class="caixa"></span><span class="txt">Levantar o CMV de cada produto<span class="nota">A bancada já existe e não precisa ser recriada: <strong>/cmv/laboratorio</strong>, no Sistema HC, com os 10 produtos cadastrados e alvo de 40%. As quantidades estão marcadas como não revisadas, e o frozen ainda está lá com o nome antigo, de morango.</span></span><span class="era">era antes de 12/09</span></li>
-      <li><span class="caixa"></span><span class="txt">Definir o preço de venda de cada produto a partir do CMV<span class="nota">O preço sugerido sai do próprio laboratório: custo dividido por 0,40. Depende do CMV estar revisado.</span></span><span class="era">era antes de 24/09</span></li>
-      <li><span class="caixa"></span><span class="txt">Degustação do cardápio<span class="nota">Semana de 05 a 11/10. Dia, local e participantes a definir.</span></span><span class="era">era 12/09</span></li>
-      <li><span class="caixa"></span><span class="txt">Registrar o que foi aprovado na degustação e o que sai do cardápio</span><span class="era">era 12/09</span></li>
-      <li><span class="caixa"></span><span class="txt">Decidir se o Cookie Gateau entra no cardápio e como ele é feito na loja</span><span class="era">era 12/09</span></li>
-      <li><span class="caixa"></span><span class="txt">Decidir se a bolacha de cookie (piscininha) entra — e se o poço vai tampado com chocolate ou com o recheio exposto</span><span class="era">era 12/09</span></li>
-    </ul>
-
-    <div class="rotulo">O que trava</div>
-    <ul class="trava">
-      <li><b>Sem CMV levantado, a degustação aprova sabor e não aprova produto</b> — ninguém sabe se o preço fecha. Era o aviso da ata de 31/08, e ele continua valendo para a degustação nova.</li>
-      <li><b>Faltam sabores definidos:</b> quantos entram no Ice Cookie, qual o sorvete do Cookie com sorvete, qual o do Cookie da Felicidade, e quais são os três sabores da torta quente e os três da torta gelada.</li>
-      <li><b>O Cookie da Felicidade é o que começa mais do zero:</b> é o Pote da Felicidade, existe no mercado, mas a loja ainda não faz — não há receita, custo nem processo de partida.</li>
-      <li><b>A piscininha mudou de produto depois da reunião.</b> Na mesa ela era "a versão pequena do cookie"; as referências em vídeo mostram uma tarte assada no aro com poço de caramelo prensado no centro. É outro custo, outro utensílio e outra exposição.</li>
-      <li>A torta gelada é o único item com caminho curto: a receita já rodou em loja no cardápio de Natal. Se o CMV e o rendimento do Natal estiverem levantados, ela entra com número na mão.</li>
-    </ul>
-
-    <div class="decide">
-      <div class="rotulo">A decisão de quarta</div>
-      <p>A lista do que foi produzido, item por item. E se o cardápio é de <strong>dez ou de doze produtos</strong> — as duas sugestões de 31/08 entram ou ficam para a próxima.</p>
-    </div>
-  </div>
-
-  <div class="etapa">
-    <div class="etapa-topo">
-      <span class="etapa-n">02</span>
-      <span class="etapa-nome">O que a loja precisa</span>
-      <span class="etapa-conta">3 de 3 abertas</span>
-    </div>
-
-    <div class="rotulo">O que falta</div>
-    <ul class="falta">
-      <li><span class="caixa"></span><span class="txt">Listar, produto a produto, os utensílios que cada loja precisa comprar</span><span class="era">era antes de 25/09</span></li>
-      <li><span class="caixa"></span><span class="txt">Viabilizar o transporte dos insumos até a loja, com cadeia de frio para os congelados</span><span class="era">era antes de 25/09</span></li>
-      <li><span class="caixa"></span><span class="txt">Calcular o espaço de armazenamento por loja<span class="nota">Nove dos dez produtos fechados dependem de frio. Só a torta quente fica fora da cadeia.</span></span><span class="era">era antes de 25/09</span></li>
-    </ul>
-
-    <div class="rotulo">O que trava</div>
-    <ul class="trava">
-      <li><b>Não se sabe se o freezer que a loja já tem comporta o volume</b> — nem quem paga o freezer novo, se não comportar.</li>
-      <li><b>Os utensílios: cada loja compra por conta ou a compra é centralizada e rateada?</b> Muda o prazo, porque compra centralizada tem lead time.</li>
-      <li><b>A casquinha e o cookie fries podem exigir sorvete de máquina.</b> Se exigirem, é investimento por loja e precisa entrar na conta antes de a fábrica liberar.</li>
-      <li><b>A panelinha:</b> é utensílio reutilizável que a loja lava e reusa, ou é descartável que entra no CMV? Muda a lista de compra e muda o custo por unidade. E, se for reutilizável, o que acontece no delivery.</li>
-      <li><b>Embalagem com prazo de gráfica nunca entrou no cronograma:</b> a caixinha ou cone do cookie fries e o pote da felicidade, se forem impressos personalizados, têm prazo próprio.</li>
-      <li>O cookie no palito não pode ficar fora da geladeira — a cobertura derrete. Expositor de balcão comum está descartado: ou é vitrine refrigerada, ou sai do freezer só na hora.</li>
-    </ul>
-
-    <div class="decide">
-      <div class="rotulo">A decisão de quarta</div>
-      <p>Compra de utensílio e equipamento: <strong>por loja ou centralizada</strong>. E quem paga o freezer, se o que existe não der conta.</p>
-    </div>
-  </div>
-
-  <div class="etapa">
-    <div class="etapa-topo">
-      <span class="etapa-n">03</span>
-      <span class="etapa-nome">Ficha técnica e treino</span>
-      <span class="etapa-conta">3 de 3 abertas</span>
-    </div>
-
-    <div class="rotulo">O que falta</div>
-    <ul class="falta">
-      <li><span class="caixa"></span><span class="txt">Criar a ficha técnica de cada produto aprovado</span><span class="era">era depois de 12/09</span></li>
-      <li><span class="caixa"></span><span class="txt">Gravar o vídeo do processo de produção de cada produto nas lojas</span><span class="era">era depois de 12/09</span></li>
-      <li><span class="caixa"></span><span class="txt">Entregar as fichas e os vídeos às lojas antes de a venda começar</span><span class="era">era antes de 01/10</span></li>
-    </ul>
-
-    <div class="rotulo">O que trava</div>
-    <ul class="trava">
-      <li><b>Nada desta etapa começa antes de a degustação dizer o que foi aprovado.</b> As três ações escorregam exatamente o que a degustação escorregou.</li>
-      <li><b>Sem ficha e sem vídeo, o produto sai diferente em cada loja</b> — é o motivo de a etapa existir. São três lojas.</li>
-      <li>A loja já tem ficha técnica dos 18 sabores de cookie. O padrão de ficha existe e não precisa ser inventado: o que falta é o conteúdo dos produtos novos.</li>
-    </ul>
-
-    <div class="decide">
-      <div class="rotulo">A decisão de quarta</div>
-      <p>Quem escreve a ficha e quem grava o vídeo, e em que ordem — porque, com a venda em cima, não dá para fazer os doze antes de começar.</p>
-    </div>
-  </div>
-
-  <div class="etapa">
-    <div class="etapa-topo">
-      <span class="etapa-n">04</span>
-      <span class="etapa-nome">Conteúdo e roteiros</span>
-      <span class="etapa-conta">2 de 2 abertas</span>
-    </div>
-
-    <div class="rotulo">O que falta</div>
-    <ul class="falta">
-      <li><span class="caixa"></span><span class="txt">Briefar a equipe de marketing sobre o cardápio de verão<span class="nota">O que vai na mão da equipe é o briefing final — "O jogo da atenção" —, não a lista de produtos. A lista diz o que existe; o briefing diz o que precisa acontecer na frente da câmera.</span></span><span class="era">era na semana de 31/08</span></li>
-      <li><span class="caixa"></span><span class="txt">Apresentar as primeiras ideias de roteiro dos produtos de verão</span><span class="era">era 15/09</span></li>
-    </ul>
-
-    <div class="rotulo">O que trava</div>
-    <ul class="trava">
-      <li><b>A equipe recebe o briefing de quem, e em que formato — reunião ou documento?</b> Está em aberto desde 31/08, e a apresentação dos roteiros depende disso.</li>
-      <li>O briefing já está escrito e no ar. O que não existe é o momento de entrega.</li>
-    </ul>
-
-    <div class="decide">
-      <div class="rotulo">A decisão de quarta</div>
-      <p>Quem briefa a equipe, em que formato, e em que dia — contado a partir da data nova da degustação.</p>
-    </div>
-  </div>
-
-  <div class="etapa">
-    <div class="etapa-topo">
-      <span class="etapa-n">05</span>
-      <span class="etapa-nome">Material e divulgação</span>
-      <span class="etapa-conta">3 de 3 abertas</span>
-    </div>
-
-    <div class="rotulo">O que falta</div>
-    <ul class="falta">
-      <li><span class="caixa"></span><span class="txt">Decidir como saem as fotos do cardápio: sessão fotográfica profissional ou IA<span class="nota">Esta é a ação que trava a produção do material impresso — e é a única da lista que nunca teve responsável.</span></span><span class="era">travava 24/09</span></li>
-      <li><span class="caixa"></span><span class="txt">Produzir o cardápio completo e o material impresso</span><span class="era">era 24/09</span></li>
-      <li><span class="caixa"></span><span class="txt">Definir a data da divulgação no Instagram do cardápio de verão</span><span class="era">era antes de 01/10</span></li>
-    </ul>
-
-    <div class="rotulo">O que trava</div>
-    <ul class="trava">
-      <li><b>O material impresso depende de duas coisas que não andaram:</b> o preço de venda, que sai do CMV, e a decisão das fotos. Enquanto as duas não saírem, a gráfica não começa.</li>
-      <li><b>A divulgação no Instagram cai antes ou no mesmo dia da venda?</b> Em aberto desde 11/08.</li>
-      <li>Se as fotos forem de sessão profissional, elas só podem acontecer depois da degustação — fotografa-se o produto aprovado, não o candidato. Isso soma prazo que a decisão de IA não somaria.</li>
-    </ul>
-
-    <div class="decide">
-      <div class="rotulo">A decisão de quarta</div>
-      <p><strong>Foto profissional ou IA, e com nome de responsável.</strong> É a trava mais antiga do projeto e a mais barata de resolver.</p>
-    </div>
-  </div>
-
-  <div class="etapa">
-    <div class="etapa-topo">
-      <span class="etapa-n">06</span>
-      <span class="etapa-nome">Calendário e liberação</span>
-      <span class="etapa-conta">3 de 3 abertas</span>
-    </div>
-
-    <div class="rotulo">O que falta</div>
-    <ul class="falta">
-      <li><span class="caixa"></span><span class="txt">Apresentar o calendário às lojas: liberação de compra, divulgação no Instagram e início da venda</span><span class="era">era antes de 25/09</span></li>
-      <li><span class="caixa"></span><span class="txt">Abrir a solicitação e liberar os produtos na fábrica para compra</span><span class="era">era 25/09</span></li>
-      <li><span class="caixa"></span><span class="txt">Início da venda nas lojas, com divulgação de marketing</span><span class="era">era 01/10</span></li>
-    </ul>
-
-    <div class="rotulo">O que trava</div>
-    <ul class="trava">
-      <li><b>As lojas precisam receber o calendário antes de a compra abrir</b> — sem o calendário na mão, a loja não se programa para comprar. Esse era o motivo de o calendário vencer antes de 25/09.</li>
-      <li><b>O Marketing aciona a fábrica direto ou depende da operação para liberar?</b> Em aberto desde 11/08.</li>
-      <li><b>01/10 passou.</b> Enquanto não houver data nova de início de venda, nenhuma das outras cinco etapas tem prazo de verdade — todas eram contadas de trás para frente a partir dela.</li>
-    </ul>
-
-    <div class="decide">
-      <div class="rotulo">A decisão de quarta</div>
-      <p><strong>A data nova de início da venda.</strong> É dela que sai o cronograma refeito, e é a decisão que destrava as outras cinco etapas.</p>
-    </div>
-  </div>
-</section>
-
-<section class="quebra">
-  <h2>Os buracos que não têm dono<em>nenhum destes tem responsável hoje</em></h2>
-  <table>
-    <tr>
-      <th style="width:58mm">O buraco</th>
-      <th>Por que ele importa</th>
-      <th style="width:24mm">Desde</th>
-    </tr>
-    <tr>
-      <td><strong>A lista do que foi produzido</strong></td>
-      <td>Sem ela, a degustação não tem pauta, a ficha técnica não tem o que descrever e o CMV não tem o que calcular</td>
-      <td><span class="selo a">novo · 02/10</span></td>
-    </tr>
-    <tr>
-      <td><strong>Fotos: profissional ou IA</strong></td>
-      <td>Trava o material impresso, e é a única ação da lista que nunca teve responsável</td>
-      <td>21/08</td>
-    </tr>
-    <tr>
-      <td><strong>Quem paga o freezer, se o que existe não comporta</strong></td>
-      <td>Nove dos dez produtos dependem de frio; sem espaço, o cardápio não cabe na loja</td>
-      <td>21/08</td>
-    </tr>
-    <tr>
-      <td><strong>Utensílio: compra por loja ou centralizada</strong></td>
-      <td>Compra centralizada tem lead time, e isso muda a data de início da venda</td>
-      <td>21/08</td>
-    </tr>
-    <tr>
-      <td><strong>A data nova de início da venda</strong></td>
-      <td>Todas as outras datas eram contadas de trás para frente a partir de 01/10, que passou</td>
-      <td><span class="selo a">novo · 02/10</span></td>
-    </tr>
-  </table>
-</section>
-
-<section>
-  <h2>O que esta reunião precisa decidir<em>em ordem — cada uma destrava a seguinte</em></h2>
-  <ol class="pauta">
-    <li>
-      <span class="o">A lista: o que exatamente foi produzido</span>
-      <span class="por">É o dado que não existe hoje e que todas as outras etapas usam. Produto por produto, o que saiu da cozinha e em que versão.</span>
-    </li>
-    <li>
-      <span class="o">A degustação: dia, local e quem participa</span>
-      <span class="por">Semana de 05 a 11/10. Se ela cai antes de quarta, esta reunião já trata dos aprovados; se cai depois, esta reunião é a preparação dela. Vale definir isso primeiro.</span>
-    </li>
-    <li>
-      <span class="o">Dez ou doze produtos</span>
-      <span class="por">O Cookie Gateau e a bolacha de cookie entram no cardápio de verão ou ficam para a próxima. Se entrarem, passam pela mesma régua: teste, CMV, preço, utensílio e espaço.</span>
-    </li>
-    <li>
-      <span class="o">A data nova de início da venda</span>
-      <span class="por">01/10 passou. É desta data que o cronograma inteiro é refeito de trás para frente — material impresso, liberação na fábrica, ficha, vídeo e divulgação.</span>
-    </li>
-    <li>
-      <span class="o">As fotos: profissional ou IA, com nome de responsável</span>
-      <span class="por">A trava mais antiga do projeto. Se for sessão profissional, ela só acontece depois da degustação, e isso soma prazo.</span>
-    </li>
-    <li>
-      <span class="o">Utensílio, equipamento e freezer: quem compra e quem paga</span>
-      <span class="por">Por loja ou centralizada; e o que acontece se a casquinha e o cookie fries exigirem sorvete de máquina. Precisa estar resolvido antes de a fábrica liberar a compra.</span>
-    </li>
-  </ol>
-</section>
-
-<footer>
-  Cardápio de Verão · Holy Cook — levantamento de 02/10/2026 a partir das 22 ações da página do projeto e da última ata, de 31/08/2026.
-  Página do projeto: fredpetrutche.github.io/holy-cook-reunioes/cardapio-verao · Índice de links: fredpetrutche.github.io/projetos/cardapio-verao
-</footer>
+<footer>Cardápio de Verão · Holy Cook — fredpetrutche.github.io/holy-cook-reunioes/cardapio-verao</footer>
 
 </body>
 </html>
